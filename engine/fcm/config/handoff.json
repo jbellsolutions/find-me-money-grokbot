@@ -1,0 +1,96 @@
+{
+  "_comment": "The 7-day clock and the tags it uses (spec 36 section 5). Change the numbers here; no code change needed.",
+  "lead_tags": [
+    "src:lead-radar",
+    "src:creators",
+    "src:website",
+    "src:craigslist",
+    "src:metamuse",
+    "src:intent-email"
+  ],
+  "contact_within_hours": 48,
+  "flag_after_hours": 72,
+  "checkin_days": [
+    3,
+    7
+  ],
+  "status_day": 7,
+  "repair_day": 9,
+  "max_partners": 3,
+  "tags": {
+    "handling": "handoff:partner-handling",
+    "consent": "consent:partner-ok",
+    "ready": "readiness:ready",
+    "prep": "readiness:prep",
+    "closed": "handoff:closed"
+  },
+  "lane_by_persona": {
+    "p1": "real-estate",
+    "p2": "real-estate",
+    "p3": "business",
+    "p4": "business",
+    "p5": "business"
+  },
+  "prep_words": [
+    "bad credit",
+    "low credit",
+    "poor credit",
+    "no credit",
+    "collections",
+    "bankruptcy",
+    "charge off",
+    "charge-off",
+    "repossession",
+    "denied",
+    "rejected",
+    "behind on",
+    "just starting",
+    "no revenue",
+    "pre-revenue",
+    "no income"
+  ],
+  "ready_words": [
+    "revenue",
+    "in business",
+    "years in business",
+    "monthly sales",
+    "under contract",
+    "have a deal",
+    "purchase order",
+    "w-2",
+    "w2",
+    "tax returns",
+    "bank statements",
+    "profit"
+  ],
+  "templates": {
+    "intro_lead": {
+      "subject": "{first}, meet {partner_first}",
+      "body": "Hi {first},\n\nThanks for talking with us. I'm connecting you with {partner_name}{at_company}, who works on exactly this kind of request. {partner_first} will reach out within a day or so.\n\nYou can also reach them directly: {partner_reach}.\n\nIf you don't hear back, reply here and I'll sort it out.\n\nJustin\nFind Me Money Group"
+    },
+    "intro_partner": {
+      "title": "New lead: {name}. Please make contact within 48 hours",
+      "body": "{name} is ready to talk.\n\nWhat they need: {ask}\nReadiness: {readiness}\nEmail: {email}\nPhone: {phone}\nState: {state}\nHow we got their OK: {consent}\n\nCall or email them one to one. No autodialed calls or texts from our consent.\n\nThe full context card is pinned on this contact.{status_line}"
+    },
+    "nudge_partner": {
+      "title": "{name}: no contact logged yet",
+      "body": "It's been {hours} hours since we sent you {name}. Have you reached them? Move the stage or use your status link so we know.{status_line}"
+    },
+    "status_partner": {
+      "title": "{name}: where does this stand?",
+      "body": "It's been a week since we sent you {name}. Where is it at? If it's not a fit, tell us and we'll help them another way.{status_line}"
+    },
+    "checkin_lead_3": {
+      "subject": "Quick check, {first}",
+      "body": "Hi {first}, just checking in. Did {partner_first} reach you? If not, reply here and I'll help.\n\nJustin"
+    },
+    "checkin_lead_7": {
+      "subject": "How's it going, {first}?",
+      "body": "Hi {first}, it's been about a week. How's it going with {partner_first}? If you're not getting what you need, tell me and I'll find you someone who can help.\n\nJustin"
+    },
+    "repair_lead": {
+      "subject": "{first}, a better fit",
+      "body": "Hi {first},\n\n{old_partner_first} wasn't the right fit for this, so I'm connecting you with {partner_name}{at_company}. {partner_first} will reach out within a day or so.\n\nYou can also reach them directly: {partner_reach}.\n\nJustin\nFind Me Money Group"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "_about": "Which persona's lane each Lead Radar campaign belongs to, and who posts while personas aren't live. Justin's rules: edit freely. Rules are tried in order; the first match wins, so put specific patterns before general ones. Persona names here are placeholders: the real names are read from .secrets/personas.json (REPLY_PERSONAS), set at intake. Who stands behind each persona is never recorded in the pack.",
+  "personas": {
+    "P1": {
+      "name": "Persona A",
+      "lane": "Rental and commercial property investors",
+      "voice": "Calm and numbers-first. Explains how lenders weigh rent against the payment. Never hypes a deal.",
+      "sample_ask": "to a landlord asking about refinancing rehabbed rentals off hard money",
+      "sample": "Moving off hard money into a DSCR loan is a common next step once the rehab is done and the unit is rented. DSCR lenders mostly look at the property's rent against the new payment, plus your credit and how long you've owned it, so a signed lease and a few months of rent history help a lot. I'm with Find Me Money Group. Roughly what does each property rent for compared with what you owe on it?"
+    },
+    "P2": {
+      "name": "Persona B",
+      "lane": "Flippers, builders and land",
+      "voice": "Practical and plain-spoken, like someone on a job site. Talks about draws, budgets and timelines the way a builder would.",
+      "sample_ask": "to a builder who needs financing to build two homes",
+      "sample": "For two spec homes, lenders usually want to see your building track record, whether you own the land outright, and a budget with a draw schedule, since construction loans pay out in stages as the work is inspected. Having the plans and a cost breakdown ready speeds things up a lot. I'm with Find Me Money Group. Do you already own the lots, or is the land part of what you need financed?"
+    },
+    "P3": {
+      "name": "Persona C",
+      "lane": "Buying or starting a business",
+      "voice": "Warm and organized. Breaks the process into the documents a lender will ask for.",
+      "sample_ask": "to someone who wants to buy an existing daycare",
+      "sample": "Buying an existing business is often easier to finance than starting one, because the lender can look at the seller's real numbers. Expect to be asked for two or three years of the business's tax returns, a letter of intent or purchase agreement, and how much you plan to put down, and SBA 7(a) loans are a common route for acquisitions. I'm with Find Me Money Group. Do you have the seller's financials yet, or are you still early in the talks?"
+    },
+    "P4": {
+      "name": "Persona D",
+      "lane": "Trucks, equipment and trades",
+      "voice": "Direct, short sentences. Respects people who work with their hands. Straight about what's realistic.",
+      "sample_ask": "to someone who wants no-credit-check financing for a work truck",
+      "sample": "Truly no-credit-check truck financing is rare, and the offers that advertise it usually make up for it with big down payments or very high costs. What helps more is showing steady income from your work and putting some money down, since the truck itself secures the loan. I'm with Find Me Money Group. How long has your business been running with steady work coming in?"
+    },
+    "P5": {
+      "name": "Persona E",
+      "lane": "Working capital for established businesses",
+      "voice": "Friendly and plain-spoken. Turns 'what do lenders look at?' into a short checklist.",
+      "sample_ask": "to an owner who wants a six-figure line of credit to pay off a co-signed balance",
+      "sample": "For a business line of credit around six figures, lenders usually look at time in business, the monthly revenue going through your business bank account, and your personal credit, and many want two years in business with steady deposits. Using business credit to pay off a balance you co-signed personally can work, but the line has to be in the business's name and backed by its revenue. I'm with Find Me Money Group. About how much does the business bring in each month?"
+    }
+  },
+  "campaign_lanes": [
+    {
+      "match": "brrrr|buy-and-hold|landlord|dscr|str-airbnb|short-term-rental|commercial-re|re-investor|re-bank-said-no|re-private-money|re-metro|re-craigslist|re-business-credit|note-investors|mobile-home-parks|fbgroups-real-estate",
+      "persona": "P1"
+    },
+    {
+      "match": "fix-flip|flipper|(?:^|-)land-flip|wholesal|subto|creative-finance|builder|new-construction|small-developers|proof-of-funds",
+      "persona": "P2"
+    },
+    {
+      "match": "buying-a-business|acquisition|franchise|startup|new-founders|laid-off|daycare|childcare|direct-sales|laundromat|vending|atm-claw",
+      "persona": "P3"
+    },
+    {
+      "match": "equipment|truck|trades|amazon-relay|amazon-dsp|cleaning|janitorial|pressure-washing|landscaping|lawn|tree-service|hvac|plumbing|electrical|roofing|junk-removal|dumpster|moving-compan|courier|final-mile|detailing|car-wash|party-event-rentals|gig",
+      "persona": "P4"
+    },
+    {
+      "match": "working-capital|inventory|0pct-cards|business-credit-cards|line-of-credit|payroll|business-funding|government-contractors|etsy|print-on-demand|youtubers|content-creators|ugc-creators|photographers|wedding-vendors|med-spa|aesthetics|music-producers|recording-studios|podcast|gyms|fitness|martial-arts|platform-financing|fbgroups-small-business",
+      "persona": "P5"
+    }
+  ],
+  "_personas_live": "Persona ids whose account exists and posts that lane. Until a persona is live, its lane's drafts go to poster_default (decision R1: Justin posts first).",
+  "personas_live": [],
+  "poster_default": "justin",
+  "_hold_older_than_days": "null attends every lead whatever its age. A number holds posts older than that many days with the reason 'past the age limit' (the proposed auto-reply guardrail in doc 20 uses 3).",
+  "hold_older_than_days": null,
+  "_hold_patterns": "Text in a post that means a person must route the lead before anyone replies. Matched against the post, case-insensitive. Since 2026-10-31 (charter section 5) business-purpose money secured by a home or other real estate (a HELOC for the business, DSCR, cash-out on an investment property) is drafted like any lead, since a licensed partner handles it as part of the strategy; only a mortgage or refinance on the home someone lives in, for personal use, is held here.",
+  "hold_patterns": [
+    {
+      "match": "\\b(?:first[- ]time (?:home ?buyers?|buying a home)|(?:buy|buying|purchas\\w*) (?:a|my|our) (?:first |family |new |own )?(?:home|house) (?:to live in|for (?:me|us|my family|our family))|(?:buy|buying|purchas\\w*) (?:a|my|our) (?:own )?primary residence|(?:mortgage|refinanc\\w*|refi) (?:for|on|of)? ?(?:the|my|our) (?:home|house) (?:I|we) live in|reverse mortgage|FHA loan|VA (?:home )?loan)\\b",
+      "reason": "personal-residence mortgage: a person decides first (L9)"
+    }
+  ],
+  "_text_lanes": "For campaigns that name a place, not a lane (fund-metro-*, fund-state-*), the post's own words pick the persona. Tried in order after campaign_lanes; first match wins.",
+  "text_lanes": [
+    {
+      "match": "\\b(?:fix(?: and |-|&)flip|flips?|flipping|rehab|hard money|construction loan|ground[- ]up|spec homes?|build(?:ing)? (?:a|two|three|my|our|spec)? ?(?:house|home)s?|vacant land|raw land|buy(?:ing)? land|wholesal\\w*|subject[- ]to|subto)\\b",
+      "persona": "P2"
+    },
+    {
+      "match": "\\b(?:rentals?|rental property|landlords?|dscr|airbnb|short[- ]term rental|str|duplex|triplex|fourplex|multi-?family|apartment building|investment propert(?:y|ies)|commercial (?:property|building|real estate)|cash[- ]out refi\\w*)\\b",
+      "persona": "P1"
+    },
+    {
+      "match": "\\b(?:buy(?:ing)? (?:a|an|the|this|that|an existing) (?:business|company|franchise|laundromat|daycare)|business acquisition|acquir\\w+|franchise|start(?:ing)? (?:a|my|our) (?:own )?business|startups?|start-?up|new business|just started|launch(?:ing)? (?:a|my))\\b",
+      "persona": "P3"
+    },
+    {
+      "match": "\\b(?:trucks?|semi|trailer|box truck|equipment|excavator|skid steer|forklift|machinery|work van|contractors?|landscap\\w*|hvac|plumb\\w*|roof\\w*|concrete|pressure wash\\w*|detailing|owner[- ]operator)\\b",
+      "persona": "P4"
+    },
+    {
+      "match": "\\b(?:working capital|line of credit|loc|payroll|inventory|cash ?flow|mca|merchant cash|revenue|expand\\w*|business loan|sba loan|bridge the gap|slow season)\\b",
+      "persona": "P5"
+    }
+  ],
+  "_persona_default": "The lane for a general business-funding ask with no lane signal in the campaign or the post (an established business needing money: working capital).",
+  "persona_default": "P5",
+  "_campaign_posters": "A campaign whose replies another poster owns. lane-metamuse: MetaMuse finds these Facebook and Instagram askers and posts the Reply Agent's draft itself (spec 30 §7a), so nobody else is assigned them: one replier per lead.",
+  "campaign_posters": {
+    "lane-metamuse": "MetaMuse"
+  }
+}

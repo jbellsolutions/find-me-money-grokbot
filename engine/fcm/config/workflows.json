@@ -1,0 +1,12 @@
+{
+  "_comment": "Workflows the agent enrolls affiliates into. Public API can enroll but not create; build once in the GHL UI / Orgo desktop (or `ghl workflows create --experimental`) using EXACTLY these names. Each email/SMS step should end with 'update contact field Last Touch Date = today'. Copy lives in knowledge/funding/05-conversation-playbook.md; newsletter/event/offer copy is read from custom values.",
+  "onboarding":          {"name": "FCM · W-1 Onboarding Drip",        "steps": "Day 0 welcome email + SMS (how to submit a deal, who their manager is) → Day 2 'your first deal' guide → Day 5 SMS check-in → Day 9 training invite → Day 14 'how's it going?'"},
+  "biweekly_touch":      {"name": "FCM · W-2 Bi-Weekly Touch",        "steps": "One message on the channel NOT used last time (branch on Last Touch Channel): value tip / partner win / quick question."},
+  "monthly_offer":       {"name": "FCM · W-3 Monthly Offer",          "steps": "Email with {{custom_values.monthly_offer_subject}} / {{custom_values.monthly_offer_body}}; SMS teaser 1 day later; update Last Offer Date."},
+  "dormant_reactivation":{"name": "FCM · W-4 Dormant Reactivation",   "steps": "Day 0 personal-style email 'still in the funding game?' → Day 3 SMS → Day 7 new-program email → Day 14 'should I close your file?' breakup."},
+  "dead_reactivation":   {"name": "FCM · W-5 Dead-Lead Reactivation", "steps": "Quarterly 3-touch campaign: what's new in the program → free growth-service offer → breakup. Reply → notify manager."},
+  "newsletter":          {"name": "FCM · W-6 Newsletter Broadcast",   "steps": "Single email using {{custom_values.newsletter_subject}} and {{custom_values.newsletter_body}}."},
+  "event_invite":        {"name": "FCM · W-7 Event Invite",           "steps": "Invite email+SMS with {{custom_values.next_event_title}}, {{custom_values.next_event_date}}, {{custom_values.next_event_link}} → reminder 24h → reminder 1h → replay link after."},
+  "new_offer":           {"name": "FCM · W-8 New Offer Announcement", "steps": "Email + SMS using {{custom_values.new_offer_subject}} / {{custom_values.new_offer_body}}."},
+  "reply_router":        {"name": "FCM · W-9 Reply Router",           "steps": "Trigger: customer replied → internal notification to assigned manager + tag 'fcm:needs-triage'. The agent triages within the hour."}
+}

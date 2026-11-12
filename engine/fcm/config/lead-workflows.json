@@ -1,0 +1,297 @@
+{
+  "_comment": "The campaign's workflows and sequences, as specs. The four GHL workflows were built as Draft in Pinnacle Funding Group on 2026-11-07 with Justin's yes; their ids are under ghl, as <NAME> placeholders read from the environment (set NAME at intake). Publishing one is Justin's, and before_publish lists what the builds still lack. Email only. Copy lives in funding-lead-business/campaigns/.",
+  "status": "draft",
+  "account": "Pinnacle Funding Group",
+  "location_id": "<PINNACLE_GHL_LOCATION_ID>",
+  "from_rule": "GHL workflows only ever reach people who wrote to us or opted in. The cold steps run in the cold sender, never in GHL.",
+  "footer": [
+    "Find Me Money Group. This is a commercial email.",
+    "{{custom_values.postal_address}}",
+    "Unsubscribe link: GHL's own, on every email"
+  ],
+  "never_enroll_tags": [
+    "aff:dnc",
+    "email:opted-out",
+    "email:bounced",
+    "handoff:partner-handling",
+    "sales:needs-justin",
+    "reach:manual-only"
+  ],
+  "cold_sequences": [
+    {
+      "key": "line",
+      "name": "FMG · Intent · A line in place",
+      "sender": "cold sender, Justin's choice",
+      "angle": "B-T1-C",
+      "stop_on_reply": true,
+      "steps": [
+        {
+          "day": 0,
+          "send": "B-T1-C",
+          "subject": "own"
+        },
+        {
+          "day": 3,
+          "send": "B-T2-C",
+          "subject": "blank, threads under step 1"
+        },
+        {
+          "day": 7,
+          "send": "B-T3",
+          "subject": "blank, threads under step 1"
+        }
+      ]
+    },
+    {
+      "key": "offers",
+      "name": "FMG · Intent · Comparing offers",
+      "sender": "cold sender, Justin's choice",
+      "angle": "B-T1-B",
+      "stop_on_reply": true,
+      "steps": [
+        {
+          "day": 0,
+          "send": "B-T1-B",
+          "subject": "own"
+        },
+        {
+          "day": 3,
+          "send": "B-T2-B",
+          "subject": "blank, threads under step 1"
+        },
+        {
+          "day": 7,
+          "send": "B-T3",
+          "subject": "blank, threads under step 1"
+        }
+      ]
+    },
+    {
+      "key": "quote",
+      "name": "FMG · Intent · Before you pay cash",
+      "sender": "cold sender, Justin's choice",
+      "angle": "E-T1-A",
+      "stop_on_reply": true,
+      "steps": [
+        {
+          "day": 0,
+          "send": "E-T1-A",
+          "subject": "own"
+        },
+        {
+          "day": 3,
+          "send": "E-T2-A",
+          "subject": "blank, threads under step 1"
+        },
+        {
+          "day": 7,
+          "send": "E-T3",
+          "subject": "blank, threads under step 1"
+        }
+      ]
+    },
+    {
+      "key": "cash",
+      "name": "FMG · Intent · Keep the cash",
+      "sender": "cold sender, Justin's choice",
+      "angle": "E-T1-B",
+      "stop_on_reply": true,
+      "steps": [
+        {
+          "day": 0,
+          "send": "E-T1-B",
+          "subject": "own"
+        },
+        {
+          "day": 3,
+          "send": "E-T2-B",
+          "subject": "blank, threads under step 1"
+        },
+        {
+          "day": 7,
+          "send": "E-T3",
+          "subject": "blank, threads under step 1"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "key": "nurture",
+      "name": "FMG · Nurture",
+      "ghl": {"workflow_id": "<FMG_NURTURE_WORKFLOW_ID>", "built": "2026-11-07", "status": "draft"},
+      "trigger": {
+        "type": "tag_added",
+        "tag": "seq:nurture"
+      },
+      "audience": "people who wrote back with interest, once their funding map has gone out",
+      "exit_tags": [
+        "email:replied-again",
+        "email:opted-out",
+        "aff:dnc",
+        "handoff:partner-handling"
+      ],
+      "steps": [
+        {
+          "wait_days": 0,
+          "send": "N1"
+        },
+        {
+          "wait_days": 3,
+          "send": "N2"
+        },
+        {
+          "wait_days": 4,
+          "send": "N3"
+        },
+        {
+          "wait_days": 7,
+          "send": "N4"
+        },
+        {
+          "wait_days": 7,
+          "send": "N5"
+        }
+      ]
+    },
+    {
+      "key": "reactivation",
+      "name": "FMG · Reactivation",
+      "ghl": {"workflow_id": "<FMG_REACTIVATION_WORKFLOW_ID>", "built": "2026-11-07", "status": "draft"},
+      "trigger": {
+        "type": "tag_added",
+        "tag": "seq:check-back"
+      },
+      "also_when": "on Lead Radar Leads with tag src:intent-email, sorted interested or question, and nothing for 30 days",
+      "audience": "people who wrote to us and went quiet",
+      "exit_tags": [
+        "email:replied-again",
+        "email:opted-out",
+        "aff:dnc",
+        "handoff:partner-handling"
+      ],
+      "steps": [
+        {
+          "wait_days": 60,
+          "send": "R1"
+        },
+        {
+          "wait_days": 4,
+          "send": "R2"
+        },
+        {
+          "wait_days": 5,
+          "send": "R3"
+        },
+        {
+          "wait_days": 7,
+          "send": "R4"
+        }
+      ]
+    },
+    {
+      "key": "sales_content",
+      "name": "FMG · Sales Content",
+      "ghl": {"workflow_id": "<FMG_SALES_CONTENT_WORKFLOW_ID>", "built": "2026-11-07", "status": "draft"},
+      "trigger": {
+        "type": "tag_added",
+        "tag": "seq:sales-ready"
+      },
+      "audience": "people close to a partner",
+      "exit_tags": [
+        "email:replied-again",
+        "email:opted-out",
+        "aff:dnc",
+        "handoff:partner-handling"
+      ],
+      "steps": [
+        {
+          "wait_days": 0,
+          "send": "S1"
+        },
+        {
+          "wait_days": 2,
+          "send": "S2"
+        },
+        {
+          "wait_days": 3,
+          "send": "S3"
+        },
+        {
+          "wait_days": 3,
+          "send": "S4"
+        }
+      ]
+    },
+    {
+      "key": "newsletter",
+      "name": "FMG · Newsletter",
+      "ghl": {"workflow_id": "<FMG_NEWSLETTER_WORKFLOW_ID>", "built": "2026-11-07", "status": "draft"},
+      "stop_on_response": false,
+      "_stop_on_response": "Off in GHL on purpose: NL-1 asks for a reply, and a reply must not cancel the next issue. Opt-out and dnc still exit.",
+      "trigger": {
+        "type": "tag_added",
+        "tag": "newsletter:opted-in"
+      },
+      "audience": "people who said yes to it",
+      "exit_tags": [
+        "email:opted-out",
+        "aff:dnc"
+      ],
+      "steps": [
+        {
+          "wait_days": 0,
+          "send": "NL-1"
+        },
+        {
+          "wait_days": 30,
+          "send": "NL-2"
+        }
+      ]
+    }
+  ],
+  "cold_footer": [
+    "Find Me Money Group. This is a commercial email.",
+    "The postal address",
+    "Unsubscribe link: the sender's own, on every step"
+  ],
+  "stop_on_response": true,
+  "before_publish": {
+    "_comment": "What the Draft builds lack. Each is a hand step in the GHL builder before that workflow goes live. Checked 2026-11-07.",
+    "postal_address": "Custom value postal_address does not exist yet, so every footer renders blank. Create it with the real address from go-live step 6.",
+    "sender": "Every email action leaves From blank, so GHL uses the location's default sender. Not checked. If it names the legal entity, set a Find Me Money Group From in each workflow's Settings > Sender details.",
+    "unsubscribe": "Confirm GHL adds its unsubscribe link to these emails. If it doesn't, add one to the footer.",
+    "exit_tags": "Not built. Add a step or goal that ends the workflow on each flow's exit_tags.",
+    "never_enroll_tags": "Not built. The trigger only checks the tag that starts the flow. Add an If/Else on never_enroll_tags as the first step.",
+    "reactivation_also_when": "Not built. Reactivation starts on seq:check-back only. The 30-days-quiet start on Lead Radar Leads needs its own trigger or the agent setting seq:check-back.",
+    "first_name": "{{contact.first_name}} has no fallback, so a contact with no first name gets 'Hi ,'. Set a default such as 'there'.",
+    "re_entry": "Allow re-entry is on (GHL's default). Re-adding a seq tag restarts the series. Turn it off if a series should run once per person.",
+    "done": "Stop on response is on for Nurture, Reactivation and Sales Content. All four are Draft."
+  },
+  "held_sequences": [
+    {
+      "key": "broker",
+      "name": "FMG · Intent · Which lender (later control)",
+      "sender": "cold sender, Justin's choice",
+      "angle": "B-T1-A",
+      "stop_on_reply": true,
+      "steps": [
+        {
+          "day": 0,
+          "send": "B-T1-A",
+          "subject": "own"
+        },
+        {
+          "day": 3,
+          "send": "B-T2-A",
+          "subject": "blank, threads under step 1"
+        },
+        {
+          "day": 7,
+          "send": "B-T3",
+          "subject": "blank, threads under step 1"
+        }
+      ]
+    }
+  ]
+}

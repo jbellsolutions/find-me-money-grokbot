@@ -1,0 +1,1379 @@
+{
+  "name": "orgo",
+  "description": "Cloud computers for AI agents.",
+  "aliases": [],
+  "options": [
+    {
+      "flags": "-v, --version",
+      "description": "Show version",
+      "required": false
+    },
+    {
+      "flags": "--json",
+      "description": "Output machine-readable JSON",
+      "required": false
+    },
+    {
+      "flags": "--quiet",
+      "description": "Suppress interactive UI affordances",
+      "required": false
+    },
+    {
+      "flags": "--profile <name>",
+      "description": "Credential profile to use",
+      "required": true
+    }
+  ],
+  "commands": [
+    {
+      "name": "login",
+      "description": "Sign in to your Orgo account",
+      "aliases": [],
+      "options": [
+        {
+          "flags": "-f, --force",
+          "description": "Force re-login even if already signed in",
+          "required": false
+        },
+        {
+          "flags": "--no-open",
+          "description": "Do not try to auto-open the browser (print the URL only)",
+          "required": false
+        }
+      ],
+      "commands": []
+    },
+    {
+      "name": "logout",
+      "description": "Sign out and remove saved credentials",
+      "aliases": [],
+      "options": [],
+      "commands": []
+    },
+    {
+      "name": "whoami",
+      "description": "Show the current account and workspace",
+      "aliases": [],
+      "options": [],
+      "commands": []
+    },
+    {
+      "name": "workspaces",
+      "description": "Manage workspaces",
+      "aliases": [
+        "ws"
+      ],
+      "options": [],
+      "commands": [
+        {
+          "name": "list",
+          "description": "List your workspaces",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "create",
+          "description": "Create a workspace",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "use",
+          "description": "Set the default workspace (optional — computer commands work across all workspaces)",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "current",
+          "description": "Show the current workspace",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "rename",
+          "description": "Rename a workspace",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--to <name>",
+              "description": "The new name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "delete",
+          "description": "Delete a workspace and its computers (irreversible)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--yes",
+              "description": "Skip confirmation prompt",
+              "required": false
+            }
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "computers",
+      "description": "Manage cloud computers",
+      "aliases": [
+        "c"
+      ],
+      "options": [],
+      "commands": [
+        {
+          "name": "list",
+          "description": "List all computers across your workspaces",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Filter to one workspace",
+              "required": true
+            },
+            {
+              "flags": "--all",
+              "description": "(Deprecated) Listing all is now the default",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "create",
+          "description": "Create a new computer in the current workspace",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--name <name>",
+              "description": "Computer name",
+              "required": true
+            },
+            {
+              "flags": "--ram <gb>",
+              "description": "RAM in GB (4, 8, 16, 32, 64)",
+              "required": true
+            },
+            {
+              "flags": "--cpu <cores>",
+              "description": "CPU cores (0.5, 1, 2, 4, 8, 16)",
+              "required": true
+            },
+            {
+              "flags": "--disk <gb>",
+              "description": "Disk size in GB",
+              "required": true
+            },
+            {
+              "flags": "--os <os>",
+              "description": "OS: linux (default), windows, macos, android, ios",
+              "required": true
+            },
+            {
+              "flags": "--gpu <profile>",
+              "description": "GPU slice: 2q (2 GB) or 4q (4 GB), Linux-only (falls back to CPU if no GPU host is available)",
+              "required": true
+            },
+            {
+              "flags": "--region <codes>",
+              "description": "Region hint (comma-separated)",
+              "required": true
+            },
+            {
+              "flags": "--resolution <WxHxD>",
+              "description": "Screen resolution, e.g. 1280x800x24",
+              "required": true
+            },
+            {
+              "flags": "--snapshot <id>",
+              "description": "Boot from a snapshot / custom image",
+              "required": true
+            },
+            {
+              "flags": "--template <ref|name>",
+              "description": "Launch from a template (e.g. claude-code or system/claude-code@1.0.0)",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Workspace to create in",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "delete",
+          "description": "Delete a computer (irreversible)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            },
+            {
+              "flags": "--yes",
+              "description": "Skip confirmation prompt",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "start",
+          "description": "Start a stopped computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "stop",
+          "description": "Stop a running computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "restart",
+          "description": "Restart a computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "resize",
+          "description": "Resize a computer's resources (RAM, CPU, disk, bandwidth)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--ram <gb>",
+              "description": "New RAM in GB (4, 8, 16, or 32)",
+              "required": true
+            },
+            {
+              "flags": "--cpu <cores>",
+              "description": "New vCPU count (1, 2, 4, 8, or 16)",
+              "required": true
+            },
+            {
+              "flags": "--disk <gb>",
+              "description": "New disk size in GB (grow only)",
+              "required": true
+            },
+            {
+              "flags": "--bandwidth <mbps>",
+              "description": "New bandwidth cap in Mbps",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "bash",
+          "description": "Run a bash command on the computer (one-shot, for scripts/CI)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "-c, --command <cmd>",
+              "description": "The command to run (or pipe it via stdin)",
+              "required": true
+            },
+            {
+              "flags": "--timeout <seconds>",
+              "description": "Max execution time in seconds",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "exec",
+          "description": "Run a Python snippet on the computer (one-shot, for scripts/CI)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--code <python>",
+              "description": "Python code to run",
+              "required": true
+            },
+            {
+              "flags": "--file <path>",
+              "description": "Read Python code from a file (or pipe it via stdin)",
+              "required": true
+            },
+            {
+              "flags": "--timeout <seconds>",
+              "description": "Timeout in seconds (1-300)",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "clone",
+          "description": "Duplicate a computer, preserving its disk state",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "rename",
+          "description": "Rename a computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--to <name>",
+              "description": "The new name",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "wait",
+          "description": "Pause on the computer for a few seconds (useful between actions)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--seconds <n>",
+              "description": "How long to pause (0-60)",
+              "required": true,
+              "default": "5"
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "vnc-password",
+          "description": "Print the VNC / terminal password for a computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "screenshot",
+          "description": "Save a screenshot of the computer's screen to a PNG",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "-o, --output <file>",
+              "description": "Where to save the PNG (default: <name>.png)",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "view",
+          "description": "Show what's on the computer's screen",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            },
+            {
+              "flags": "--width <columns>",
+              "description": "Render width in terminal columns",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "ssh",
+          "description": "Open an interactive terminal session on the computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            },
+            {
+              "flags": "--cwd <path>",
+              "description": "Start in this directory (default: /root/Desktop, pass \"\" to skip)",
+              "required": true
+            }
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "templates",
+      "description": "Browse and launch prebuilt environments",
+      "aliases": [
+        "t"
+      ],
+      "options": [],
+      "commands": [
+        {
+          "name": "list",
+          "description": "List templates — Featured and yours",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--mine",
+              "description": "Only your templates",
+              "required": false
+            },
+            {
+              "flags": "--featured",
+              "description": "Only featured (curated) templates",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "show",
+          "description": "Inspect a template (hardware, secrets, versions)",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "run",
+          "description": "Launch a computer from a template",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--name <name>",
+              "description": "Name for the new computer",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Workspace to launch in",
+              "required": true
+            },
+            {
+              "flags": "--ram <gb>",
+              "description": "Override the template RAM (GB)",
+              "required": true
+            },
+            {
+              "flags": "--cpu <cores>",
+              "description": "Override the template CPU cores",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "delete",
+          "description": "Delete one of your templates (irreversible)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--yes",
+              "description": "Skip confirmation prompt",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "validate",
+          "description": "Validate a template spec (YAML or JSON) without publishing",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "publish",
+          "description": "Publish a template from a spec file (Scale plan)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--build",
+              "description": "Kick off a golden build right after publishing",
+              "required": false
+            },
+            {
+              "flags": "--force",
+              "description": "Overwrite an existing version with the same ref",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "build",
+          "description": "Build a published template into a golden snapshot (Scale plan)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--no-wait",
+              "description": "Kick off the build and return immediately",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "schema",
+          "description": "Print the template spec JSON Schema",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "secrets",
+      "description": "Manage secrets (env vars for templates)",
+      "aliases": [],
+      "options": [],
+      "commands": [
+        {
+          "name": "list",
+          "description": "List secret names (values are never shown)",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "set",
+          "description": "Set or update a secret (omit value to be prompted or pipe via stdin)",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "delete",
+          "description": "Delete a secret",
+          "aliases": [
+            "rm"
+          ],
+          "options": [
+            {
+              "flags": "--yes",
+              "description": "Skip confirmation prompt",
+              "required": false
+            }
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "handoff",
+      "description": "Give a computer a job and walk away",
+      "aliases": [],
+      "options": [],
+      "commands": [
+        {
+          "name": "start",
+          "description": "Hand a job to a computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "-c, --computer <id|name>",
+              "description": "The computer that does the work",
+              "required": true
+            },
+            {
+              "flags": "-i, --instruction <text>",
+              "description": "What you want done",
+              "required": true
+            },
+            {
+              "flags": "--read-only",
+              "description": "Look and report; change nothing. Use this first.",
+              "required": false
+            },
+            {
+              "flags": "--dry-run",
+              "description": "Plan only; do not open the sites",
+              "required": false
+            },
+            {
+              "flags": "--mode <mode>",
+              "description": "auto | read-only | dry-run",
+              "required": true
+            },
+            {
+              "flags": "--site <domain...>",
+              "description": "A site the agent may use (repeatable)",
+              "required": true
+            },
+            {
+              "flags": "--due <when>",
+              "description": "When you expect it finished, as a date",
+              "required": true
+            },
+            {
+              "flags": "--send-threshold <n>",
+              "description": "How sure it must be before sending (0-1)",
+              "required": true
+            },
+            {
+              "flags": "--publish-threshold <n>",
+              "description": "How sure it must be before posting (0-1)",
+              "required": true
+            },
+            {
+              "flags": "--spend-threshold <n>",
+              "description": "How sure it must be before spending (0-1)",
+              "required": true
+            },
+            {
+              "flags": "--destroy-threshold <n>",
+              "description": "How sure it must be before deleting (0-1)",
+              "required": true
+            },
+            {
+              "flags": "--spend-cap <dollars>",
+              "description": "Most it may spend on one thing",
+              "required": true
+            },
+            {
+              "flags": "--spend-run-cap <dollars>",
+              "description": "Most it may spend in total",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "status",
+          "description": "What the agent has done so far",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "cancel",
+          "description": "Stop a handoff",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "egress",
+      "description": "Control where a computer's traffic exits",
+      "aliases": [],
+      "options": [],
+      "commands": [
+        {
+          "name": "status",
+          "description": "Show the current exit for a computer",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "residential",
+          "description": "Exit through the shared residential-ISP pool",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--new-ip",
+              "description": "Rotate to a fresh residential IP",
+              "required": false
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "device",
+          "description": "Exit through your own machine's IP, via orgo-relay",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--device <id|name>",
+              "description": "Which paired device (default: your only one)",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "custom",
+          "description": "Exit through a proxy you name",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--host <host>",
+              "description": "Proxy host",
+              "required": true
+            },
+            {
+              "flags": "--port <port>",
+              "description": "Proxy port",
+              "required": true
+            },
+            {
+              "flags": "--username <user>",
+              "description": "Proxy username",
+              "required": true
+            },
+            {
+              "flags": "--password <pass>",
+              "description": "Proxy password",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "off",
+          "description": "Exit directly again (turn the proxy off)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "devices",
+          "description": "List the machines you have paired for device egress",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "pair",
+          "description": "Pair a new machine and print the relay command to run on it",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "files",
+      "description": "Upload, download, and manage files",
+      "aliases": [],
+      "options": [],
+      "commands": [
+        {
+          "name": "list",
+          "description": "List files in a workspace",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Filter to one computer",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Workspace to look in",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "upload",
+          "description": "Upload a local file (syncs to the computer when --computer is set)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Computer to sync the file to",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Workspace to upload to",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "export",
+          "description": "Pull a file off a computer into workspace storage",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Computer to export from",
+              "required": true
+            },
+            {
+              "flags": "--path <remote>",
+              "description": "Path to the file on the computer",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate the computer",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "download",
+          "description": "Download a stored file to your machine",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "-o, --output <file>",
+              "description": "Where to save it (default: original filename)",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "delete",
+          "description": "Delete a stored file (irreversible)",
+          "aliases": [
+            "rm"
+          ],
+          "options": [
+            {
+              "flags": "--yes",
+              "description": "Skip confirmation prompt",
+              "required": false
+            }
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "clone",
+      "description": "Bring your own phone's data and apps to your Orgo iPhone",
+      "aliases": [],
+      "options": [],
+      "commands": [
+        {
+          "name": "scan",
+          "description": "List the apps on the iPhone plugged into this Mac and send the list to your Orgo iPhone",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Your Orgo iPhone (the one that gets the list)",
+              "required": true
+            },
+            {
+              "flags": "--udid <udid>",
+              "description": "Which attached iPhone to read, when more than one is plugged in",
+              "required": true
+            },
+            {
+              "flags": "--dry-run",
+              "description": "Print the list and do not send it (no login needed)",
+              "required": false
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "data",
+          "description": "Choose which of the plugged-in iPhone's apps send their files to your Orgo iPhone",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Your Orgo iPhone (the one that gets the data)",
+              "required": true
+            },
+            {
+              "flags": "--udid <udid>",
+              "description": "Which attached iPhone to read, when more than one is plugged in",
+              "required": true
+            },
+            {
+              "flags": "--app <bundleId>",
+              "description": "An app to send (repeatable); omit to list what can be sent",
+              "required": true
+            },
+            {
+              "flags": "--all",
+              "description": "Send every app that has something to send",
+              "required": false
+            },
+            {
+              "flags": "--dry-run",
+              "description": "Walk the phone and print what would be sent, contacting Orgo not at all",
+              "required": false
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "install",
+          "description": "Install apps on your Orgo iPhone by bundle id, the same job the Clone tab queues",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Your Orgo iPhone (the one that installs them)",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "vphone",
+          "description": "List the virtual iPhones running locally on this Mac (via vphone-cli)",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "inject",
+          "description": "Inject a browser login session (Safari cookies) into a local virtual iPhone",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--vphone <name>",
+              "description": "Target virtual iPhone (resolves its guest IP via vphone-cli)",
+              "required": true
+            },
+            {
+              "flags": "--host <ip>",
+              "description": "Target guest by IP instead of a vphone name",
+              "required": true
+            },
+            {
+              "flags": "--ssh-pass <password>",
+              "description": "Guest SSH password for user 'mobile' (default: alpine)",
+              "required": true
+            },
+            {
+              "flags": "--from-staging",
+              "description": "Pull the session from staging (cross-machine default); needs --computer",
+              "required": false
+            },
+            {
+              "flags": "--label <name>",
+              "description": "Name this session on --upload, or pick it by name with --from-staging",
+              "required": true
+            },
+            {
+              "flags": "--session <path>",
+              "description": "A Cookies.binarycookies file, or a folder laid out as a Safari container",
+              "required": true
+            },
+            {
+              "flags": "--backup <path>",
+              "description": "An iPhone encrypted backup to extract the session from",
+              "required": true
+            },
+            {
+              "flags": "--password <pw>",
+              "description": "Password for the encrypted --backup",
+              "required": true
+            },
+            {
+              "flags": "--computer <id|name>",
+              "description": "The Orgo iPhone whose clone bucket holds/receives the session",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            },
+            {
+              "flags": "--upload",
+              "description": "Also push the session to staging so other machines can use it (needs --computer)",
+              "required": false
+            },
+            {
+              "flags": "--browsing-data",
+              "description": "Also inject History/Bookmarks/Tabs, not just login cookies",
+              "required": false
+            },
+            {
+              "flags": "--open",
+              "description": "After injecting, open the session host in Safari on the guest",
+              "required": false
+            },
+            {
+              "flags": "--dry-run",
+              "description": "Show what would be injected and where, touching neither the vphone nor staging",
+              "required": false
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "watch",
+          "description": "Send the app list to your Orgo iPhone by itself whenever your iPhone connects",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--computer <id|name>",
+              "description": "Your Orgo iPhone (the one that gets the list)",
+              "required": true
+            },
+            {
+              "flags": "--udid <udid>",
+              "description": "Which iPhone to watch for (required with --install)",
+              "required": true
+            },
+            {
+              "flags": "--every <minutes>",
+              "description": "Re-read the phone this often while it stays connected (default: 10)",
+              "required": true
+            },
+            {
+              "flags": "--once",
+              "description": "Wait for the phone, send once, then exit",
+              "required": false
+            },
+            {
+              "flags": "--yes",
+              "description": "Link the one attached phone without asking (needed where nothing can ask: pipes, --json)",
+              "required": false
+            },
+            {
+              "flags": "--install",
+              "description": "macOS: run this in the background at every login (launchd)",
+              "required": false
+            },
+            {
+              "flags": "--uninstall",
+              "description": "macOS: stop and remove the background job",
+              "required": false
+            },
+            {
+              "flags": "--status",
+              "description": "macOS: show whether the background job is installed and running",
+              "required": false
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Disambiguate when multiple computers share the name",
+              "required": true
+            }
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "api-keys",
+      "description": "Manage API keys",
+      "aliases": [
+        "keys"
+      ],
+      "options": [],
+      "commands": [
+        {
+          "name": "list",
+          "description": "List your API keys",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "create",
+          "description": "Mint a new API key (plaintext is shown ONCE)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--name <name>",
+              "description": "Human label for the key (e.g. CI, laptop)",
+              "required": true
+            },
+            {
+              "flags": "--workspace <id|name>",
+              "description": "Scope the key to one workspace (omit for account-wide)",
+              "required": true
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "delete",
+          "description": "Delete an API key",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--yes",
+              "description": "Skip confirmation prompt",
+              "required": false
+            }
+          ],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "billing",
+      "description": "Credits, top-ups, and billing portal",
+      "aliases": [],
+      "options": [],
+      "commands": [
+        {
+          "name": "balance",
+          "description": "Show your current credit balance",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "topup",
+          "description": "Buy more credits ($10, $25, $50, or $100)",
+          "aliases": [],
+          "options": [
+            {
+              "flags": "--amount <usd>",
+              "description": "USD amount: 10, 25, 50, or 100",
+              "required": true,
+              "default": "10"
+            }
+          ],
+          "commands": []
+        },
+        {
+          "name": "history",
+          "description": "Show recent credit transactions",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        },
+        {
+          "name": "portal",
+          "description": "Open the Stripe billing portal in your browser",
+          "aliases": [],
+          "options": [],
+          "commands": []
+        }
+      ]
+    },
+    {
+      "name": "agent",
+      "description": "Launch an interactive agent attached to a computer",
+      "aliases": [],
+      "options": [
+        {
+          "flags": "--computer <id|name>",
+          "description": "Computer to drive",
+          "required": true
+        },
+        {
+          "flags": "--workspace <id|name>",
+          "description": "Workspace to look in",
+          "required": true
+        },
+        {
+          "flags": "--model <id>",
+          "description": "Model to use (default: claude-sonnet-5)",
+          "required": true
+        },
+        {
+          "flags": "--prompt <text>",
+          "description": "Send an initial prompt and switch to interactive",
+          "required": true
+        },
+        {
+          "flags": "--resume [id]",
+          "description": "Resume a prior session (no id → picker)",
+          "required": false
+        }
+      ],
+      "commands": []
+    },
+    {
+      "name": "resume",
+      "description": "Resume a saved agent session (no id → interactive picker)",
+      "aliases": [],
+      "options": [
+        {
+          "flags": "--model <id>",
+          "description": "Override the session model",
+          "required": true
+        }
+      ],
+      "commands": []
+    },
+    {
+      "name": "sessions",
+      "description": "List saved agent sessions",
+      "aliases": [],
+      "options": [],
+      "commands": []
+    },
+    {
+      "name": "run",
+      "description": "Run a single prompt against a computer (non-interactive)",
+      "aliases": [],
+      "options": [
+        {
+          "flags": "--computer <id|name>",
+          "description": "Computer to drive",
+          "required": true
+        },
+        {
+          "flags": "--workspace <id|name>",
+          "description": "Workspace to look in",
+          "required": true
+        },
+        {
+          "flags": "--model <id>",
+          "description": "Model to use (default: claude-sonnet-5)",
+          "required": true
+        }
+      ],
+      "commands": []
+    },
+    {
+      "name": "ssh",
+      "description": "Open an interactive terminal session on a computer (shortcut for `computers ssh`)",
+      "aliases": [],
+      "options": [
+        {
+          "flags": "--workspace <id|name>",
+          "description": "Disambiguate when multiple computers share the name",
+          "required": true
+        },
+        {
+          "flags": "--cwd <path>",
+          "description": "Start in this directory (default: /root/Desktop, pass \"\" to skip)",
+          "required": true
+        }
+      ],
+      "commands": []
+    },
+    {
+      "name": "completion",
+      "description": "Print a shell completion script (bash, zsh, or fish)",
+      "aliases": [],
+      "options": [],
+      "commands": []
+    },
+    {
+      "name": "__complete",
+      "aliases": [],
+      "options": [],
+      "commands": []
+    },
+    {
+      "name": "manifest",
+      "description": "Print a machine-readable manifest of every command and option",
+      "aliases": [],
+      "options": [],
+      "commands": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# NEEDS-JUSTIN: Find Me Money
+
+Only what Justin can do. Each line: what, the exact click or command, what it unblocks. Ticked off in order when he works the list.
+
+| # | What | The exact step | What it unblocks |
+|---|---|---|---|
+| 1 | [ ] Grok account for Find Me Money | Sign in at x.ai/bot with a Find Me Money account (never AI Guy's); check the plan includes bots and routines | Everything |
+| 2 | [ ] Create the bot | Grok desktop app: new bot "Find Me Money", time zone UTC, attach `find-me-money.zip` from release `find-me-money-v1`, paste the message in HANDOFF.md Part 1 step 4 | Setup |
+| 3 | [ ] Auto-review rules | Paste the eight Ask-first lines from GATES.md into Auto-review → Custom Rules | Safe routines |
+| 4 | [ ] Sign-ins | Gmail and Slack through Connect apps when the bot asks. InvestorLift (for wholesale inventory), and the Lender portal of a verified lender only when you name one | Sales inbox, the report, wholesale inventory, the loan officer |
+| 5 | [ ] Keys, by hidden prompt (names only) | `SLACK_BOT_TOKEN`, `NOTION_TOKEN`; `RADAR_URL`, `RADAR_PASSWORD`, `RADAR_IMPORT_URL`, `RADAR_IMPORT_TOKEN`; `TREG_API_KEY`; `ONE_API_URL`, `ONE_API_TOKEN` (a revocable agent key); `SCRAPEBOX_URL`, `SCRAPEBOX_TOKEN`; `BROWSER_BOX_URL`, `BROWSER_BOX_TOKEN`; `ORGO_API_KEY`, `MUSE_COMPUTER`; `GHL_API_KEY` (read-only first), `GHL_LOCATION_ID`; `ANTHROPIC_API_KEY`; `HUB_URL`, `HUB_PASSWORD`; `INSTANTLY_API_KEY` (read-only first); `REACHER_URL` | The tools each role uses |
+| 6 | [ ] Intake values (not secrets) | Paste the private intake values you give the bot into `.secrets/fmm.env`: `GHL_LOCATION_ID`, `PINNACLE_GHL_LOCATION_ID`, `FM_GHL_LOCATION_ID`, `FM_GHL_CALENDARS`, `REPLY_NEVER_LOCATIONS`, `FCM_NEVER_SAY`, `FMG_NURTURE_WORKFLOW_ID`, `FMG_REACTIVATION_WORKFLOW_ID`, `FMG_SALES_CONTENT_WORKFLOW_ID`, `FMG_NEWSLETTER_WORKFLOW_ID`, `RADAR_URL`, `RADAR_IMPORT_URL`, `HUB_URL`, `REACHER_URL`, `ONE_API_URL`, `ONE_API_HUB_URL`, `FMM_HOSTS`, `MUSE_COMPUTER`, `INSTANTLY_WINNR_TAG_ID`, `GHL_COMPANY_ID`, `GHL_MCP_HOME`, `SUPER_BROWSER_URL`, `FULFILLMENT_PARTNER`, `FMM_MAILING_ADDRESS`, and `REPLY_GHL_TARGET=pinnacle-funding-group` (the code default is the other funding location, which is never written); and the never-touch names into `.secrets/never-touch.txt`, one per line; the persona names into `.secrets/personas.json` , the wholesaling method notes into `.secrets/course/method.md` and the Charm Offensive templates into `.secrets/course/charm/` (from your private files) | Preflight, the owner guard, Orgo and Muse (all refuse until the never-touch list and `FMM_HOSTS` exist), the scorecard and every CRM write (they refuse until the location ids are set) |
+| 7 | [ ] Slack channel and Notion page | Name the bot's own channel (default `#find-me-money-bot`) and the Notion page; invite the bot | The daily report and alarms |
+| 8 | [ ] Suppression list | Give the bot the opt-out file when it asks (never in the repo) | Any draft to a person |
+| 9 | [ ] Lead Storm VPS | Say what it is (where it runs, which agents and platforms) and how it takes work: a folder, an API, a Slack channel or a repo | The bot's social queue reaching the VPS |
+| 10 | [ ] First local metro | Name it, or "use the default" (the metro with the most fit asks that week) | Local businesses |
+| 11 | [ ] Approve each message type once | Reply yes to each draft type in Notion Drafts: public reply, email reply, cold email, social DM, content post, wholesaler first touch, deal pass, partner message. Say "auto" for a type once its replies look right | Sends |
+| 12 | [ ] First post per channel | Approve the first viral piece for each channel, and say who posts (you, a poster, or a scheduler) | Content going live |
+| 13 | [ ] Which system the bot takes over first | Pause the live writer for one system, then say "<system>: bot" (for the CRM also "crm-writes: on") so the bot updates `context/owners.md`. The other systems the same way, one at a time | CRM writes, Radar imports, Muse typing |
+| 14 | [ ] Muse | Approve the Mac's automation permission prompt yourself, and say whether Muse's past finds move to the home CRM | Muse as a lane |
+| 15 | [ ] One active partner and the split | Name one partner with products, states and pay, set the commission rate (`[RATE]` is still open), then "yes, deploy Hub distribution" | Any lead or deal reaching a partner |
+| 16 | [ ] Cold email domains | "Buy N domains" with a budget, or "use the existing Instantly domains" | Cold email going out |
+| 17 | [ ] Spend caps | A daily cap for Radar credits, One API and paid scrape rungs, written as `<plan-id>: approved <usd>` | Anything past the free rungs |
+| 18 | [ ] Single brain path | "Deploy key" (the bot pushes its daily note) or "Mac pulls" | Reports reach the single brain |
+| 19 | [ ] Archive the v1 pack | "Archive the v1 pack" once this bot is set up | One pack, no confusion |

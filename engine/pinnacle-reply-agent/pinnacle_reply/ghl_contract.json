@@ -1,0 +1,240 @@
+{
+ "_about": "GHL operations the creators CRM sync calls, extracted from GHL's OpenAPI files by scripts/ghl_contract.py. Don't edit by hand.",
+ "source": {
+  "repo": "jbellsolutions/ghl-super-hub",
+  "commit": "797e8dfe3661aff9ed8904d0f38dc211c750e4d2",
+  "path": "knowledge/upstream/apps"
+ },
+ "operations": {
+  "GET /locations/{locationId}": {
+   "summary": "Get Sub-Account (Formerly Location)",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [],
+   "required_body": []
+  },
+  "GET /opportunities/pipelines": {
+   "summary": "Get Pipelines",
+   "version": "2021-07-28",
+   "query": [
+    "locationId"
+   ],
+   "required_query": [
+    "locationId"
+   ],
+   "body": [],
+   "required_body": []
+  },
+  "GET /opportunities/lost-reason": {
+   "summary": "Get lost reason",
+   "version": "2021-07-28",
+   "query": [
+    "deleted",
+    "getCount",
+    "limit",
+    "locationId",
+    "name",
+    "query",
+    "skip"
+   ],
+   "required_query": [
+    "locationId"
+   ],
+   "body": [],
+   "required_body": []
+  },
+  "GET /opportunities/{id}": {
+   "summary": "Get Opportunity",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [],
+   "required_body": []
+  },
+  "POST /opportunities/": {
+   "summary": "Create Opportunity",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "assignedTo",
+    "contactId",
+    "customFields",
+    "locationId",
+    "monetaryValue",
+    "name",
+    "pipelineId",
+    "pipelineStageId",
+    "status"
+   ],
+   "required_body": [
+    "contactId",
+    "locationId",
+    "name",
+    "pipelineId",
+    "status"
+   ]
+  },
+  "PUT /opportunities/{id}": {
+   "summary": "Update Opportunity",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "assignedTo",
+    "customFields",
+    "monetaryValue",
+    "name",
+    "pipelineId",
+    "pipelineStageId",
+    "status"
+   ],
+   "required_body": []
+  },
+  "PUT /opportunities/{id}/status": {
+   "summary": "Update Opportunity Status",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "lostReasonId",
+    "status"
+   ],
+   "required_body": [
+    "status"
+   ]
+  },
+  "POST /contacts/": {
+   "summary": "Create Contact",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "address1",
+    "assignedTo",
+    "city",
+    "companyName",
+    "country",
+    "customFields",
+    "dateOfBirth",
+    "dnd",
+    "dndSettings",
+    "email",
+    "firstName",
+    "gender",
+    "inboundDndSettings",
+    "lastName",
+    "locationId",
+    "name",
+    "phone",
+    "postalCode",
+    "source",
+    "state",
+    "tags",
+    "timezone",
+    "website"
+   ],
+   "required_body": [
+    "locationId"
+   ]
+  },
+  "PUT /contacts/{contactId}": {
+   "summary": "Update Contact",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "address1",
+    "assignedTo",
+    "city",
+    "country",
+    "customFields",
+    "dateOfBirth",
+    "dnd",
+    "dndSettings",
+    "email",
+    "firstName",
+    "inboundDndSettings",
+    "lastName",
+    "name",
+    "phone",
+    "postalCode",
+    "source",
+    "state",
+    "tags",
+    "timezone",
+    "website"
+   ],
+   "required_body": []
+  },
+  "POST /contacts/{contactId}/tags": {
+   "summary": "Add Tags",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "tags"
+   ],
+   "required_body": [
+    "tags"
+   ]
+  },
+  "DELETE /contacts/{contactId}/tags": {
+   "summary": "Remove Tags",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "tags"
+   ],
+   "required_body": [
+    "tags"
+   ]
+  },
+  "POST /contacts/{contactId}/notes": {
+   "summary": "Create Note",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "body",
+    "color",
+    "pinned",
+    "title",
+    "userId"
+   ],
+   "required_body": [
+    "body"
+   ]
+  },
+  "PUT /contacts/{contactId}/notes/{id}": {
+   "summary": "Update Note",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "body",
+    "userId"
+   ],
+   "required_body": [
+    "body"
+   ],
+   "_added": "2026-10-29 by hand for the contact card (GHL API v2 Update Note); not in the creators sync's copy"
+  },
+  "POST /contacts/search": {
+   "summary": "Search Contacts",
+   "version": "2021-07-28",
+   "query": [],
+   "required_query": [],
+   "body": [
+    "filters",
+    "locationId",
+    "page",
+    "pageLimit"
+   ],
+   "required_body": [],
+   "_added": "2026-11-06, from the creators sync's copy (scripts/ghl_contract.py): GHL's OpenAPI leaves this body empty, so the fields were read from the live API"
+  }
+ }
+}

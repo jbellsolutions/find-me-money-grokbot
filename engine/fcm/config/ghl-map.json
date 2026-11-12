@@ -1,0 +1,11 @@
+{
+  "_comment": "Filled in by `fcm ghl bootstrap`. The agent refuses any GHL_LOCATION_ID other than location_id below, which is read from env PINNACLE_GHL_LOCATION_ID (set at intake); unset, it refuses every location. Home CRM: Pinnacle Funding Group, never the Funding Machine (spec 36 section 6).",
+  "profile": "pinnacle-funding",
+  "location_id": "<PINNACLE_GHL_LOCATION_ID>",
+  "custom_fields": {},
+  "pipelines": {},
+  "workflows": {},
+  "users": {
+    "manager": ""
+  }
+}

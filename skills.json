@@ -1,0 +1,186 @@
+{
+  "_doc": "Which role uses which skill and which account. tools/check.py reads this. skills: role -> skill folders under skills/<role>/ ('bot-guards' means guards/). accounts: name a role charter uses -> path in the pack that serves it (or null), and key names (SIGNIN for a sign-in Justin does).",
+  "skills": {
+    "lead": [
+      "bot-guards",
+      "fmm-guards"
+    ],
+    "radar": [
+      "bot-guards",
+      "funding-radar",
+      "lead-radar",
+      "treg",
+      "one-api",
+      "craigslist-lane",
+      "local-business-lane"
+    ],
+    "muse": [
+      "bot-guards",
+      "metamuse-operator",
+      "metamuse-leads",
+      "orgo-computer-use",
+      "orgo-computer"
+    ],
+    "content": [
+      "bot-guards",
+      "fmm-viral-content",
+      "charm-social-content",
+      "charm-linkedin"
+    ],
+    "outreach": [
+      "bot-guards",
+      "winnr-instantly",
+      "verify-emails",
+      "lead-storm-handoff"
+    ],
+    "sales": [
+      "bot-guards",
+      "reply-agent",
+      "find-me-money-charter",
+      "sales-replies",
+      "charm-reply-handler",
+      "pinnacle-crm",
+      "lead-crm",
+      "gohighlevel-cli",
+      "ghl-api",
+      "ghl-operator",
+      "ghl-workflows",
+      "ghl-email"
+    ],
+    "partners": [
+      "bot-guards",
+      "lending-hub-distribution",
+      "partner-handoffs",
+      "funding-knowledge",
+      "affiliate-manager",
+      "affiliate-reply-triage",
+      "affiliate-activation-support",
+      "partner-fit-review",
+      "partner-conversation-drafts",
+      "partner-attribution-review"
+    ],
+    "loan-officer": [
+      "bot-guards",
+      "funding-intake-officer",
+      "loan-processing-officer",
+      "radar-to-deal",
+      "funding-underwriting",
+      "lender-portal-submission"
+    ],
+    "wholesale": [
+      "bot-guards",
+      "wholesale-funding"
+    ]
+  },
+  "accounts": {
+    "Slack": {
+      "path": null,
+      "keys": [
+        "SLACK_BOT_TOKEN"
+      ]
+    },
+    "Notion": {
+      "path": null,
+      "keys": [
+        "NOTION_TOKEN"
+      ]
+    },
+    "Funding Radar": {
+      "path": "skills/radar/funding-radar",
+      "keys": [
+        "RADAR_URL",
+        "RADAR_PASSWORD",
+        "RADAR_IMPORT_URL",
+        "RADAR_IMPORT_TOKEN"
+      ]
+    },
+    "treg": {
+      "path": "skills/radar/treg",
+      "keys": [
+        "TREG_API_KEY"
+      ]
+    },
+    "One API": {
+      "path": "skills/radar/one-api",
+      "keys": [
+        "ONE_API_URL",
+        "ONE_API_TOKEN"
+      ]
+    },
+    "Scrapebox": {
+      "path": "skills/radar/local-business-lane",
+      "keys": [
+        "SCRAPEBOX_URL",
+        "SCRAPEBOX_TOKEN"
+      ]
+    },
+    "browser-box": {
+      "path": "skills/radar/craigslist-lane",
+      "keys": [
+        "BROWSER_BOX_URL",
+        "BROWSER_BOX_TOKEN"
+      ]
+    },
+    "Orgo": {
+      "path": "skills/muse/orgo-computer-use",
+      "keys": [
+        "ORGO_API_KEY",
+        "MUSE_COMPUTER"
+      ]
+    },
+    "Pinnacle GoHighLevel": {
+      "path": "skills/sales/pinnacle-crm",
+      "keys": [
+        "GHL_API_KEY",
+        "GHL_LOCATION_ID"
+      ]
+    },
+    "Lending Hub": {
+      "path": "skills/partners/lending-hub-distribution",
+      "keys": [
+        "HUB_URL",
+        "HUB_PASSWORD"
+      ]
+    },
+    "Gmail": {
+      "path": null,
+      "keys": [
+        "SIGNIN"
+      ]
+    },
+    "Anthropic": {
+      "path": "engine/pinnacle-reply-agent",
+      "keys": [
+        "ANTHROPIC_API_KEY"
+      ]
+    },
+    "Instantly": {
+      "path": "skills/outreach/winnr-instantly",
+      "keys": [
+        "INSTANTLY_API_KEY"
+      ]
+    },
+    "Email verifier": {
+      "path": "skills/outreach/verify-emails",
+      "keys": [
+        "REACHER_URL"
+      ]
+    },
+    "Lead Storm VPS": {
+      "path": "skills/outreach/lead-storm-handoff",
+      "keys": []
+    },
+    "Lender portal": {
+      "path": null,
+      "keys": [
+        "SIGNIN"
+      ]
+    },
+    "InvestorLift": {
+      "path": null,
+      "keys": [
+        "SIGNIN"
+      ]
+    }
+  }
+}

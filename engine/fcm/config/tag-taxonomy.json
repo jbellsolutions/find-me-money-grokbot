@@ -1,0 +1,12 @@
+{
+  "_comment": "Tags created in GHL by `fcm ghl bootstrap`. Source tags are applied at intake; lifecycle tags are owned by the agent's daily sweep.",
+  "source": ["src:skool", "src:linkedin", "src:referral", "src:webinar", "src:event", "src:facebook", "src:website", "src:legacy-import"],
+  "lifecycle": ["aff:applied", "aff:onboarding", "aff:active", "aff:producing", "aff:quiet", "aff:dormant", "aff:dead", "aff:reactivated", "aff:dnc"],
+  "interest": ["want:funnel", "want:reactivation", "want:email-campaigns", "want:social", "want:crm-help", "want:event", "deal:incoming"],
+  "system": ["fcm:test-contact", "fcm:synthetic", "fcm:reply-personally"],
+  "contact_limits": ["aff:no-email", "aff:wrong-number", "aff:not-interested"],
+  "tier": ["tier:platinum", "tier:gold", "tier:silver", "tier:bronze"],
+  "kickoff": ["fcm:kickoff-pending", "fcm:kickoff-sent", "fcm:kickoff-done"],
+  "memory": ["kickoff:a", "kickoff:b", "kickoff:c", "fcm:replied", "fcm:call-held", "fcm:plan-ready", "fcm:identity-question"],
+  "memory_dynamic": "Also applied from the agent's memory, created in GoHighLevel on first use: niche:<slug> (their niche) and needs:<slug> (one per kind of funding their clients need)."
+}

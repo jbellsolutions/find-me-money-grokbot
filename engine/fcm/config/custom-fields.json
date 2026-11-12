@@ -1,0 +1,247 @@
+{
+  "_comment": "Affiliate profile fields created in GHL by `fcm ghl bootstrap`. key = logical name used by the agent; name = GHL display name.",
+  "fields": [
+    {
+      "key": "affiliate_id",
+      "name": "Affiliate ID",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "join_date",
+      "name": "Affiliate Join Date",
+      "dataType": "DATE"
+    },
+    {
+      "key": "source",
+      "name": "Affiliate Source",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "skool",
+        "linkedin",
+        "referral",
+        "webinar",
+        "event",
+        "facebook",
+        "website",
+        "legacy-import"
+      ]
+    },
+    {
+      "key": "niche",
+      "name": "Affiliate Niche",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "audience_size",
+      "name": "Audience Size",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "<500",
+        "500-2k",
+        "2k-10k",
+        "10k+"
+      ]
+    },
+    {
+      "key": "deals_submitted",
+      "name": "Deals Submitted",
+      "dataType": "NUMERICAL"
+    },
+    {
+      "key": "last_deal_date",
+      "name": "Last Deal Date",
+      "dataType": "DATE"
+    },
+    {
+      "key": "funded_volume",
+      "name": "Funded Volume",
+      "dataType": "NUMERICAL"
+    },
+    {
+      "key": "last_touch_date",
+      "name": "Last Touch Date",
+      "dataType": "DATE"
+    },
+    {
+      "key": "last_touch_channel",
+      "name": "Last Touch Channel",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "sms",
+        "email",
+        "workflow",
+        "call"
+      ]
+    },
+    {
+      "key": "last_offer_date",
+      "name": "Last Offer Date",
+      "dataType": "DATE"
+    },
+    {
+      "key": "last_reply_date",
+      "name": "Last Reply Date",
+      "dataType": "DATE"
+    },
+    {
+      "key": "next_touch_date",
+      "name": "Next Touch Date",
+      "dataType": "DATE"
+    },
+    {
+      "key": "cadence_note",
+      "name": "Cadence Note",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "preferred_channel",
+      "name": "Preferred Channel",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "sms",
+        "email"
+      ]
+    },
+    {
+      "key": "assigned_manager",
+      "name": "Assigned Manager",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "products_of_interest",
+      "name": "Products of Interest",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "services_offered",
+      "name": "Growth Services Offered",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "obsidian_note",
+      "name": "Obsidian Note",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "tier",
+      "name": "Partner Tier",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "Platinum",
+        "Gold",
+        "Silver",
+        "Bronze"
+      ]
+    },
+    {
+      "key": "plan",
+      "name": "Partner Plan",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "profile_summary",
+      "name": "Partner Profile Summary",
+      "dataType": "LARGE_TEXT"
+    },
+    {
+      "key": "profile_completeness",
+      "name": "Profile Completeness %",
+      "dataType": "NUMERICAL"
+    },
+    {
+      "key": "next_step",
+      "name": "Next Step",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "client_types",
+      "name": "Client Types",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "deal_types",
+      "name": "Client Funding Needs",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "deal_size",
+      "name": "Typical Deal Size",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "regions",
+      "name": "Regions Served",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "goals",
+      "name": "Partner Goals",
+      "dataType": "LARGE_TEXT"
+    },
+    {
+      "key": "best_time",
+      "name": "Best Time to Reach",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "blockers",
+      "name": "Blockers",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "needs",
+      "name": "What Would Help",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "next_question",
+      "name": "Next Question to Ask",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "open_loops",
+      "name": "Open Loops",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "calls_held",
+      "name": "Calls Held",
+      "dataType": "NUMERICAL"
+    },
+    {
+      "key": "revenue_plan",
+      "name": "Revenue Plan Ready",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "key": "kickoff_variant",
+      "name": "Kickoff Variant",
+      "dataType": "SINGLE_OPTIONS",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "L"
+      ]
+    },
+    {
+      "key": "file_line",
+      "name": "Opener: File Line",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "history_line",
+      "name": "Opener: History Line",
+      "dataType": "TEXT"
+    },
+    {
+      "key": "referral_link",
+      "name": "Referral Link",
+      "dataType": "TEXT"
+    }
+  ]
+}

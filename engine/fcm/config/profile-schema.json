@@ -1,0 +1,108 @@
+{
+  "_comment": "The lead profile. Every fact the agent learns lands in one slot. Key slots set completeness; when one is empty, its question is what gets asked next (one per message). multi: the slot keeps every value. Never store anything in never_store.",
+  "sections": {
+    "need": "What they need",
+    "business": "Their business",
+    "history": "Background",
+    "loops": "Open loops"
+  },
+  "slots": [
+    {
+      "key": "ask",
+      "label": "What they need",
+      "section": "need",
+      "key_slot": true,
+      "ask_rank": 1,
+      "question": "What are you trying to get funded?"
+    },
+    {
+      "key": "amount",
+      "label": "How much",
+      "section": "need",
+      "key_slot": true,
+      "ask_rank": 2,
+      "question": "Roughly how much are you looking for?"
+    },
+    {
+      "key": "use",
+      "label": "Use of funds",
+      "section": "need",
+      "key_slot": true,
+      "ask_rank": 3,
+      "question": "What will the money go toward?"
+    },
+    {
+      "key": "business_type",
+      "label": "Business",
+      "section": "business",
+      "key_slot": true,
+      "ask_rank": 4,
+      "question": "What kind of business is it?"
+    },
+    {
+      "key": "time_in_business",
+      "label": "Time in business",
+      "section": "business",
+      "key_slot": true,
+      "ask_rank": 5,
+      "question": "How long have you been at it?"
+    },
+    {
+      "key": "revenue",
+      "label": "Monthly revenue",
+      "section": "business",
+      "key_slot": true,
+      "ask_rank": 6,
+      "question": "About how much comes in each month?"
+    },
+    {
+      "key": "credit_band",
+      "label": "Credit, their own words",
+      "section": "business",
+      "key_slot": true,
+      "ask_rank": 7,
+      "question": "Roughly where's your credit at?"
+    },
+    {
+      "key": "state",
+      "label": "State",
+      "section": "business",
+      "key_slot": true,
+      "ask_rank": 8,
+      "question": "Which state are you in?"
+    },
+    {
+      "key": "timeline",
+      "label": "How soon",
+      "section": "need",
+      "ask_rank": 9,
+      "question": "How soon do you need it?"
+    },
+    {
+      "key": "tried",
+      "label": "Already tried",
+      "section": "history",
+      "multi": true
+    },
+    {
+      "key": "open_loop",
+      "label": "Open loops",
+      "section": "loops",
+      "multi": true
+    },
+    {
+      "key": "personal_note",
+      "label": "Personal",
+      "section": "history",
+      "multi": true
+    }
+  ],
+  "never_store": [
+    "health or medical details",
+    "religion",
+    "politics",
+    "bank or card account numbers",
+    "SSN, EIN or other ID numbers",
+    "passwords or login details"
+  ]
+}

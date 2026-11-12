@@ -1,0 +1,244 @@
+{
+  "_comment": "The sales side: how a campaign reply is sorted, where the person moves, and the first draft of an answer. Change the words here; no code change needed. Drafts wait for a person until FCM_SEND_REPLIES=1. Stage names match Pinnacle Funding Group exactly. <NAME> values are read from the environment (set NAME at intake); an unset one refuses live writes.",
+  "home_location": "<PINNACLE_GHL_LOCATION_ID>",
+  "never_location": "<FM_GHL_LOCATION_ID>",
+  "lead_tag": "src:intent-email",
+  "campaign_pipeline": "Lead Radar Leads",
+  "tags": {
+    "replied": "email:replied",
+    "opted_out": "email:opted-out",
+    "dnc": "aff:dnc",
+    "bounced": "email:bounced",
+    "not_now": "sales:not-now",
+    "wrong_person": "sales:wrong-person",
+    "needs_justin": "sales:needs-justin",
+    "social": "social:queue",
+    "replied_again": "email:replied-again",
+    "newsletter": "newsletter:opted-in"
+  },
+  "pipelines": {
+    "Lead Radar Leads": [
+      "New Lead",
+      "Replied",
+      "They Answered",
+      "Talking",
+      "Qualified",
+      "Booked",
+      "Not a Fit"
+    ],
+    "Facebook Leads": [
+      "New Lead",
+      "Poster Replied",
+      "They Answered",
+      "Talking",
+      "Qualified",
+      "Booked",
+      "Not a Fit"
+    ],
+    "Craigslist Leads": [
+      "New Lead",
+      "Replied",
+      "They Answered",
+      "Talking",
+      "Qualified",
+      "Booked",
+      "Not a Fit"
+    ],
+    "P4 · Partner Handoffs": [
+      "New Response",
+      "Engaged",
+      "Qualified",
+      "Appointment Booked",
+      "Sent to Partner",
+      "Partner Accepted",
+      "Application In",
+      "Funded",
+      "Paid"
+    ]
+  },
+  "agent_stops_at": {
+    "P4 · Partner Handoffs": "Appointment Booked"
+  },
+  "_stage_renames": "A stage's old name, read as its new one wherever GHL still shows it. Justin said yes on 2026-11-07 to renaming Facebook Leads' \"MetaMuse Replied\" to \"Poster Replied\" (the posters answer Facebook asks). The stage id doesn't change, so moves work before and after the rename in GHL's screen.",
+  "stage_renames": {"MetaMuse Replied": "Poster Replied"},
+  "never_stages": [
+    "Sent to Partner",
+    "Partner Accepted",
+    "Application In",
+    "Funded",
+    "Paid"
+  ],
+  "stage_by_intent": {
+    "interested": "They Answered",
+    "question": "They Answered",
+    "unclear": "They Answered",
+    "not_now": "They Answered",
+    "identity": "They Answered",
+    "not_interested": "Not a Fit",
+    "wrong_person": "Not a Fit"
+  },
+  "sequence_by_intent": {
+    "not_now": "seq:check-back"
+  },
+  "tag_on_stage": {
+    "Qualified": "seq:sales-ready"
+  },
+  "not_now_days": 60,
+  "signature": "\n\nJustin\nFind Me Money Group",
+  "drafts": {
+    "interested": {
+      "subject": "Re: {subject}",
+      "body": "Thanks{name}. Two things and I can send back the options I'd look at first: what's it for, and roughly how much? A rough answer is fine. Please don't email any documents or account numbers."
+    },
+    "map": {
+      "subject": "Re: {subject}",
+      "body": "Thanks{name}. Going only on what you've told me, here's where I'd look.\n\nFirst look: {first_look}\n{second_look}I'd skip: {skip}\n\nThese are starting points, not offers. A partner reviews your numbers and the lender decides, so nothing here is a yes yet.\n\nIf you'd like an intro to a partner, tell me how soon you'd need it, the best number for them, and that it's OK to share this. If not, this is yours either way."
+    },
+    "not_now": {
+      "subject": "Re: {subject}",
+      "body": "No problem{name}. I'll check back around {follow_up}. If something changes before then, just reply here."
+    },
+    "source": {
+      "subject": "Re: {subject}",
+      "body": "Fair question{name}. Your name and work email came from a business contact provider. I'm a funding broker, and I write to owners who may want help with funding. If you'd rather not hear from me, say so and I'll stop."
+    }
+  },
+  "sequence_on_send": {
+    "map": "seq:nurture"
+  },
+  "map_rows": [
+    {
+      "words": [
+        "flip",
+        "rental",
+        "dscr",
+        "hard money",
+        "property",
+        "real estate",
+        "heloc"
+      ],
+      "first": "investor real estate financing, through a licensed partner.",
+      "second": "",
+      "skip": "business credit products for this."
+    },
+    {
+      "words": [
+        "mca",
+        "daily payment",
+        "daily payments",
+        "cash advance",
+        "stacked"
+      ],
+      "first": "a refinance or a consolidation. A partner has to look at what you owe first.",
+      "second": "",
+      "skip": "another advance on top of this one."
+    },
+    {
+      "words": [
+        "truck",
+        "trucks",
+        "machine",
+        "equipment",
+        "gear",
+        "excavator",
+        "forklift",
+        "trailer",
+        "vehicle",
+        "van"
+      ],
+      "first": "equipment financing. The gear backs the deal, so you may be able to keep your cash for payroll and jobs.",
+      "second": "the vendor's own financing, as a number to compare.",
+      "skip": "paying it all in cash, if that would leave you short."
+    },
+    {
+      "words": [
+        "invoices",
+        "invoice",
+        "receivables",
+        "net 30",
+        "net 60",
+        "factoring"
+      ],
+      "first": "invoice factoring, which turns what you're owed into cash now.",
+      "second": "a line of credit, which you can draw on and repay.",
+      "skip": "revenue-based funding, unless it's urgent."
+    },
+    {
+      "words": [
+        "bad credit",
+        "low credit",
+        "poor credit",
+        "fix my credit",
+        "bankruptcy"
+      ],
+      "first": "getting your credit ready first, with a credit partner.",
+      "second": "",
+      "skip": "applying anywhere right now."
+    },
+    {
+      "words": [
+        "startup",
+        "start-up",
+        "new business",
+        "just starting",
+        "new llc",
+        "pre-revenue"
+      ],
+      "first": "building business credit first.",
+      "second": "0% credit lines. Some owners may qualify after preparation. It takes good personal credit, and a partner decides.",
+      "skip": "term loans and SBA loans for now."
+    },
+    {
+      "words": [
+        "payroll",
+        "cash flow",
+        "slow month",
+        "slow months",
+        "working capital",
+        "line of credit",
+        "credit line"
+      ],
+      "first": "a line of credit, which you can draw on and repay.",
+      "second": "a term loan, if this is a one-time need.",
+      "skip": "revenue-based funding, unless it's urgent. It's fast, and usually the most expensive."
+    },
+    {
+      "words": [
+        "expansion",
+        "expand",
+        "renovation",
+        "project",
+        "build-out",
+        "new location",
+        "inventory",
+        "loan"
+      ],
+      "first": "a term loan, a set amount paid back on a schedule.",
+      "second": "an SBA loan, if you can wait. It's often the longest term and the slowest.",
+      "skip": "revenue-based funding, unless it's urgent."
+    }
+  ],
+  "collections": {
+    "stages": [
+      {
+        "key": "reminder",
+        "after_days": 1,
+        "subject": "Invoice reminder from Find Me Money Group",
+        "body": "Hi {first},\n\nA quick note that {amount} is past due on your account with us. {items}\n\nIf it's already on its way, send me the reference and I'll match it up. If something looks wrong, tell me and we'll sort it out.\n\nJustin\nFind Me Money Group"
+      },
+      {
+        "key": "second",
+        "after_days": 7,
+        "subject": "Past due: {amount}",
+        "body": "Hi {first},\n\nI don't see {amount} yet, and it's now {days} days past due. {items}\n\nCan you tell me when it will go out?\n\nJustin\nFind Me Money Group"
+      },
+      {
+        "key": "last",
+        "after_days": 14,
+        "subject": "Past due: {amount}, and new leads",
+        "body": "Hi {first},\n\n{amount} is {days} days past due. {items}\n\nI'd like to keep sending you leads. Can we get this settled this week? Call me if it's easier.\n\nJustin\nFind Me Money Group"
+      }
+    ],
+    "flag_justin_after_days": 14
+  }
+}

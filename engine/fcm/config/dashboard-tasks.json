@@ -1,0 +1,527 @@
+{
+  "_comment": "What the API token can't do, done on the dashboard by the agent on its own Orgo computer's desktop (Chrome there, signed in to GHL by a person). Each task: why the API can't, what triggers it (a launch step or an API roadblock), the access it needs (asked for AHEAD of the launch by `fcm launch access`), who approves, the steps, and how to prove it worked with an API read. UI labels come from GHL help articles (sources) and are not live-verified: the agent follows what the screenshot shows and searches ghl_docs_search when a label differs. Source of docs/launch/DASHBOARD-WORKFLOWS.md (`fcm dashboard render`).",
+  "version": 1,
+  "access": {
+    "agent.desktop": {
+      "ask": "The agent's own Orgo computer (8 GB, Chrome) with its desktop tools on, and an Orgo API key for its workspace",
+      "who": "Justin",
+      "why": "what the API token can't do, the agent does by clicking through GHL in Chrome on its own desktop; no second computer and no second browser",
+      "how": "the computer from the client's manifest (orgo.computer_id); set-secrets.py enters ORGO_API_KEY and ORGO_COMPUTER_ID; a person signs in to GHL there over VNC"
+    },
+    "send.gate": {
+      "ask": "A send gate for this client, off the agent's computer (a Railway service from deploy/gate), holding the only GHL token that can send",
+      "who": "Justin",
+      "why": "the agent drives its own computer, so nothing there can be trusted to stop a send; the gate sends only what an approver's own Slack message released, each message at most once",
+      "how": "bash deploy/gate/launch.sh (GATE_RAILWAY_PROJECT=<the client's project>, FCM_CLIENT=<client>): it asks for the gate's secrets at hidden prompts, deploys, checks /health, and writes FCM_SEND_GATE_URL and FCM_SEND_GATE_TOKEN to the agent's computer; record the gate's URL in the manifest's gate.url"
+    },
+    "approver.slack.id": {
+      "ask": "The Slack member ID of each person whose approval releases a send (Justin), set on the client's send gate",
+      "who": "Justin",
+      "why": "the send gate releases a batch only when one of these Slack users posts the approval in the channel, read through Slack's API; the agent's bot token can't post as them",
+      "how": "Slack \u2192 profile \u2192 \u22ee \u2192 Copy member ID; deploy/gate/launch.sh asks for it as GATE_APPROVER_SLACK_IDS (it lives on the gate, never on the agent's computer)"
+    },
+    "desktop.no.personal.slack": {
+      "ask": "Justin's personal Slack is never signed in on the agent's desktop: not in Chrome, not in a Slack app",
+      "who": "Justin",
+      "why": "approvals are only safe because the agent can't act as Justin in Slack; a signed-in session on its own desktop would let it approve its own sends",
+      "how": "check over VNC before launch (Chrome profiles, slack.com cookies, no Slack desktop app); record it in the manifest's access_received; fcm launch check fails until it is recorded",
+      "after_computer": true
+    },
+    "ghl.login.subaccount": {
+      "ask": "A GoHighLevel user for the agent (e.g. \"Affiliate Manager (agent)\", in the program's sub-account, WITHOUT Conversations or Automation access), signed in once in Chrome on the agent's desktop",
+      "who": "the client's GHL admin (or Justin for a demo)",
+      "why": "pipelines, workflows, Private Integrations, phone and A2P screens are inside the sub-account; without Conversations or Automation the agent can't send a text or start a workflow from the screen either",
+      "how": "the person opens the agent's desktop over VNC, signs in and completes MFA themselves; the agent never types a password and never handles MFA codes",
+      "after_computer": true
+    },
+    "ghl.login.agency": {
+      "ask": "An agency-admin GoHighLevel user signed in on the agent's desktop (only for creating sub-accounts and snapshots)",
+      "who": "Justin",
+      "why": "sub-account creation and snapshots live in the agency view",
+      "how": "same as above, over VNC; can be the same Chrome profile only if it is our own agency, never a client's",
+      "after_computer": true
+    },
+    "ghl.agency.pro": {
+      "ask": "The GHL agency on the Agency Pro plan, active",
+      "who": "Justin",
+      "why": "POST /locations/ (sub-account creation) and agency-level Marketplace apps need Agency Pro",
+      "how": "billing in app.gohighlevel.com (money: Justin only)"
+    },
+    "spend.approval": {
+      "ask": "Who approves paid GHL items (a phone number, call transcription at $0.024/min, A2P fees), and a ceiling per launch",
+      "who": "the client (they pay usage) and Justin",
+      "why": "money moves only with a person's yes, every time",
+      "how": "a name in the manifest's approvals; the agent asks that person in Slack before the purchase screen's final click"
+    },
+    "a2p.details": {
+      "ask": "A2P 10DLC brand details: exact legal name, EIN (CP-575 helps), business type, registered address, website, authorized contact (name, phone, email, title), the opt-in method and consent text, privacy policy and terms URLs, 2-5 sample messages",
+      "who": "the client",
+      "why": "carriers review a real business; mismatches with IRS records are the usual rejection",
+      "how": "the client fills a short form or sends the list; the agent pre-fills Trust Center, the client reviews and submits (they attest)"
+    },
+    "slack.admin": {
+      "ask": "A Slack admin of the client's workspace to click Allow on our app's install link",
+      "who": "the client's Slack admin",
+      "why": "installing an app is an OAuth grant: only the admin can give it",
+      "how": "we send the install link; they click Allow; set-secrets.py takes the two tokens"
+    },
+    "marketplace.dev": {
+      "ask": "A GHL Marketplace developer account under the agency",
+      "who": "Justin",
+      "why": "the OAuth app that mints location tokens (removes the manual Private Integration step)",
+      "how": "marketplace.gohighlevel.com \u2192 sign up \u2192 My Apps"
+    },
+    "client.data.approval": {
+      "ask": "The client's written approval of the systems, including the agent's desktop (its browser shows their partners' records in GoHighLevel)",
+      "who": "the client",
+      "why": "partner data may sit only in systems the client approved in writing (often under an NDA); the dashboard lane waits on the same approval as the API",
+      "how": "the client's systems page (`fcm launch systems --client <name>`) lists the agent's desktop; their reply 'approved' is recorded in the manifest's data_approval"
+    },
+    "ghl.client.agency.admin": {
+      "ask": "The client's GHL agency admin, to open our app's install link and click Allow",
+      "who": "the client's GHL admin (or Justin for a demo)",
+      "why": "OAuth consent can only be given by the account's admin, on GHL's screen",
+      "how": "we send the link; they pick the sub-account and approve; nothing to type"
+    },
+    "client.intake": {
+      "ask": "The client's intake for the agent's persona and knowledge: what the company is and sells, to whom, who the partners are, how a referral flows, the products partners can refer, how partners are paid, anything never to be said, the mailing address, the booking link, and the partner manager's name",
+      "who": "the client",
+      "why": "the agent writes only from what the client told us; anything missing shows as NOT PROVIDED and the agent asks instead of guessing",
+      "how": "fill the manifest's company block and manager_name; fcm launch release refuses a pack without the company's name, kind, offer, partners and the manager's name"
+    }
+  },
+  "tasks": {
+    "ghl.account.reactivate": {
+      "title": "Reactivate the GHL agency or sub-account",
+      "why_not_api": "billing and account state; no API, and money moves only with a person",
+      "triggers": [
+        {
+          "status": [
+            401
+          ],
+          "message": "not active"
+        }
+      ],
+      "where": "agency",
+      "human_only": true,
+      "needs": [
+        "ghl.agency.pro"
+      ],
+      "approval": "Justin",
+      "steps": [
+        "Stop every GHL step: nothing works on an inactive account, and it looks like a token problem but isn't.",
+        "Tell the manager in one message: which account (agency or sub-account), the exact message GHL returned, and that billing in app.gohighlevel.com is the fix.",
+        "Wait. Re-run `fcm launch check` once they say it's done."
+      ],
+      "verify": "fcm launch check: 'account active' passes",
+      "sources": []
+    },
+    "ghl.subaccount.create": {
+      "title": "Create the program's sub-account",
+      "why_not_api": "POST /locations/ needs an agency token on Agency Pro; it returns 401/403 otherwise",
+      "triggers": [
+        {
+          "path": "/locations/",
+          "method": "POST",
+          "status": [
+            401,
+            403
+          ]
+        }
+      ],
+      "intents": [
+        "create sub-account",
+        "create location"
+      ],
+      "launch_step": "location",
+      "where": "agency",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.agency"
+      ],
+      "approval": "the manager makes the final Create click (a sub-account may be billable)",
+      "steps": [
+        "Screenshot your desktop. Open GoHighLevel and switch to the agency view (the account switcher, top left).",
+        "Search Sub-Accounts for the name in the manifest (ghl.location_name). If it exists, stop and use it: never create a second.",
+        "Fill everything in: the name exactly as in the manifest (a demo's name must say Demo or synthetic), the snapshot (manifest ghl.snapshot_id, or none), phone and address.",
+        "Sub-Accounts \u2192 Create Sub-Account (labels may differ: follow the screen). Pick the snapshot if one is offered.",
+        "FINAL CLICK: stop before the last Create/Save. Card to the manager with what's filled in; they open the agent's desktop over VNC and click it.",
+        "Open the new sub-account and read the location id from the URL (/location/<id>/...). Screenshot as proof.",
+        "Write the id into the manifest's ghl section via the manager (the agent can't edit files) and log it in the daily note."
+      ],
+      "verify": "the location id from the URL answers GET /locations/{id} with the program's token (fcm launch check: 'location')",
+      "sources": [],
+      "final_click": true
+    },
+    "ghl.pit.create": {
+      "title": "Create the two Private Integration Tokens: the agent's (can't send) and the gate's (can)",
+      "why_not_api": "GHL has no API to mint a Private Integration Token; /oauth/locationToken needs a Marketplace app (Agency-Access-Only)",
+      "triggers": [
+        {
+          "check": "account active",
+          "detail": "GHL_API_KEY or GHL_LOCATION_ID is empty"
+        }
+      ],
+      "intents": [
+        "create private integration",
+        "get api token"
+      ],
+      "launch_step": "token",
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount"
+      ],
+      "approval": "manager",
+      "secret_moment": true,
+      "steps": [
+        "Screenshot. Confirm the sub-account by name and by the location id in the URL.",
+        "Settings \u2192 Private Integrations. If ones named \"Affiliate OS agent\" or \"Affiliate OS send gate\" already exist, stop: ask the manager whether to reuse them (they hold the tokens) or replace them. Up to 20 tokens per sub-account.",
+        "Create \"Affiliate OS agent\" (the agent's own token). Scopes: contacts, conversations (read only), opportunities, workflows (read), locations (read), custom fields, custom values, tags, users (read), calendars, tasks, notes. NOT conversations/message.write: this token must not be able to send.",
+        "SECRET MOMENT: stop before the token is shown. The manager opens the agent's desktop over VNC, clicks Create, Copy, and runs `python3 deploy/orgo/set-secrets.py --client <client> GHL_API_KEY GHL_LOCATION_ID` on their Mac. The agent never reads, screenshots, or repeats it.",
+        "Create \"Affiliate OS send gate\". Scopes: conversations/message.write, contacts (read/write), workflows. Same SECRET MOMENT: the manager copies it into `deploy/gate/launch.sh` (GATE_GHL_API_KEY), never onto the agent's computer.",
+        "After they confirm, take a screenshot only once the token dialogs are closed."
+      ],
+      "verify": "fcm launch check: 'account active', 'token scopes' and 'approvals' pass; on the computer `fcm gate can-send` prints no",
+      "sources": [
+        "155000003054"
+      ]
+    },
+    "ghl.pit.scopes.edit": {
+      "title": "Add missing scopes to the agent's Private Integration",
+      "why_not_api": "a token's scopes are edited only in the dashboard",
+      "triggers": [
+        {
+          "status": [
+            401,
+            403
+          ],
+          "message": "not authorized for this scope"
+        },
+        {
+          "check": "token scopes"
+        }
+      ],
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount"
+      ],
+      "approval": "manager",
+      "steps": [
+        "Name the missing scopes from fcm launch check ('token scopes' detail) or the failing call.",
+        "Card to the manager: which scopes, and why each is needed. Edit only after a yes.",
+        "Settings \u2192 Private Integrations \u2192 Funding Affiliate Manager \u2192 edit permissions; add only the named scopes; save and wait for the saved state.",
+        "If GHL issues a new token instead of keeping the old one, this becomes ghl.pit.create's SECRET MOMENT: the manager copies it, the agent never sees it."
+      ],
+      "verify": "fcm launch check: 'token scopes' passes",
+      "sources": [
+        "155000003054"
+      ]
+    },
+    "ghl.pipelines.build": {
+      "title": "Build the two pipelines",
+      "why_not_api": "the public API reads pipelines but can't create them (no POST /opportunities/pipelines)",
+      "triggers": [
+        {
+          "check": "pipelines mapped"
+        }
+      ],
+      "intents": [
+        "create pipeline"
+      ],
+      "launch_step": "map",
+      "skip_if": "snapshot_id",
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount"
+      ],
+      "approval": "none (building in the program's own sub-account; no one is contacted)",
+      "steps": [
+        "Read config/pipelines.json with fcm_read: the exact names and stage order.",
+        "Opportunities \u2192 Pipelines. For each pipeline that's missing, Create new pipeline with the exact name.",
+        "Affiliate Lifecycle: Applied, Onboarded, Active, Producing, Quiet, Dormant, Reactivated (this order).",
+        "Affiliate Growth Services: Interested, Scoped, In Progress, Delivered.",
+        "Save each; reopen it and compare every stage name character for character (bootstrap maps by exact name).",
+        "Ask the manager to run `fcm ghl bootstrap --apply` (it maps the new ids)."
+      ],
+      "verify": "fcm launch check: 'pipelines mapped' passes",
+      "sources": []
+    },
+    "ghl.workflows.build": {
+      "title": "Build W-1 to W-9 as drafts",
+      "why_not_api": "the public API lists and enrolls workflows but can't create them",
+      "triggers": [],
+      "intents": [
+        "create workflow"
+      ],
+      "launch_step": "map",
+      "skip_if": "snapshot_id",
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount"
+      ],
+      "approval": "a person makes the Publish click (building drafts needs none)",
+      "steps": [
+        "Read config/workflows.json with fcm_read: each workflow's exact name, trigger, filters, actions, waits and exit conditions. Sketch the graph first: every branch needs a destination and an end.",
+        "Automation \u2192 Workflows. Search each name first; record the URL of any that exist and resume a partial one instead of creating a duplicate.",
+        "Create Workflow \u2192 start from scratch, set the exact name, keep it in DRAFT while building.",
+        "Add New Trigger, pick the event, set its filters, save the trigger. Several triggers each enroll on their own: they are not an AND filter.",
+        "Add actions with the canvas + controls, one at a time: pick it by its current label, fill the required fields, use the merge-field picker for contact values (never type guessed variables), name it, save it, screenshot.",
+        "Set each condition's branches and fallback, and every wait's timezone/window. Then open workflow settings and set re-entry, stop-on-response and time settings as written: don't trust defaults.",
+        "Turn Stats View off before editing (it blocks edits). Save, reload, and check every edge, branch and action against the spec.",
+        "Test Workflow with the test contact (fcm:test-contact) only, then check the history and branch decisions. Never test on a partner.",
+        "FINAL CLICK: never publish. A published workflow can text partners outside the outbox, STOP handling and the send window. Card to the manager listing the nine drafts with their test results; the manager opens the agent's desktop over VNC and clicks Publish on the ones they approve.",
+        "Ask the manager to run `fcm ghl bootstrap --apply` to map the ids."
+      ],
+      "verify": "GET /workflows/ lists all nine names; `fcm ghl bootstrap` shows them mapped",
+      "sources": [
+        "Super Hub v2.3.0 skills/ghl-workflows (help articles 155000001254, 155000002292, 155000002294)"
+      ],
+      "final_click": true
+    },
+    "ghl.snapshot.create": {
+      "title": "Save the reference sub-account as the Affiliate Manager snapshot",
+      "why_not_api": "the API lists snapshots and makes share links but can't create one",
+      "triggers": [],
+      "intents": [
+        "create snapshot"
+      ],
+      "launch_step": "snapshot",
+      "where": "agency",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.agency"
+      ],
+      "approval": "Justin",
+      "steps": [
+        "Only from a reference sub-account with NO partner data and NO client branding (check contacts count is 0 or all fcm:demo-synthetic, and delete nothing yourself: ask).",
+        "Agency view \u2192 Account Snapshots \u2192 Create New Snapshot. Name: Affiliate Manager vN. Source: the reference sub-account.",
+        "Wait for it to finish; open it and list what it contains (pipelines, workflows, custom fields, custom values). This is the check that proves what a snapshot carries.",
+        "Read its id (GET /snapshots/ shows it) and give it to the manager for the launcher config."
+      ],
+      "verify": "GET /snapshots/ lists \"Affiliate Manager vN\"",
+      "sources": [
+        "155000003380"
+      ]
+    },
+    "ghl.snapshot.load": {
+      "title": "Load the snapshot into an existing sub-account",
+      "why_not_api": "the API creates a sub-account with a snapshot but doesn't push one into an existing sub-account",
+      "triggers": [],
+      "intents": [
+        "load snapshot",
+        "push snapshot"
+      ],
+      "launch_step": "map",
+      "where": "agency",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.agency"
+      ],
+      "approval": "manager",
+      "steps": [
+        "Confirm the target sub-account by name and id; it must be the program's, never another client's.",
+        "Agency view \u2192 Account Snapshots \u2192 the Affiliate Manager snapshot \u2192 push/load into the target sub-account (follow the screen's labels).",
+        "Choose to keep existing items when asked (never overwrite the client's own workflows without a yes).",
+        "Check the push status, then run fcm launch check."
+      ],
+      "verify": "GET /snapshots/snapshot-status/{snapshotId}/location/{locationId}; fcm launch check: 'pipelines mapped'",
+      "sources": []
+    },
+    "ghl.a2p.register": {
+      "title": "Register A2P 10DLC (brand, then campaign)",
+      "why_not_api": "Trust Center registration is a dashboard flow, and the business attests to it",
+      "triggers": [
+        {
+          "intent": "texting"
+        }
+      ],
+      "intents": [
+        "a2p",
+        "10dlc",
+        "texting setup"
+      ],
+      "launch_step": "texting",
+      "first": true,
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount",
+        "a2p.details",
+        "spend.approval"
+      ],
+      "approval": "the client submits",
+      "steps": [
+        "Start this FIRST in every launch that texts: carrier review takes days and gates everything else.",
+        "Settings \u2192 Phone System / Trust Center \u2192 A2P 10DLC. Brand first, then campaign.",
+        "Fill the brand from a2p.details exactly as the IRS records read; the campaign use case is a customer-care/relationship one, with the sample messages from the approved kickoff copy and HELP/STOP text.",
+        "Stop before Submit: the client reviews every field on the agent's desktop over VNC and submits themselves (they attest; fees apply).",
+        "Log the submission date; fcm launch check reports 'A2P pending' until approved."
+      ],
+      "verify": "the Trust Center shows Brand and Campaign approved",
+      "sources": [
+        "155000002380",
+        "155000000508",
+        "155000000235"
+      ]
+    },
+    "ghl.phone.purchase": {
+      "title": "Buy the program's phone number",
+      "why_not_api": "the API can purchase, but buying is money: it always waits for a person's yes, and the dashboard shows regulatory prompts",
+      "triggers": [
+        {
+          "intent": "texting"
+        }
+      ],
+      "intents": [
+        "buy number",
+        "purchase phone number"
+      ],
+      "launch_step": "texting",
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount",
+        "spend.approval"
+      ],
+      "approval": "the spend approver makes the Purchase click",
+      "steps": [
+        "Settings \u2192 Phone System \u2192 Phone numbers \u2192 + Add Number \u2192 Add Phone Number.",
+        "Search the client's area code; pick a local number with SMS and voice.",
+        "FINAL CLICK: stop on the confirmation screen. Card to the spend approver: the number, its monthly price, that it's for this program. They open the agent's desktop over VNC, complete any identity/regulatory prompts, and click Purchase themselves.",
+        "Assign it to the agent's GHL user, then screenshot."
+      ],
+      "verify": "the number shows under Phone numbers; GET /phone-system/numbers (if scoped) lists it",
+      "sources": [
+        "155000003226"
+      ],
+      "final_click": true
+    },
+    "ghl.transcription.enable": {
+      "title": "Turn on call recording and transcription",
+      "why_not_api": "a paid add-on switched on in Phone System settings",
+      "triggers": [
+        {
+          "intent": "calls"
+        }
+      ],
+      "intents": [
+        "call transcription"
+      ],
+      "launch_step": "calls",
+      "where": "sub-account",
+      "needs": [
+        "agent.desktop",
+        "ghl.login.subaccount",
+        "spend.approval"
+      ],
+      "approval": "the spend approver turns it on ($0.024 per recorded minute plus recording)",
+      "steps": [
+        "Open Settings \u2192 Phone System \u2192 Voice \u2192 Call Recording and Transcription, and stop there.",
+        "FINAL CLICK: card to the spend approver with the price; they open the agent's desktop over VNC and tick Enable Call Transcription (Voice Intelligence) themselves.",
+        "Screenshot the enabled state once they confirm."
+      ],
+      "verify": "the next recorded test call has a transcript (GET /conversations/locations/{loc}/messages/{id}/transcription)",
+      "sources": [
+        "155000002841"
+      ],
+      "final_click": true
+    },
+    "ghl.marketplace.app": {
+      "title": "Register our GHL Marketplace app (OAuth)",
+      "why_not_api": "apps are registered in the developer portal",
+      "triggers": [
+        {
+          "path": "/oauth/locationToken",
+          "status": [
+            401,
+            403
+          ]
+        }
+      ],
+      "intents": [
+        "marketplace app"
+      ],
+      "where": "developer portal",
+      "human_only": true,
+      "needs": [
+        "marketplace.dev",
+        "ghl.agency.pro"
+      ],
+      "approval": "Justin",
+      "steps": [
+        "Justin signs in to marketplace.gohighlevel.com \u2192 My Apps \u2192 Create App (private, distribution Agency & Sub-account).",
+        "Scopes: the PIT scope list plus locations.write and oauth.write.",
+        "Redirect URL: the token broker's callback (ONE-CLICK.md, M2). Client id and secret go into the broker's secrets, never chat."
+      ],
+      "verify": "an agency install returns an agency token; POST /oauth/locationToken returns a location token",
+      "sources": [
+        "155000001057",
+        "155000001163"
+      ]
+    },
+    "slack.app.install": {
+      "title": "Install the Slack app in the client's workspace",
+      "why_not_api": "an OAuth grant only the client's Slack admin can give",
+      "triggers": [],
+      "intents": [
+        "slack install"
+      ],
+      "launch_step": "channel",
+      "where": "Slack",
+      "human_only": true,
+      "needs": [
+        "slack.admin",
+        "approver.slack.id"
+      ],
+      "approval": "the client's Slack admin",
+      "steps": [
+        "Create the app from slack/manifest.json in the client's workspace (Justin or the admin).",
+        "The admin clicks Allow; then runs set-secrets.py for SLACK_BOT_TOKEN, SLACK_APP_TOKEN, SLACK_HOME_CHANNEL, SLACK_ALLOWED_USERS. The gate gets its own read of the approvals channel (GATE_SLACK_BOT_TOKEN, GATE_SLACK_CHANNEL)."
+      ],
+      "verify": "the agent answers in the home channel",
+      "sources": []
+    },
+    "ghl.marketplace.install": {
+      "title": "Install our Marketplace app in the client's agency (consent)",
+      "why_not_api": "OAuth consent is a person choosing to grant access on GHL's own screen",
+      "triggers": [],
+      "intents": [
+        "install marketplace app",
+        "oauth consent"
+      ],
+      "launch_step": "token",
+      "where": "the client's agency",
+      "human_only": true,
+      "needs": [
+        "ghl.client.agency.admin"
+      ],
+      "approval": "the client's agency admin",
+      "steps": [
+        "The agent prepares the install link (our app's authorization URL with its scopes) and a one-paragraph note: what the app can do and that every message still needs a person's approval.",
+        "The client's agency admin opens it, picks the sub-account(s), reads the scopes, and clicks Allow. The agent never clicks a consent screen.",
+        "The token broker receives the code and stores the agency refresh token; the agent's computer gets only a location token."
+      ],
+      "verify": "the broker shows an install for the client's companyId; POST /oauth/locationToken returns a token for the program's location",
+      "sources": [
+        "155000001057"
+      ]
+    }
+  },
+  "fallback": {
+    "title": "Any other API roadblock",
+    "steps": [
+      "First, on a sub-account that holds the client's real partners: dashboard work waits for the client's written systems approval, exactly like the API. fcm_api_roadblock says so when it's locked; then you only report and wait.",
+      "Classify the failure with fcm_api_roadblock (status, message, path, method, what you were trying to do). Retry only rate limits (429) and transient errors (5xx, timeouts), with backoff.",
+      "If it names a known task, follow that task's steps.",
+      "Otherwise search ghl_docs_search for the dashboard route and read the article (ghl_docs_read).",
+      "Write the plan as an approval card: what failed, the dashboard route, every click that changes something, the access it needs, and how you'll prove it with an API read. Ask for any missing access in the same card.",
+      "Do it on your desktop only after a clear yes: screenshot, one action, screenshot, compare.",
+      "Prove it with the API read, then save the recipe with fcm_daily_note under 'Dashboard recipe: <title>' so a person can add it to config/dashboard-tasks.json.",
+      "Never: extract browser tokens or cookies, switch to another account to make a menu appear, type a password, sign in to Slack as anyone, open a terminal or file manager on your desktop, handle an MFA code, or make a FINAL CLICK (purchase, submit, publish, create a billable account) yourself: a person does it over VNC."
+    ]
+  }
+}

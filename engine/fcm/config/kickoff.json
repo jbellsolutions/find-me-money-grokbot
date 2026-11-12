@@ -1,0 +1,36 @@
+{
+  "_comment": "Who we are and which tags mean what. The kickoff-wave settings below are unused: this agent runs leads, not waves.",
+  "company": "Find Me Money Group",
+  "sms_company": "Find Me Money",
+  "default_sender": "Justin",
+  "generic_manager_names": [
+    "Funding Relationship Manager",
+    "Partner Manager",
+    ""
+  ],
+  "wave_size": 250,
+  "batch_max": 500,
+  "max_segments": 2,
+  "nudge_after_days": 5,
+  "variants": [
+    "A"
+  ],
+  "calendar_link": "",
+  "_mailing_address": "The company's postal address, printed in the footer of every email (CAN-SPAM). Read from env FMM_MAILING_ADDRESS (set at intake). Live email is refused until it is set; texts don't need it.",
+  "mailing_address": "<FMM_MAILING_ADDRESS>",
+  "send_pause_seconds": 1.0,
+  "attribution_tag_prefix": "crm",
+  "_attribution_tag_prefix": "A reply tags the partner <prefix>:replied, a recorded deal <prefix>:deal-submitted (the send gate adds <prefix>:crm-sent). Empty = no attribution tags.",
+  "program_tags": {
+    "cohort": "",
+    "campaign": "",
+    "source": "",
+    "later": "crm:later",
+    "hot": "crm:hot",
+    "manager": "crm:for-justin",
+    "potential_deal": "crm:potential-deal",
+    "call_booked": "crm:call-booked",
+    "takeover": "handoff:partner-handling"
+  },
+  "_program_tags": "GHL lowercases tags, so these are lowercase. cohort: every partner the agent manages; the agent's sweeps, waves, reports and cards only ever see contacts with this tag (the sub-account holds many other contacts). source: where the record came from. Both go on at import. campaign: enrollment in the reactivation campaign; NOT added at import (a GHL workflow triggers on it), only by `fcm program enroll` once the copy is approved. Empty cohort = no filter. later: a partner who said \"later\" (W-8b holds them 60 days). hot: a warm reply (a call, a deal, will send deals, wants help): the positive-replies smart list. manager: a reply Justin leads (a deal, a call, a question, commissions, \"is this a real person?\", a service); GHL's W-10 texts and emails him on it. The agent answers every other reply itself, by text or email."
+}

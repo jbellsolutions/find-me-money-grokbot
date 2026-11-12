@@ -1,0 +1,21 @@
+{
+  "_comment": "Cadence rules. Touch every 14 days (alternating SMS/email), an offer every 30, personal check-in at 60 days silent, reactivation at 90, dead-lead campaign at 180. Silent = no reply and no deal. The SMS window is the RECIPIENT's local time (from the area code; a number whose zone is unclear must be inside the window everywhere it could be). Unapproved batches expire after action_ttl_hours. The inbox reads back inbox_lookback_days.",
+  "onboarding_days": 14,
+  "biweekly_touch_days": 14,
+  "monthly_offer_days": 30,
+  "quiet_after_days": 45,
+  "checkin_after_days": 60,
+  "dormant_after_days": 90,
+  "dead_after_days": 180,
+  "dead_reactivation_every_days": 90,
+  "sms_window_start_hour": 9,
+  "sms_window_end_hour": 20,
+  "daily_personal_touch_cap": 40,
+  "daily_bulk_enroll_cap": 2000,
+  "batch_approval_max": 100,
+  "approval_ttl_hours": 12,
+  "resume_ttl_hours": 36,
+  "action_ttl_hours": 48,
+  "inbox_lookback_days": 14,
+  "timezone": "America/New_York"
+}

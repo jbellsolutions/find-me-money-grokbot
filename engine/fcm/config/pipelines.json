@@ -1,0 +1,60 @@
+{
+  "_comment": "GHL's public API cannot create pipelines. Build these in the GHL UI (or on the agent's Orgo desktop) with EXACTLY these names; `fcm ghl bootstrap` then maps their ids.",
+  "lifecycle": {
+    "name": "Affiliate Lifecycle",
+    "stages": [
+      "applied",
+      "onboarded",
+      "active",
+      "producing",
+      "quiet",
+      "dormant",
+      "reactivated"
+    ],
+    "stage_names": [
+      "Applied",
+      "Onboarded",
+      "Active",
+      "Producing",
+      "Quiet",
+      "Dormant",
+      "Reactivated"
+    ]
+  },
+  "services": {
+    "name": "Affiliate Growth Services",
+    "stages": [
+      "interested",
+      "scoped",
+      "in_progress",
+      "delivered"
+    ],
+    "stage_names": [
+      "Interested",
+      "Scoped",
+      "In Progress",
+      "Delivered"
+    ]
+  },
+  "reactivation": {
+    "name": "Re-engagement",
+    "stages": [
+      "enrolled",
+      "contacted",
+      "responded",
+      "call_booked",
+      "potential_deal",
+      "active",
+      "quiet"
+    ],
+    "stage_names": [
+      "Enrolled",
+      "Contacted",
+      "Responded",
+      "Call Booked",
+      "Potential Deal",
+      "Active",
+      "Quiet"
+    ]
+  }
+}

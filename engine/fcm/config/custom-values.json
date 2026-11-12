@@ -1,0 +1,19 @@
+{
+  "_comment": "Custom values the broadcast workflows read. The agent updates them as part of an APPROVED newsletter/event/offer action. manager_name, calendar_link and company_address are the reactivation copy's merge values (campaigns/client-reactivation/05-workflows.md); bootstrap creates them as '-', and no email is published until company_address holds the real postal address (CAN-SPAM).",
+  "names": [
+    "newsletter_subject",
+    "newsletter_body",
+    "monthly_offer_subject",
+    "monthly_offer_body",
+    "new_offer_subject",
+    "new_offer_body",
+    "next_event_title",
+    "next_event_date",
+    "next_event_link",
+    "partner_submit_link",
+    "partner_manager_name",
+    "manager_name",
+    "calendar_link",
+    "company_address"
+  ]
+}
