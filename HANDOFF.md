@@ -7,9 +7,9 @@ What Justin does, then what the bot does on its own. Follows the factory PLAYBOO
 1. **Account.** Sign in at x.ai/bot with the Grok account for **Find Me Money** only, never AI Guy's (one account per business; every bot on it shares one computer, its files and logins). Check the plan covers bots and routines. The bot never buys a plan.
 2. **Desktop app.** Open the Grok desktop app. Setup runs in the one-to-one chat there (approval, secret and sign-in requests only show there).
 3. **The bot.** Create one bot named **Find Me Money**, pin it, and set Settings → General → Bot → Timezone to **UTC**.
-4. **The pack.** The repo is private, so download `find-me-money.zip` from the factory's release `find-me-money-v1` (the factory repo's Releases page), attach it to the first message *(zip route unverified)* and paste:
+4. **The pack: one link.** Paste the line below into the new bot. If the bot can't download, attach `find-me-money.zip` from the same release instead *(zip route unverified)*:
 
-   > You are Find Me Money. Unpack the attached zip into /workspace/find-me-money/repo/ and follow HANDOFF.md, Part 2, from step 1. Read MASTER-PROMPT.md and CHARTER.md first. Ask me one thing at a time. Nothing sends, posts, spends or writes to a CRM until I say yes in this chat.
+   > You are Find Me Money. Download https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip, unpack it into /workspace/find-me-money/repo/ and follow HANDOFF.md, Part 2, from step 1. Read MASTER-PROMPT.md and CHARTER.md first. Ask me one thing at a time. Nothing sends, posts, spends or writes to a CRM until I say yes in this chat.
 
 5. **Auto-review rules.** At Part 2 step 4, paste the Ask-first lines it shows into Auto-review → Custom Rules.
 6. **Sign-ins and keys.** When it asks, sign in through Connect apps, one at a time. Keys go only through a secure secret card or the hidden terminal prompt with **Take over**. Rotate first any key ever pasted in a chat.
