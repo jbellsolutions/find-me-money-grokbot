@@ -10,8 +10,8 @@ Muse reads Facebook (the groups its account is in, posts, comments, Marketplace)
 **Operate the app with `metamuse-operator`** (`muse.py`). Prompts are in `references/prompts.md`. Rows go to the Radar through `scripts/muse_to_radar.py`.
 
 ```bash
-M="python3 /workspace/find-me-money/repo/skills/muse/metamuse-operator/scripts/muse.py"
-R="python3 /workspace/find-me-money/repo/skills/muse/metamuse-leads/scripts/muse_to_radar.py"
+M="python3 /workspace/find-me-money/repo/skills/worker/metamuse-operator/scripts/muse.py"
+R="python3 /workspace/find-me-money/repo/skills/worker/metamuse-leads/scripts/muse_to_radar.py"
 ```
 
 ## Who does what (rulings that stand)

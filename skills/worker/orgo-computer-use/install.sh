@@ -1,6 +1,6 @@
 #!/bin/sh
 # Install this skill. Usage:
-#   ./install.sh claude            -> /workspace/find-me-money/repo/skills/muse/orgo-computer-use
+#   ./install.sh claude            -> /workspace/find-me-money/repo/skills/worker/orgo-computer-use
 #   ./install.sh hermes [profile]  -> ~/.hermes/skills/orgo-computer-use (or a profile's skills)
 #   ./install.sh <dir>             -> <dir>/orgo-computer-use (GrokBot /workspace, any agent)
 set -e

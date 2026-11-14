@@ -1,26 +1,31 @@
 # Trigger map
 
-The loop is deterministic: schedules start every step (GrokBot takes no webhooks, so sweeps stand in for them), scripts move the data, and the agent makes only the judgment call inside. Gates stay on until replies prove good. Every cron is UTC (Eastern is UTC-5 in winter). **50 routines max per bot; this uses 29.** `tools/check.py` counts the Schedule rows below.
+**GrokBot is the orchestrator and automator; the work runs elsewhere** (Justin, 2026-11-13: "grokbot is just the orchestrator and automator", "just also think of usage. always"). The bot plans, sends work orders, judges, queues approvals and reports. The doing runs on:
 
-**Routine names are exact.** The name in the "Routine" column is the routine's title in Grok, its line in `context/routines-on.md` (`<name>: off|test|on`), and the `--routine` argument the guards and job scripts get. Change one, change all four.
+| Executor | Runs | Why there |
+|---|---|---|
+| **Hermes on the Mac** (the `find-me-money` profile, its own cheap model) | Facebook groups by theme, Marketplace and Muse (computer use on the Mac itself), Craigslist, local places, wholesaler call cards; plus the profile's own 12 jobs: the reply cycle, the 30-minute reply sweep, reply sorting, the lead sweep, the day check, the handoff watch, the scorecard, loop close | Browser, Muse and sign-ins live on that Mac; high-frequency sweeps cost Grok nothing there |
+| **Codex CLI** (on this bot's computer, its own subscription) | Bulk first drafts (no web search in `codex exec`, so research stays on Hermes) | Moves that spend off Grok's weekly allowance (usage-mastery trick 29) |
+| **GrokBot** (this bot) | 12 routines, about 13 runs a day | Judgment only: what to work, lead fit on the shortlist, the best copy, partner choice, what to tell Justin |
 
-**Writes to a live system** go through `guards/scripts/owner_guard.py check <system> --routine "<name>"`. Every system starts `live` in `context/owners.md`, so the bot reads and drafts and the live system keeps writing. Justin moves one system at a time to `bot`.
+Which executor runs which lane is `context/executors.md`; the bridge is `engine/hermes_bridge.py` (one Orgo call per put or pull). Every cron is UTC. **50 routines max per bot; this uses 12.** `tools/check.py` counts the Schedule rows below. Routine names are exact: the Grok title, the line in `context/routines-on.md`, and the `--routine` the guards get.
 
 ## The loop, step by step
 
-| # | Step | Started by | Role | Judgment call | Human gate |
+| # | Step | Started by | Runs on | Judgment call (Grok) | Human gate |
 |---|---|---|---|---|---|
-| 1 | Plan the day | Schedule `30 12 * * *` | lead | What matters today | None |
-| 2 | Find leads in every lane: the Radar queue, Facebook groups, Craigslist, local businesses, Muse, wholesalers | Schedules (radar, muse, wholesale) | radar, muse, wholesale | Lead fit: keep, hold with a reason, or skip | Spend past rung 0 (spend guard) |
-| 3 | File and draft the reply in the person's own thread | Schedule `0 */2 * * *` | sales | Copy: does it answer what they asked, in the charter voice? | Every reply until `public_reply: auto` |
-| 4 | Outreach drafts: cold email, the Lead Storm queue, local businesses | Schedules (outreach) | outreach | Copy and who gets it | Every message until its type is `auto`; the sender stays the live system |
-| 5 | Content: three simple viral pieces a day on the eight hooks | Schedule `0 15 * * *` | content | Funny, simple, relatable (score 4+ on each) | Each channel's first post; every post until `fmm_content_post: auto` |
-| 6 | Read answers and sort them | Sweep `*/30 * * * *`, sort `15 */2 * * *` | sales | Interested, question, not now, opt-out, wrong person; the next message | Opt-outs recorded at once, no gate |
-| 7 | Applications and the CRM stage | Schedule `45 */2 * * *` | sales | Is the stage true? | CRM writes: `pinnacle-ghl: bot` and `crm-writes: on` |
-| 8 | Route: in-house or one partner; pass a deal for a percentage | Schedule `40 17 * * *` | partners | Partner choice with one line of reason | Every handoff is a proposal Justin approves |
-| 9 | Wholesalers: fund them or pass their deal | Schedules (wholesale) | wholesale | Right who; buyer or lender match | Every message; contracts and fees are Justin's |
-| 10 | In-house deal desk | Schedule `0 21 * * *` | loan-officer | Is the file complete? | Parked until Justin names a verified lender |
-| 11 | Report | Schedule `30 23 * * *` | lead | Proof check on each number | None |
+| 1 | Plan the week's niches and places | Schedule `0 11 * * 1` | GrokBot | Which niches, group themes, Marketplace categories, metros and creators this week, from last week's answers per lane | None |
+| 2 | Send the day's work orders | Schedule `0 12 * * *` | GrokBot → Hermes / Codex | None: the week's plan becomes orders | Spend past free rungs (spend guard) |
+| 3 | Mine, read, research, draft | The worker's 15-minute inbox job | Hermes on the Mac, Codex | None (Hermes's own model grades and drafts) | Read only; nothing posts |
+| 4 | Pull results, route them, watchdog | Schedule `0 15,19,23 * * *` | GrokBot | None: files to `requests/<role>/`; alarms on silent lanes | None |
+| 5 | Today's reply queue | Schedule `0 13 * * *` | GrokBot | Lead fit on the shortlist; the best draft per ask | Every reply until `public_reply: auto` |
+| 6 | Content | Schedule `30 15 * * *` | GrokBot (ideas may come from Codex) | Funny, simple, relatable: score 4+ | First post per channel; every post until `fmm_content_post: auto` |
+| 7 | Sales escalations | Schedule `15 14,20 * * *` | GrokBot (Hermes sorts and sweeps) | The replies Hermes marked "needs a person": next message, stage | Every message; CRM writes need `pinnacle-ghl: bot` |
+| 8 | Outreach drafts | Schedule `0 17 * * 1-5` | GrokBot (Codex writes the bulk drafts) | The best variants; who gets which | Every message type; senders stay live systems |
+| 9 | Partners and affiliates | Schedule `40 17 * * *` | GrokBot | In-house or one partner; which creators, coaches and houses to approach | Every handoff and partner message |
+| 10 | Wholesale | Schedule `30 18 * * *` | GrokBot (Hermes builds call cards) | Funding need or deal pass; the match | Every message; contracts are Justin's |
+| 11 | In-house desk | Schedule `0 21 * * 1,3,5` | GrokBot | File complete? | Parked until a verified lender |
+| 12 | Report | Schedule `30 23 * * *` | GrokBot | Proof check on each number | None |
 
 ## Every schedule, by role
 
@@ -28,78 +33,64 @@ The loop is deterministic: schedules start every step (GrokBot takes no webhooks
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `30 12 * * *` | Morning plan | A plan for each role in `daily/<date>/lead.md` and Slack |
-| Schedule | `50 */3 * * *` | Watchdog | `beat.py status --hours 26`, Grok's run records; one Slack line per SILENT role or a send with no approved template |
-| Schedule | `5 */2 * * *` | Scorecard | `bash repo/engine/jobs/fmm-scorecard.sh` (counts only, no model) |
-| Schedule | `30 23 * * *` | Evening report | The day's numbers to Slack, one Notion row, `vault/Daily/<date>.md`, the scrubbed line for the single brain |
+| Schedule | `30 12 * * *` | Morning plan | Today's plan per role from the week's plan, yesterday's results and Justin's queue; Slack |
+| Schedule | `30 23 * * *` | Evening report | Numbers to Slack, one Notion row, `vault/Daily/<date>.md`, the scrubbed single-brain line; Mondays add the usage audit (`usage/AUDIT.md`) |
+
+### worker
+
+| Kind | When | Routine | Does |
+|---|---|---|---|
+| Schedule | `0 12 * * *` | Dispatch | `hermes_bridge.py put <lane> '<args>'` for each item in this week's plan (`context/week-plan.md`); orders to Codex run here at once |
+| Schedule | `0 15,19,23 * * *` | Pull | `hermes_bridge.py pull`, then route each result file to `requests/<role>/`; `hermes_bridge.py status` and `beat.py status`: one Slack line per silent lane or role |
 
 ### radar
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `30 5 * * *` | Mine Facebook groups | `bash repo/engine/jobs/fmm-fbgroups.sh` (runs only when `fbgroups-lane: bot`; the live Hermes lane mines them now) |
-| Schedule | `0 9 * * *` | Craigslist read | `craigslist-lane`: the business categories, rung 0 first; fit rows to the Radar or `requests/sales/` |
-| Schedule | `0 10 * * 1-5` | Local businesses | `local-business-lane`: one metro, free Scrapebox places; the list to `requests/outreach/` |
-| Schedule | `0 12 * * *` | Pick today's queue | `funding-radar`: asks from the last 2 days, high tier first, up to 10, through `guards.py send public_reply` |
-
-### muse
-
-| Kind | When | Routine | Does |
-|---|---|---|---|
-| Schedule | `0 14 * * *` | Muse morning session | `metamuse-operator` on the Muse Mac (`MUSE_COMPUTER`) by computer use: ask Muse for today's funding asks and partner openings (types only when `muse-app: bot`; otherwise screenshot and read) |
-| Schedule | `0 20 * * *` | Muse collect | Read Muse's results and its drafted first touches into today's Muse file; drafts to `requests/justin/` |
-| Schedule | `30 20 * * *` | Muse import | `metamuse-leads` `muse_to_radar.py`: the day's file into the Radar as `lane-muse` (when `funding-radar: bot`), else `requests/sales/` |
+| Schedule | `0 11 * * 1` | Niche rotation | `lead-map`: score last week's lanes by answers per find; write `context/week-plan.md` (niches, group themes, Marketplace categories, metros, creators, coaches, affiliate houses) |
+| Schedule | `0 13 * * *` | Pick today's queue | `funding-radar` plus the worker's finds: up to 10 fresh asks, the best draft each, through `guards.py send public_reply` |
 
 ### content
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `0 15 * * *` | Daily content | `fmm-viral-content`: three pieces on three hooks, scored, to `requests/justin/` |
-| Schedule | `0 16 * * 1` | Weekly content batch | Ten pieces across all eight hooks and last week's read |
+| Schedule | `30 15 * * *` | Daily content | `fmm-viral-content`: three pieces on three hooks; Mondays also the weekly read and next week's hook rotation |
 
 ### outreach
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `0 11 * * 1` | Deliverability check | `winnr-instantly`, read-only: inbox health, bounce and reply rates; a plan to `requests/justin/` if anything is off |
-| Schedule | `0 17 * * 1-5` | Cold email drafts | Campaign copy and lists for Instantly (local businesses, wholesalers, partners), verified with `verify-emails`; drafts only while `cold-email-sender: live` |
-| Schedule | `30 17 * * *` | Lead Storm feed | `lead-storm-handoff`: approved social targets and messages into `requests/lead-storm/`; read the VPS's reports |
+| Schedule | `0 17 * * 1-5` | Outreach drafts | Cold email (Instantly) and the Lead Storm queue from the worker's lists and Codex's drafts; Mondays also the read-only deliverability check |
 
 ### sales
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `0 */2 * * *` | File and draft | `bash repo/engine/jobs/fmm-cycle.sh` (CRM outbox only when `pinnacle-ghl: bot`) |
-| Schedule | `*/30 * * * *` | Read answers | `bash repo/engine/jobs/fcm-job.sh triage "Read answers"` |
-| Schedule | `15 */2 * * *` | Sort replies | The answers the sweep found: sort, draft the next message, record opt-outs |
-| Schedule | `45 */2 * * *` | Applications | `bash repo/engine/jobs/fcm-job.sh sweep "Applications"` |
-| Schedule | `20 16 * * *` | Day check | `bash repo/engine/jobs/fcm-job.sh day "Day check"` |
-| Schedule | `0 23 * * *` | Loop close | `bash repo/engine/jobs/fmm-loop-close.sh` |
+| Schedule | `15 14,20 * * *` | Sales desk | Read the Hermes profile's sorted replies and loop list; draft the next message for each "needs a person"; propose stages |
 
 ### partners
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `40 17 * * *` | Partner match | `lending-hub-distribution`: preview, then propose in-house or one partner with a reason |
-| Schedule | `0 18,22,2 * * *` | Handoff watch | `bash repo/engine/jobs/fcm-job.sh watch "Handoff watch"` |
-| Schedule | `0 19 * * 2,4` | Affiliate recruiting | `affiliate-manager`, `partner-fit-review`: ten new partner or affiliate candidates, researched, drafts only |
-| Schedule | `30 19 * * *` | Affiliate replies | `affiliate-reply-triage`: sort partner and affiliate replies, draft the next step |
+| Schedule | `40 17 * * *` | Partner desk | Partner match for applicants; affiliate and partner replies; on Tuesdays and Thursdays, pick this week's creators, coaches and affiliate houses from the worker's research and draft first touches |
 
 ### loan-officer
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `0 21 * * *` | In-house desk | Any deal kept in-house: intake checklist, missing documents; writes "parked: no verified lender" until Justin names one |
+| Schedule | `0 21 * * 1,3,5` | In-house desk | Any deal kept in-house; "parked: no verified lender" until Justin names one |
 
 ### wholesale
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `30 13 * * *` | Wholesaler sweep | `wholesale-funding`: today's wholesaler rows (radar-cl output, Radar, groups, Muse), call cards |
-| Schedule | `30 18 * * *` | Wholesale match | Funding need to the partner desk; deals to pass matched to buyer and lender partners; drafts |
+| Schedule | `30 18 * * *` | Wholesale desk | The worker's call cards: funding need to partners, deals to pass matched, first-touch drafts |
 
-## What changed from the v1 pack
+## Usage, before and after
 
-- Nine roles instead of five, 29 routines instead of 14: muse, content, outreach and wholesale are new; reply desk and CRM desk are one **sales** role (one CRM writer); the shared jobs are the **lead** role.
-- Every job script asks the owner guard before it writes, so the bot and the live systems (other agents, the Radar services, the CRM) never write the same thing.
-- The Railway Radar's own cron still runs its daily sweep; the bot doesn't start it.
+| | v1 (Nov 12) | v2 |
+|---|---|---|
+| Grok routines | 29 | 12 |
+| Grok runs a day | about 130 (the 30-minute and 2-hourly sweeps) | about 13 |
+| Where the sweeps run | Grok | Hermes on the Mac (its own 12 jobs, already installed and paused) |
+| Where research and bulk drafts run | Grok | Hermes (research), Codex CLI or Hermes (drafts) |

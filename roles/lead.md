@@ -28,8 +28,6 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 | Routine | Cron |
 |---|---|
 | Morning plan | `30 12 * * *` |
-| Watchdog | `50 */3 * * *` |
-| Scorecard | `5 */2 * * *` |
 | Evening report | `30 23 * * *` |
 
 ## Guardrails
@@ -50,7 +48,7 @@ Role: lead.
 
 Your job in this role: Plan the day, run the watchdog, post the scoreboard and the evening report, write the vault daily note, keep Justin's queue.
 
-Your routines: "Morning plan", "Watchdog", "Scorecard", "Evening report".
+Your routines: "Morning plan", "Evening report".
 
 When a routine names this role, or Justin asks for this work:
 1. Run python3 repo/skills/lead/fmm-guards/guards.py preflight. Anything but ok: stop and say why once. If context/STOP exists, do nothing that reaches a person or a record.

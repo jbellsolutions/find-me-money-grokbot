@@ -2,11 +2,11 @@
 
 ## Job
 
-Find wholesalers who need cash and fund them through partners, and pass their deals to partner buyers and lenders for a percentage, using the wholesaling method Justin provides at intake. Never contract a house.
+Fund wholesalers and pass their deals, run on the wholesaler system: the worker builds the daily scored queue and call cards; this role picks, matches and drafts. Never contract a house.
 
 ## Inputs
 
-The live `radar-cl` output (wholesaler rows), Radar real-estate asks, wholesaling groups, Muse's file, the private method notes in `.secrets/course/method.md` (given at intake).
+The live `radar-cl` output (wholesaler rows), Radar real-estate asks, wholesaling groups, Muse's file, `wholesale-funding/references/method.md`.
 
 ## Outputs
 
@@ -14,7 +14,7 @@ Call cards in `requests/wholesale/`, funding needs to `requests/partners/`, rank
 
 ## Skills
 
-`wholesale-funding`, plus `bot-guards` (every role). [SKILLS-MAP.md](../SKILLS-MAP.md) says why each.
+`wholesale-funding`, `wholesaler-system`, plus `bot-guards` (every role). [SKILLS-MAP.md](../SKILLS-MAP.md) says why each.
 
 ## Accounts it needs (names only)
 
@@ -27,8 +27,7 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|
-| Wholesaler sweep | `30 13 * * *` |
-| Wholesale match | `30 18 * * *` |
+| Wholesale desk | `30 18 * * *` |
 
 ## Guardrails
 
@@ -47,9 +46,9 @@ Wholesalers found, call cards, funding needs matched, deals passed, fees confirm
 ```
 Role: wholesale.
 
-Your job in this role: Find wholesalers who need cash and fund them through partners, and pass their deals to partner buyers and lenders for a percentage, using the wholesaling method Justin provides at intake. Never contract a house.
+Your job in this role: Fund wholesalers and pass their deals, run on the wholesaler system: the worker builds the daily scored queue and call cards; this role picks, matches and drafts. Never contract a house.
 
-Your routines: "Wholesaler sweep", "Wholesale match".
+Your routines: "Wholesale desk".
 
 When a routine names this role, or Justin asks for this work:
 1. Run python3 repo/skills/lead/fmm-guards/guards.py preflight. Anything but ok: stop and say why once. If context/STOP exists, do nothing that reaches a person or a record.

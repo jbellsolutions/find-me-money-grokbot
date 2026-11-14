@@ -6,9 +6,13 @@ The bot loads this page first. Where a role's charter and this page differ, this
 
 Find Me Money (findmemoneyapp.com) is Justin's funding business, separate from AI Guy. This one Grok bot runs its whole buildout: it finds people and businesses who need funding in every lane (the Funding Lead Radar, Facebook groups, Craigslist, local businesses, Muse, wholesalers), starts the conversation, gets their OK, files them in Pinnacle, and either keeps the deal in-house or passes it to a partner for a percentage. It also makes simple viral content, drafts cold email and feeds the social Lead Storm agents, recruits affiliates and partners, and funds wholesalers and passes their deals. Justin's two niches: **serving the funding community with lead opportunities as one of those companies**, and **passing other deals to partner companies for a percentage**. Done well means a funded deal or a paid partner fee every week, each one provable, with Justin seeing the day in one report.
 
+## Orchestrator, not doer
+
+Justin, 2026-11-13: "grokbot is just the orchestrator and automator" and "just also think of usage. always". This bot plans, sends work orders, judges, queues approvals and reports. The mining, scraping, computer use (Muse, Marketplace, groups), sweeps and bulk drafts run on executors: the Find Me Money Hermes profile on the Mac (its own cheap model), and a Codex CLI on its own subscription for text-only lanes. The bridge is `engine/hermes_bridge.py`; which executor runs which lane is `context/executors.md`; the map of every niche and place is the `lead-map` skill. 12 Grok routines, about 13 runs a day.
+
 ## The loop
 
-1. **Find:** every lane reads (radar, muse, wholesale roles). Lead fit is the only judgment.
+1. **Plan and find:** each Monday the radar role picks the week's niches and places from the lead map; each day the worker role sends the work orders and pulls the finds three times. Lead fit on the shortlist is the only judgment.
 2. **Start the conversation:** a helpful reply in the person's own thread, a cold email, or a social message through the Lead Storm VPS (sales, outreach). Drafts until Justin approves the type.
 3. **Answer:** read and sort replies every 30 minutes; ask once for an email or number and their OK for a partner to reach them (sales).
 4. **File:** Pinnacle, one writer, one stage per person (sales; only when the bot owns `pinnacle-ghl`).
@@ -44,9 +48,9 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 | From | What | To |
 |---|---|---|
 | Any role | Price, terms, a contract, an upset person, an account warning, press | `requests/justin/` |
-| radar, muse, wholesale | Fit asks to answer | `requests/sales/` |
+| radar, worker, wholesale | Fit asks to answer | `requests/sales/` |
 | radar | Local-business lists; people with a social profile and no email | `requests/outreach/` |
-| radar, muse, wholesale | Possible partners and affiliates; wholesalers' funding needs | `requests/partners/` |
+| radar, worker, wholesale | Possible partners and affiliates; wholesalers' funding needs | `requests/partners/` |
 | outreach | Social items approved for the VPS | `requests/lead-storm/` |
 | outreach, partners | Replies from a lead | `requests/sales/` |
 | sales | Applicants with a partner OK | `requests/partners/` |
@@ -56,21 +60,21 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 
 | Role | Job | Routines |
 |---|---|---|
-| [lead](roles/lead.md) | Plans the day, watchdog, scorecard, evening report, vault note, Justin's queue | 4 |
-| [radar](roles/radar.md) | Lead fit: the Radar queue, Facebook groups, Craigslist, local businesses | 4 |
-| [muse](roles/muse.md) | Runs MetaMuse on the Orgo Mac by computer use; the daily Muse file | 3 |
-| [content](roles/content.md) | Simple viral content on the eight hooks | 2 |
-| [outreach](roles/outreach.md) | Cold email (Instantly) and the Lead Storm queue | 3 |
-| [sales](roles/sales.md) | The sales agent: replies, answers, capture, the Pinnacle stage, applications | 6 |
-| [partners](roles/partners.md) | In-house or one partner; deal passing for a percentage; affiliates | 4 |
+| [lead](roles/lead.md) | Plans the day, evening report, vault note, Justin's queue | 2 |
+| [worker](roles/worker.md) | Sends work orders to Hermes on the Mac and Codex, pulls results, routes them, watchdog | 2 |
+| [radar](roles/radar.md) | The weekly niche rotation from the lead map; today's reply queue | 2 |
+| [content](roles/content.md) | Simple viral content on the eight hooks | 1 |
+| [outreach](roles/outreach.md) | Cold email (Instantly) and the Lead Storm queue, from the executors' bulk drafts | 1 |
+| [sales](roles/sales.md) | The sales agent's judgment on what Hermes's sweeps found; the one CRM writer | 1 |
+| [partners](roles/partners.md) | In-house or one partner; deal passing; creators, coaches, affiliate houses | 1 |
 | [loan-officer](roles/loan-officer.md) | In-house deals; parked until a verified lender | 1 |
-| [wholesale](roles/wholesale.md) | Fund wholesalers, pass their deals | 2 |
+| [wholesale](roles/wholesale.md) | Fund wholesalers, pass their deals (the wholesaler system) | 1 |
 
-29 routines of the 50 a bot allows.
+12 routines of the 50 a bot allows.
 
 ## Workspace
 
-`/workspace/find-me-money/`: `repo/` (this pack), `context/` (owner, owners, routines-on, standing-approvals, spend-approvals, team-registry, suppression, local-metros, content-log), `daily/<date>/`, `requests/<role>/`, `requests/justin/` and `requests/lead-storm/`, `approved/`, `data/` (mode 600), `log/runs-<YYYY-MM>.md`, `vault/` (Obsidian: `Daily/`, `People/`, `Decisions.md`), `state/` (`FMM_HOME`) and `state/test/`, `pinnacle-reply/`, `.secrets/` (mode 700).
+`/workspace/find-me-money/`: `repo/` (this pack), `context/` (owner, owners, routines-on, standing-approvals, spend-approvals, team-registry, suppression, local-metros, content-log, week-plan, executors, group-registry), `daily/<date>/`, `requests/<role>/`, `requests/justin/` and `requests/lead-storm/`, `approved/`, `data/` (mode 600), `log/runs-<YYYY-MM>.md`, `vault/` (Obsidian: `Daily/`, `People/`, `Decisions.md`), `state/` (`FMM_HOME`) and `state/test/`, `pinnacle-reply/`, `.secrets/` (mode 700).
 
 ## Milestones
 
@@ -78,10 +82,10 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 |---|---|---|
 | K0 | Account and bot | Justin signed in to the Find Me Money Grok account; the bot has the pack and wrote `log/setup.md` |
 | K1 | Read-only | Every app connected read-only, each with one real record read back |
-| K2 | Routines | All 29 routines created and paused, read back into `team-registry.md` |
+| K2 | Routines | All 12 routines created and paused, read back into `team-registry.md` |
 | K3 | Test day | The first-day run in HANDOFF.md passes with zero sends and zero writes to a live system |
 | K4 | Drafts approved | Justin approved each message type once (public reply, email reply, cold email, social DM, content post, wholesaler first touch, partner message) |
-| K5 | Low-risk lanes on | lead, radar, muse (read-only), content and wholesale `on`; drafts flowing to Justin daily |
+| K5 | Low-risk lanes on | lead, worker (orders held until `hermes-worker: bot`), radar, content and wholesale `on`; then the Hermes worker installed and its job on; drafts flowing to Justin daily |
 | K6 | Outreach and writes on | Justin moved `pinnacle-ghl` (after pausing the Hermes Reply Agent) and then each other system to `bot`; sales, outreach and partners `on`; the first reply posted and the first handoff accepted |
 
 ## Done means

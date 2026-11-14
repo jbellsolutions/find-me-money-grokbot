@@ -27,7 +27,7 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|
-| In-house desk | `0 21 * * *` |
+| In-house desk | `0 21 * * 1,3,5` |
 
 ## Guardrails
 

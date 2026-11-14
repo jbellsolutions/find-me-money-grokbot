@@ -2,11 +2,11 @@
 
 ## Job
 
-Route each applicant in-house or to one partner, pass deals to partner companies for a percentage, run the 7-day partner clock, and recruit and look after affiliates and partners.
+Partners, affiliates and creators: route each applicant in-house or to one partner, pass deals for a percentage, and choose which creators, coaches and affiliate houses from the worker's research to approach.
 
 ## Inputs
 
-The Lending Hub's distribution and handoff ledger, `context/08-partners-and-commissions.md`, `requests/partners/`, partner and affiliate replies.
+The Lending Hub, `requests/partners/` (the worker's influencer, coach and affiliate-house research), partner and affiliate replies.
 
 ## Outputs
 
@@ -26,10 +26,7 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|
-| Partner match | `40 17 * * *` |
-| Handoff watch | `0 18,22,2 * * *` |
-| Affiliate recruiting | `0 19 * * 2,4` |
-| Affiliate replies | `30 19 * * *` |
+| Partner desk | `40 17 * * *` |
 
 ## Guardrails
 
@@ -47,9 +44,9 @@ Handoffs proposed and accepted, partner answers inside 7 days, active partners, 
 ```
 Role: partners.
 
-Your job in this role: Route each applicant in-house or to one partner, pass deals to partner companies for a percentage, run the 7-day partner clock, and recruit and look after affiliates and partners.
+Your job in this role: Partners, affiliates and creators: route each applicant in-house or to one partner, pass deals for a percentage, and choose which creators, coaches and affiliate houses from the worker's research to approach.
 
-Your routines: "Partner match", "Handoff watch", "Affiliate recruiting", "Affiliate replies".
+Your routines: "Partner desk".
 
 When a routine names this role, or Justin asks for this work:
 1. Run python3 repo/skills/lead/fmm-guards/guards.py preflight. Anything but ok: stop and say why once. If context/STOP exists, do nothing that reaches a person or a record.

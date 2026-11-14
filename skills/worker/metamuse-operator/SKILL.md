@@ -10,12 +10,12 @@ Muse (bundle `com.meta.endo`, v11.1, Meta's personal agent) runs on the Orgo Mac
 Everything goes through one helper, built on `orgo.py` (the orgo-computer-use skill):
 
 ```bash
-M="python3 /workspace/find-me-money/repo/skills/muse/metamuse-operator/scripts/muse.py"   # or the repo copy
+M="python3 /workspace/find-me-money/repo/skills/worker/metamuse-operator/scripts/muse.py"   # or the repo copy
 $M pin        # always first: activates Muse, window to 587,30 size 1200x800
 $M state      # Muse running? frontmost app? window geometry, RAM
 ```
 
-It finds `orgo.py` via `$ORGO_PY`, then `/workspace/find-me-money/repo/skills/muse/orgo-computer-use/`. `ORGO_API_KEY` comes from `/workspace/find-me-money/.secrets/fmm.env`. `MUSE_COMPUTER` names the Mac (required: `muse.py` refuses without it, and without the never-touch list).
+It finds `orgo.py` via `$ORGO_PY`, then `/workspace/find-me-money/repo/skills/worker/orgo-computer-use/`. `ORGO_API_KEY` comes from `/workspace/find-me-money/.secrets/fmm.env`. `MUSE_COMPUTER` names the Mac (required: `muse.py` refuses without it, and without the never-touch list).
 
 ## What works, and how (proven 2026-11-11)
 

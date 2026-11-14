@@ -27,8 +27,8 @@ import argparse, base64, json, os, re, subprocess, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 ORGO = os.environ.get("ORGO_PY") or next((p for p in [
     os.path.join(HERE, "..", "..", "..", "..", "orgo-computer-use", "scripts", "orgo.py"),
-    os.path.expanduser("/workspace/find-me-money/repo/skills/muse/orgo-computer-use/scripts/orgo.py"),
-    os.path.expanduser("/workspace/find-me-money/repo/skills/muse/orgo-computer-use/scripts/orgo.py"),
+    os.path.expanduser("/workspace/find-me-money/repo/skills/worker/orgo-computer-use/scripts/orgo.py"),
+    os.path.expanduser("/workspace/find-me-money/repo/skills/worker/orgo-computer-use/scripts/orgo.py"),
 ] if os.path.exists(p)), None)
 COMPUTER = os.environ.get("MUSE_COMPUTER", "").strip()
 

@@ -26,14 +26,14 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|
-| Daily content | `0 15 * * *` |
-| Weekly content batch | `0 16 * * 1` |
+| Daily content | `30 15 * * *` |
 
 ## Guardrails
 
 - Every piece uses one of the eight hooks word for word in the first two seconds.
 - No rate, approval or amount promises; no shaming; no copyrighted songs, people or creators' bits.
 - The bot never posts. Each channel's first post waits for Justin; every post is a draft until `fmm_content_post: auto`.
+- Raw ideas may come from Codex (the `drafts` lane); the funny is judged here.
 - Plus every gate in [GATES.md](../GATES.md) and the charter.
 
 ## KPIs
@@ -47,7 +47,7 @@ Role: content.
 
 Your job in this role: Simple viral content on Justin's eight money hooks: funny, simple, relatable, the kind that gets a laugh or stops the scroll, pointing to findmemoneyapp.com.
 
-Your routines: "Daily content", "Weekly content batch".
+Your routines: "Daily content".
 
 When a routine names this role, or Justin asks for this work:
 1. Run python3 repo/skills/lead/fmm-guards/guards.py preflight. Anything but ok: stop and say why once. If context/STOP exists, do nothing that reaches a person or a record.
@@ -60,5 +60,5 @@ When a routine names this role, or Justin asks for this work:
 8. End with python3 repo/guards/scripts/beat.py write content '<line>' found=N drafted=N sent=N, write daily/<date>/content.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
 
-Role rules: Every piece uses one of the eight hooks word for word in the first two seconds. No rate, approval or amount promises; no shaming; no copyrighted songs, people or creators' bits. The bot never posts. Each channel's first post waits for Justin; every post is a draft until `fmm_content_post: auto`.
+Role rules: Every piece uses one of the eight hooks word for word in the first two seconds. No rate, approval or amount promises; no shaming; no copyrighted songs, people or creators' bits. The bot never posts. Each channel's first post waits for Justin; every post is a draft until `fmm_content_post: auto`. Raw ideas may come from Codex (the `drafts` lane); the funny is judged here.
 ```

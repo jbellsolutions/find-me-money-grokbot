@@ -7,19 +7,13 @@
     ],
     "radar": [
       "bot-guards",
+      "lead-map",
       "funding-radar",
       "lead-radar",
       "treg",
       "one-api",
       "craigslist-lane",
       "local-business-lane"
-    ],
-    "muse": [
-      "bot-guards",
-      "metamuse-operator",
-      "metamuse-leads",
-      "orgo-computer-use",
-      "orgo-computer"
     ],
     "content": [
       "bot-guards",
@@ -69,7 +63,16 @@
     ],
     "wholesale": [
       "bot-guards",
-      "wholesale-funding"
+      "wholesale-funding",
+      "wholesaler-system"
+    ],
+    "worker": [
+      "bot-guards",
+      "worker-bridge",
+      "orgo-computer-use",
+      "metamuse-operator",
+      "metamuse-leads",
+      "orgo-computer"
     ]
   },
   "accounts": {
@@ -122,7 +125,7 @@
       ]
     },
     "Orgo": {
-      "path": "skills/muse/orgo-computer-use",
+      "path": "skills/worker/orgo-computer-use",
       "keys": [
         "ORGO_API_KEY",
         "MUSE_COMPUTER"

@@ -1,6 +1,6 @@
 # Find Me Money: GrokBot pack
 
-One Grok bot, nine roles, 29 routines, for findmemoneyapp.com. Built from the GrokBot Factory template on top of the v1 pack, which this replaces. Idea and Justin's words: [../IDEA.md](../IDEA.md). Rules this build follows: the factory's `PLAYBOOK.md`.
+One Grok bot, the orchestrator: nine roles, 12 routines (about 13 runs a day), with the work on Hermes on the Mac and a Codex CLI, for findmemoneyapp.com. Built from the GrokBot Factory template on top of the v1 pack, which this replaces. Idea and Justin's words: [../IDEA.md](../IDEA.md). Rules this build follows: the factory's `PLAYBOOK.md`.
 
 | File | What |
 |---|---|
@@ -13,7 +13,8 @@ One Grok bot, nine roles, 29 routines, for findmemoneyapp.com. Built from the Gr
 | [GATES.md](GATES.md) | The gates and the Ask-first lines for Auto-review |
 | [guards/](guards/SKILL.md) | The guard scripts: suppression, send, spend, heartbeat, and the owner guard that keeps the bot off live systems' writes |
 | [skills.json](skills.json), [SKILLS-MAP.md](SKILLS-MAP.md), [skills/](skills/) | Which role uses which skill and account, and the skills |
-| [engine/](engine/) | The Reply Agent, `fcm`, the scorecard, the Facebook groups miner, and the job scripts the routines call |
+| [engine/](engine/) | `hermes_bridge.py` (work orders and results), and the Reply Agent, `fcm`, the scorecard and the job scripts, which now run on the Hermes side |
+| [hermes-worker/](hermes-worker/) | The worker for the Mac: `dispatch.py`, the lanes and their fixed prompts, and the paused installer |
 | [context/](context/) | Lead sources, the Lending Hub, partners and commissions |
 | [.env.example](.env.example) | Key names only |
 | `tools/check.py` | Completeness and secret check: `python3 tools/check.py --ready` |

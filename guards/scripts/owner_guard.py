@@ -28,7 +28,7 @@ from _ws import p, stopped, touch_refusal
 # Extra systems can be added at intake (OWNER_SYSTEMS, comma-separated); any system not in context/owners.md is `live`.
 import os
 DEFAULTS = ["pinnacle-ghl", "funding-radar", "radar-cl", "fbgroups-lane", "lending-hub", "muse-app",
-            "social-sender", "legacy-agent", "cold-email-sender",
+            "social-sender", "legacy-agent", "cold-email-sender", "hermes-worker", "codex-cli",
             *[x.strip().lower() for x in os.environ.get("OWNER_SYSTEMS", "").split(",") if x.strip()]]
 
 
