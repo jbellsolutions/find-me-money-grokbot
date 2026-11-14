@@ -82,7 +82,7 @@ def run_one(order):
         if lane not in CODEX_OK:
             return f"rejected: {lane} needs the Mac (browser, Muse or sign-ins), not a CLI"
         out = od / f"{day}-{oid}.md"
-        cmd = [CODEX, "exec", "--skip-git-repo-check", prompt_for(lane, args)]
+        cmd = [CODEX, "exec", "--approve-for-me", "--skip-git-repo-check", prompt_for(lane, args)]   # tested form, codex-cli 0.167
     else:
         out = od / f"{day}-{oid}.md"
         cmd = [HERMES, "-p", PROFILE, "chat", "-q", prompt_for(lane, args), "-Q", "--source", "tool",
