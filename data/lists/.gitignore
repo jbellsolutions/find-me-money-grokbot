@@ -1,0 +1,4 @@
+# The lists are private: nothing in this folder is ever committed except this file and the README.
+*
+!.gitignore
+!README.md

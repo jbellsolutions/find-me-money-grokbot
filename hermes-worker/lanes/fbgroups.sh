@@ -6,7 +6,9 @@ set -uo pipefail
 THEME="$1"; MAX="$2"; OUT="$3"; HERE="$(cd "$(dirname "$0")" && pwd)"
 LIST="$HOME/.fmm/groups/$THEME.txt"
 [ -f "$LIST" ] || { echo "{\"blocked\": \"no group list for theme $THEME (intake)\"}" > "$OUT"; exit 0; }
-MINER="$HOME/.fmm/miner/fbgroups_miner.py"; [ -f "$MINER" ] || MINER="$HERE/../../engine/fbgroups_miner.py"
+MINER="$HOME/.fmm/miner/fbgroups_miner.py"; [ -f "$MINER" ] || MINER="$HERE/fbgroups_miner.py"   # the installer copies it here
+[ -f "$MINER" ] || MINER="$HERE/../../engine/fbgroups_miner.py"   # inside the whole pack
+[ -f "$MINER" ] || { echo "{\"blocked\": \"no fbgroups_miner.py on this computer (re-run the installer)\"}" > "$OUT"; exit 0; }
 STATE="$HOME/.fmm/grok/state-fbgroups-$THEME.json"
 python3 "$MINER" --groups "$LIST" --pages 1 --max-groups "$MAX" --days 3 --state "$STATE" > "$OUT.log" 2>&1
 rc=$?

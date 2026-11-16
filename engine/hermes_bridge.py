@@ -29,7 +29,7 @@ import base64, json, os, pathlib, subprocess, sys, time, uuid
 HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parent
 WS = pathlib.Path(os.environ.get("BOT_HOME") or REPO.parent)
-ORGO = REPO / "skills" / "muse" / "orgo-computer-use" / "scripts" / "orgo.py"
+ORGO = REPO / "skills" / "worker" / "orgo-computer-use" / "scripts" / "orgo.py"
 OWNER = REPO / "guards" / "scripts" / "owner_guard.py"
 REMOTE = "~/.fmm/grok"
 
