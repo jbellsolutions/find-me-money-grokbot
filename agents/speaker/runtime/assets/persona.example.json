@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "client_id": "demo-client",
+  "persona_id": "demo-persona",
+  "fictional_example": true,
+  "full_name": "Alex Example",
+  "professional_title": "AI operations practitioner",
+  "bio": "Replace with client-supplied biography. This is a fictional demonstration.",
+  "credentials": [],
+  "topics": [
+    {
+      "topic": "Practical AI Operations",
+      "description": "How to evaluate and implement useful business workflows.",
+      "audience": "Operations leaders",
+      "approved_claims": []
+    }
+  ],
+  "target_industries": [
+    "Professional services"
+  ],
+  "target_geography": null,
+  "event_formats": [
+    "in_person",
+    "virtual"
+  ],
+  "languages": [
+    "English"
+  ],
+  "date_window": {
+    "start": null,
+    "end": null
+  },
+  "payment_policy": {
+    "paid_only": true,
+    "minimum_fee": null,
+    "currency": null,
+    "travel_terms": null
+  },
+  "exclusions": [],
+  "approved_sources": [],
+  "voice_samples": [],
+  "voice_profile": {},
+  "human_connection_signals": [],
+  "outreach_authorization": null
+}

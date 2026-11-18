@@ -1,0 +1,115 @@
+{
+ "_doc": "One business's Dream 100 settings. Names of things only: the owner's rule is that a pack never holds partner names, contact lists or private figures, so the list itself lives in the bot's workspace. Every number here is a starting number a business changes freely.",
+ "campaign": "find-me-money",
+ "target_kind": "partners",
+ "_target_kind": "partners or clients. The owner is focusing on partners.",
+ "ideal_customer": "People and businesses asking for funding; wholesalers; local businesses",
+ "who_qualifies": "someone who already has people who need funding gathered around them: funding and credit creators, business coaches, community and group owners, wholesaler communities, affiliate houses",
+ "list": {
+  "size": 100,
+  "file": "data/dream100.csv",
+  "columns": [
+   "person",
+   "audience",
+   "platform",
+   "url",
+   "audience_size",
+   "score",
+   "evidence",
+   "sources",
+   "warm_path",
+   "channel",
+   "status",
+   "next_step",
+   "next_date"
+  ]
+ },
+ "sources": {
+  "skool": {
+   "on": false,
+   "what": "communities and their owners",
+   "tool": "the scraping tool"
+  },
+  "facebook_groups": {
+   "on": true,
+   "what": "group admins",
+   "tool": "the worker's group-discovery lane"
+  },
+  "communities_other": {
+   "on": true,
+   "what": "admins of other communities the ideal customer is in",
+   "tool": "data/lists/communities.csv and the worker's research lanes"
+  },
+  "lead_tools": {
+   "on": true,
+   "what": "people found through the business's own lead tools",
+   "tool": "the Funding Radar's creators lane; data/lists/influencers.csv and coaches.csv"
+  }
+ },
+ "rank_on": {
+  "audience_fit": 30,
+  "engagement": 20,
+  "different_offer": 15,
+  "audience_size": 15,
+  "already_promotes_others": 10,
+  "reachable": 10
+ },
+ "offer": {
+  "free_value": "",
+  "for_their_audience": "",
+  "proof_asset": {
+   "kind": "",
+   "title": "",
+   "url": ""
+  },
+  "ask": "who do I talk to, or what do I need to do, to give this to your audience",
+  "_waits": "The owner's words: what Find Me Money gives a partner's audience at no cost. Asked once at intake; drafts wait on it."
+ },
+ "channels": {
+  "skool_dm": {
+   "on": false,
+   "account": "",
+   "runs_on": ""
+  },
+  "facebook_dm": {
+   "on": false,
+   "account": "",
+   "runs_on": "hired posters or the Lead Storm VPS: the owner's call"
+  },
+  "email": {
+   "on": true,
+   "mailbox": "the owner's mailbox"
+  },
+  "linkedin": {
+   "on": false,
+   "runs_on": "OutFlo or the local computer"
+  },
+  "x_dm": {
+   "on": false,
+   "account": "",
+   "runs_on": ""
+  },
+  "instagram_dm": {
+   "on": false,
+   "account": "",
+   "runs_on": ""
+  }
+ },
+ "pace": {
+  "drafts_a_day": 5,
+  "follow_up_days": [
+   5,
+   14,
+   30
+  ],
+  "_note": "Starting numbers from this function's chat, not the owner's."
+ },
+ "approval": "the owner approves each draft",
+ "reference_funnel": {
+  "reached": 100,
+  "replied": 20,
+  "looked": 12,
+  "stayed": 6,
+  "worth_it": 3
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "_doc": "One business's content settings. Names of things only. Publishing needs the owner's yes.",
+ "campaign": "example",
+ "points_to": "the one call or page every piece ends on",
+ "voice": [
+  "plain words",
+  "the owner's own stories"
+ ],
+ "formats": [
+  "reaction",
+  "talkback",
+  "breakdown",
+  "ugc"
+ ],
+ "outlets": {
+  "linkedin": {
+   "on": true,
+   "publisher": "the owner, from their own computer",
+   "pieces": [
+    "post",
+    "carousel"
+   ]
+  },
+  "youtube": {
+   "on": true,
+   "publisher": "the owner (uploads stay private until they publish)",
+   "pieces": [
+    "video brief",
+    "shorts cuts"
+   ]
+  },
+  "newsletter": {
+   "on": true,
+   "publisher": "the owner",
+   "tool": "",
+   "pieces": [
+    "section"
+   ]
+  },
+  "instagram": {
+   "on": true,
+   "publisher": "the owner or a named poster",
+   "pieces": [
+    "reel script",
+    "carousel"
+   ]
+  }
+ },
+ "cadence": {
+  "master_pieces_a_day": 1,
+  "instagram_a_week": 1
+ },
+ "sources": [
+  "recordings",
+  "reply agent questions",
+  "lead radar asks",
+  "crm wins",
+  "posts worth reacting to"
+ ],
+ "owner_setup": "not handed over",
+ "tools": {
+  "_doc": "The toolset is per campaign: switch each on or off, and name whose account it runs on. Every one of these is a paid tool with its own plan or credits; a sign-up and a render are spend, and spend needs the owner's yes. weekly_limit is the most the tool may spend in a week, in the tool's own unit, such as '20 USD' or '2000 credits'; it is on the owner's keep-or-remove list in STATUS.md.",
+  "video": {
+   "higgsfield": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "invideo": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "max-fusion": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "arcads": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "creatomate": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "google-flow": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   }
+  },
+  "posting": {
+   "creator-os": {
+    "on": false,
+    "account": ""
+   },
+   "metricool": {
+    "on": false,
+    "account": ""
+   },
+   "direct": {
+    "on": false,
+    "accounts": []
+   }
+  },
+  "tool_engine": "claude"
+ }
+}

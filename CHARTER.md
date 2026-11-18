@@ -8,7 +8,11 @@ Find Me Money (findmemoneyapp.com) is Justin's funding business, separate from A
 
 ## Orchestrator, not doer
 
-Justin, 2026-11-13: "grokbot is just the orchestrator and automator" and "just also think of usage. always". This bot plans, sends work orders, judges, queues approvals and reports. The mining, scraping, computer use (Muse, Marketplace, groups), sweeps and bulk drafts run on executors: the Find Me Money Hermes profile on the Mac (its own cheap model), and a Codex CLI on its own subscription for text-only lanes. The bridge is `engine/hermes_bridge.py`; which executor runs which lane is `context/executors.md`; the map of every niche and place is the `lead-map` skill. 12 Grok routines, about 13 runs a day.
+Justin, 2026-11-13: "grokbot is just the orchestrator and automator" and "just also think of usage. always". This bot plans, sends work orders, judges, queues approvals and reports. The mining, scraping, computer use (Muse, Marketplace, groups), sweeps and bulk drafts run on executors: the Find Me Money Hermes profile on the Mac (its own cheap model), and a Codex CLI on its own subscription for text-only lanes. The bridge is `engine/hermes_bridge.py`; which executor runs which lane is `context/executors.md`; the map of every niche and place is the `lead-map` skill. 15 Grok routines, about 14 runs a day.
+
+## The Revenue OS
+
+Justin, 2026-11-18: "Let's give it a revenue OS, and let's just tell it to go do it." The bot builds and runs the nine Revenue OS agents for this business: Dream 100, Dream 500, partners, cold email, Lead Radar, content, SpeakerAgent, AEO and SEO, and the sales agent (replies and the CRM in one). [REVENUE-OS.md](REVENUE-OS.md) is the build list and says which role works which agent; [TEMPLATE.md](TEMPLATE.md) is the spec. Claude Code and Codex run on the bot's computer through `engines/route.py`, each on its own subscription, and every message goes in the conversation log (`convlog/`).
 
 ## The loop
 
@@ -62,15 +66,15 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 |---|---|---|
 | [lead](roles/lead.md) | Plans the day, evening report, vault note, Justin's queue | 2 |
 | [worker](roles/worker.md) | Sends work orders to Hermes on the Mac and Codex, pulls results, routes them, watchdog | 2 |
-| [radar](roles/radar.md) | The weekly niche rotation from the lead map; today's reply queue | 2 |
-| [content](roles/content.md) | Simple viral content on the eight hooks | 1 |
-| [outreach](roles/outreach.md) | Cold email (Instantly) and the Lead Storm queue, from the executors' bulk drafts | 1 |
-| [sales](roles/sales.md) | The sales agent's judgment on what Hermes's sweeps found; the one CRM writer | 1 |
-| [partners](roles/partners.md) | In-house or one partner; deal passing; creators, coaches, affiliate houses | 1 |
+| [radar](roles/radar.md) | The weekly niche rotation from the lead map; today's reply queue ; the Lead Radar agent | 2 |
+| [content](roles/content.md) | Simple viral content on the eight hooks; the content agent; the AEO and SEO agent | 2 |
+| [outreach](roles/outreach.md) | Cold email (Instantly) and the Lead Storm queue, from the executors' bulk drafts ; the cold email agent; the Podcast SpeakerAgent | 2 |
+| [sales](roles/sales.md) | The sales agent's judgment on what Hermes's sweeps found; the one CRM writer ; the Revenue OS sales agent | 1 |
+| [partners](roles/partners.md) | In-house or one partner; deal passing; creators, coaches, affiliate houses ; the Dream 100, Dream 500 and partners agents | 2 |
 | [loan-officer](roles/loan-officer.md) | In-house deals; parked until a verified lender | 1 |
 | [wholesale](roles/wholesale.md) | Fund wholesalers, pass their deals (the wholesaler system) | 1 |
 
-12 routines of the 50 a bot allows.
+15 routines of the 50 a bot allows.
 
 ## Workspace
 
@@ -82,7 +86,8 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 |---|---|---|
 | K0 | Account and bot | Justin signed in to the Find Me Money Grok account; the bot has the pack and wrote `log/setup.md` |
 | K1 | Read-only | Every app connected read-only, each with one real record read back |
-| K2 | Routines | All 12 routines created and paused, read back into `team-registry.md` |
+| K2 | Routines | All 15 routines created and paused, read back into `team-registry.md` |
+| K2b | The Revenue OS built | Every step of REVENUE-OS.md has a line of evidence in `log/revenue-os-build.md`; all nine agents ran on test on the bot's computer |
 | K3 | Test day | The first-day run in HANDOFF.md passes with zero sends and zero writes to a live system |
 | K4 | Drafts approved | Justin approved each message type once (public reply, email reply, cold email, social DM, content post, wholesaler first touch, partner message) |
 | K5 | Low-risk lanes on | lead, worker (orders held until `hermes-worker: bot`), radar, content and wholesale `on`; then the Hermes worker installed and its job on; drafts flowing to Justin daily |

@@ -1,0 +1,29 @@
+{
+  "_doc": "One business's Revenue OS settings. Names of things only: no keys, no contact lists, no partner names, no private figures. Agent state: on (built and running), test (built, drafts only), paused (built, switched off), partial (some of it exists), missing (not built), off (not wanted for this business).",
+  "campaign": "example",
+  "business": "Example Co",
+  "kind": "internal",
+  "base_pack": "revenue-os-max v2.0.0",
+  "grok": {"account": "the business's own Grok account", "bot_name": "Example Revenue", "timezone": "UTC"},
+  "approver": "owner",
+  "offer": "One sentence on what is sold and the call every lane ends in",
+  "icp": "Who it is for",
+  "crm": {"name": "GoHighLevel", "writer": "sales-crm"},
+  "sending": {"cold_email": "PlusVibe", "one_to_one": "the owner's mailbox"},
+  "engines": {"host": "grokbot-computer", "claude_subscription": "owner", "codex_subscription": "owner", "overrides": {}},
+  "linkedin": {"mode": "outflo+local", "local_computer": "the owner's own", "caps": {}},
+  "conversation_log": {"vault": "vault/People", "crm_recorder": "sales-crm"},
+  "agents": {
+    "dream-100":  {"state": "missing", "source": "", "waits_on": ""},
+    "dream-500":  {"state": "missing", "source": "", "waits_on": ""},
+    "partners":   {"state": "missing", "source": "", "waits_on": ""},
+    "cold-email": {"state": "missing", "source": "", "waits_on": ""},
+    "lead-radar": {"state": "missing", "source": "", "waits_on": ""},
+    "content":    {"state": "missing", "source": "", "waits_on": "the owner's content setup"},
+    "speaker":    {"state": "missing", "source": "", "waits_on": ""},
+    "aeo-seo":    {"state": "missing", "source": "", "waits_on": ""},
+    "sales-crm":  {"state": "missing", "source": "", "waits_on": ""}
+  },
+  "lanes": [],
+  "coordinate_with": ""
+}

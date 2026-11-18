@@ -1,0 +1,135 @@
+{
+ "_doc": "One business's settings for the partners, collaborators and influencers function. Names of things only: no key, no inbox password, no contact list, no partner name. Every value here is a default a business can change.",
+ "campaign": "find-me-money",
+ "offer": "funding for their audience or clients, with a percentage for every deal that funds",
+ "buyer": "People and businesses asking for funding; wholesalers; local businesses",
+ "area": "",
+ "leave_outs": [],
+ "volume": {
+  "_doc": "The owner's numbers (2026-11-16): 1,000 a day, 10 per inbox. sends_per_day counts follow-ups. partners.py plan works out the inboxes and the new names a day this needs.",
+  "sends_per_day": 1000,
+  "per_inbox_per_day": 10,
+  "inboxes_held": 0,
+  "send_days": [
+   "mon",
+   "tue",
+   "wed",
+   "thu",
+   "fri"
+  ]
+ },
+ "sequence": {
+  "_doc": "Day 0 is the first email. The follow-ups are a default, not something the owner asked for.",
+  "days": [
+   0,
+   4,
+   10
+  ]
+ },
+ "sender": {
+  "_doc": "tool is the name of the sending tool, as the owner calls it. Kept for the owner's call (STATUS.md, list item 4): sending inboxes are not mailboxes anyone uses for real mail.",
+  "tool": "Instantly",
+  "inbox_set": "named after the domain decision",
+  "from_name": "named at intake",
+  "reply_to": "the sales agent's inbox for this function"
+ },
+ "dream_lists": {
+  "_doc": "Where the two dream lists live in the bot's workspace. Each is a csv with any of: email, domain, link, name. Someone on either list has been identified as Dream 100 or Dream 500, so is not in this tier.",
+  "dream-100": "data/dream100.csv",
+  "dream-500": "data/dream-500/dream-500.csv"
+ },
+ "contacted": "context/contacted.csv",
+ "types": {
+  "_doc": "All types are in. A type picks the email a person gets; it does not rank anyone, and a row whose type is not listed here is still kept. pathway is one sentence for a type where the path from their audience to the offer is obvious; empty means the email names no offer. hand_to passes a type to another function.",
+  "newsletter": {
+   "on": true,
+   "who": "people who write to a list our buyers read",
+   "promotion": [
+    "an email to their list",
+    "a guest link"
+   ],
+   "pathway": ""
+  },
+  "community": {
+   "on": true,
+   "who": "owners of groups and communities our buyers are in",
+   "promotion": [
+    "a post",
+    "a talk in front of their group"
+   ],
+   "pathway": ""
+  },
+  "creator": {
+   "on": true,
+   "who": "creators and influencers our buyers follow, any size",
+   "promotion": [
+    "a post",
+    "a video",
+    "an affiliate link"
+   ],
+   "pathway": ""
+  },
+  "consultant-coach": {
+   "on": true,
+   "who": "consultants and coaches whose clients are our buyers",
+   "promotion": [
+    "an email to their list",
+    "a talk in front of their group",
+    "an affiliate link"
+   ],
+   "pathway": ""
+  },
+  "agency-software": {
+   "on": true,
+   "who": "agencies and software firms that serve our buyers",
+   "promotion": [
+    "an email to their list",
+    "a guest link",
+    "an affiliate link"
+   ],
+   "pathway": ""
+  },
+  "local-business": {
+   "on": true,
+   "who": "offline businesses whose customers are our buyers, such as a trades company",
+   "promotion": [
+    "an email to their list",
+    "a post",
+    "a guest link"
+   ],
+   "pathway": ""
+  },
+  "affiliate": {
+   "on": true,
+   "who": "people who already promote other people's offers to our buyers",
+   "promotion": [
+    "an affiliate link",
+    "an email to their list"
+   ],
+   "pathway": ""
+  },
+  "show": {
+   "on": false,
+   "hand_to": "speaker",
+   "who": "podcast and interview show hosts: they stay with SpeakerAgent"
+  }
+ },
+ "promotion_counts_as": [
+  "an email to their list",
+  "a post",
+  "a video",
+  "a guest link",
+  "an affiliate link",
+  "a talk in front of their group",
+  "anything else that promotes the business"
+ ],
+ "monthly_goal": {
+  "_doc": "The owner: 'a couple of these per month'.",
+  "promotions": 2
+ },
+ "hand_off": {
+  "replies": "the sales agent's inbox for this function",
+  "owner": "an interested partner, with the thread: products, states, pay and the split are the owner's (the split rule in roles/partners.md)",
+  "speaker": "show hosts found while building lists"
+ }
+}

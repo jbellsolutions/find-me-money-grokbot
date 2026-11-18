@@ -137,7 +137,7 @@ def main():
     # 5 placeholders
     todo = {}
     for p, t in allf.items():
-        if p.startswith(("tools/", "roles/_")) or p == "skills/README.md":
+        if p.startswith(("tools/", "roles/_")) or p == "skills/README.md" or (p.startswith("agents/") and "/prompts/" in p):  # prompt templates: merge fields a script fills
             continue
         c = len(PLACEHOLDER.findall(t))
         if c:

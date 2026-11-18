@@ -1,0 +1,48 @@
+{
+ "_doc": "One business's Dream 100 settings. Names of things only: the owner's rule is that a pack never holds partner names, contact lists or private figures, so the list itself lives in the bot's workspace. Every number here is a starting number a business changes freely.",
+ "campaign": "example",
+ "target_kind": "partners",
+ "_target_kind": "partners or clients. The owner is focusing on partners.",
+ "ideal_customer": "who the business sells to, in one line",
+ "who_qualifies": "someone who already has that customer gathered around them",
+ "list": {
+  "size": 100,
+  "file": "data/dream100.csv",
+  "columns": ["person", "audience", "platform", "url", "audience_size", "score", "evidence", "sources", "warm_path", "channel", "status", "next_step", "next_date"]
+ },
+ "sources": {
+  "skool": {"on": true, "what": "communities and their owners", "tool": "the scraping tool"},
+  "facebook_groups": {"on": true, "what": "group admins", "tool": ""},
+  "communities_other": {"on": true, "what": "admins of other communities the ideal customer is in", "tool": ""},
+  "lead_tools": {"on": true, "what": "people found through the business's own lead tools", "tool": ""}
+ },
+ "rank_on": {
+  "audience_fit": 30,
+  "engagement": 20,
+  "different_offer": 15,
+  "audience_size": 15,
+  "already_promotes_others": 10,
+  "reachable": 10
+ },
+ "offer": {
+  "free_value": "what the business will show, give or do for them at no cost",
+  "for_their_audience": "what their audience gets from it, in one line",
+  "proof_asset": {"kind": "podcast episode", "title": "", "url": ""},
+  "ask": "who do I talk to, or what do I need to do, to give this to your audience"
+ },
+ "channels": {
+  "skool_dm": {"on": true, "account": "", "runs_on": ""},
+  "facebook_dm": {"on": true, "account": "", "runs_on": ""},
+  "email": {"on": true, "mailbox": ""},
+  "linkedin": {"on": false, "runs_on": "OutFlo or the local computer"},
+  "x_dm": {"on": false, "account": "", "runs_on": ""},
+  "instagram_dm": {"on": false, "account": "", "runs_on": ""}
+ },
+ "pace": {
+  "drafts_a_day": 5,
+  "follow_up_days": [5, 14, 30],
+  "_note": "Starting numbers from this function's chat, not the owner's."
+ },
+ "approval": "the owner approves each draft",
+ "reference_funnel": {"reached": 100, "replied": 20, "looked": 12, "stayed": 6, "worth_it": 3}
+}

@@ -22,6 +22,11 @@ Next-message drafts, proposed stages, captured contacts with their OK, applicati
 - Lending Hub
 - Gmail
 - Anthropic
+- Codex CLI
+
+## Revenue OS
+
+This role works the sales agent (replies and the CRM in one): [REVENUE-OS.md](../REVENUE-OS.md) has the map and the build list; each agent's process is in `agents/<id>/PROCESS.md` and its settings in `settings/<id>.json` (sales-crm).
 
 ## Routines
 
@@ -62,6 +67,8 @@ When a routine names this role, or Justin asks for this work:
 7. Hand work to another role through requests/<role>/.
 8. End with python3 repo/guards/scripts/beat.py write sales '<line>' found=N drafted=N sent=N, write daily/<date>/sales.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
+
+Revenue OS: in this role you are the sales agent (replies and the CRM in one). Before the work, read repo/agents/<id>/PROCESS.md and context/revenue-os/<id>.json for each (sales-crm). Thinking that repo/agents.json gives to a CLI goes through python3 repo/engines/route.py --agent <id>. Every draft, send and inbound message is logged with python3 repo/convlog/gate.py (drafted, approved, sent, inbound). Read the person's note in vault/People/ before you draft an answer, and add to it after.
 
 Role rules: One reply per thread; never a second message before they answer. No links, "DM me", rate quotes or guarantees in a public reply. Opt-outs come before everything: `suppression.py add` the moment one is read. One CRM, one writer: Pinnacle Funding Group, through the cycle's outbox, only when `pinnacle-ghl: bot` and `crm-writes: on`. Never the Funding Machine account, never GoHighLevel directly. A lead is shared with a partner only with the lead's own OK in their words.
 ```

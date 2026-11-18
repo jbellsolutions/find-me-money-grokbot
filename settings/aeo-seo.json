@@ -1,0 +1,116 @@
+{
+ "_doc": "One business's AEO and SEO settings. Names of things only: no key, no token.",
+ "campaign": "find-me-money",
+ "goal": {
+  "_doc": "What this function is for. Every other number on the read is a means to this one.",
+  "measure": "inbound leads from Google and from AI engines, counted by the CRM sales agent",
+  "points_to": "the application form on findmemoneyapp.com",
+  "lead_sources": [
+   "search",
+   "ai_engine",
+   "video"
+  ]
+ },
+ "site": "findmemoneyapp.com",
+ "site_changes": {
+  "_doc": "How a fix reaches the site. pull_request: the business owns the site's code and the owner merges. package: someone else runs the site; the fix is a file set with its checks, handed over. A direct write to a live site is the owner's yes.",
+  "mode": "pull_request",
+  "who_applies": "the owner, in the site's own repo"
+ },
+ "business": {
+  "what_it_does": "helps people and business owners find funding",
+  "buyer": "People and businesses asking for funding; wholesalers; local businesses",
+  "name_as_said": "Find Me Money"
+ },
+ "rankspot": {
+  "_doc": "The engine checker. One workspace per site. The key is read from the environment by name; prices are RankSpot's listed ones on the date below and are checked again before the owner's yes.",
+  "workspace_id": "",
+  "key_env": "RANKSPOT_API_KEY",
+  "usd_per_check": 0.004,
+  "usd_per_article": 3.0,
+  "prices_read": "2026-11-16",
+  "daily_run": "off until the owner's yes; once on, RankSpot bills each question on each platform every day by itself"
+ },
+ "google": {
+  "_doc": "The search terms the business wants the front page for, buying terms first. Each: the term, its intent (buy, compare or learn), the page that answers it, and the video that answers it. Rank comes from the site's own Search Console, read through RankSpot.",
+  "terms_file": "data/aeo/terms.json",
+  "front_page_is": "position 10 or better",
+  "spots": [
+   "the AI answer at the top",
+   "the featured answer",
+   "the video results",
+   "the ten links"
+  ]
+ },
+ "video": {
+  "_doc": "Video is the first choice for a buying term. This function writes the brief and places the finished video; the content function makes it. brief_holds is this function's reading of 'stuff that's going to convert, not just any video'.",
+  "on": true,
+  "made_by": "content",
+  "hosted_on": "youtube",
+  "brief_holds": [
+   "the buyer's question as the title, in their words",
+   "the answer in the first 30 seconds",
+   "one next step: the call or page in goal.points_to, said and in the description's first line"
+  ],
+  "placed": [
+   "embedded on the page that answers the same question, with video schema",
+   "chapters and a full description",
+   "the transcript on the page"
+  ],
+  "_note": "AI answers cite YouTube on most of the funding questions: one video per guide question, the existing answer pages as the scripts' source"
+ },
+ "panel": {
+  "_doc": "The questions a buyer asks an AI, each with where it came from. The panel's size is what the daily run costs.",
+  "file": "data/aeo/prompts.md",
+  "questions": 15,
+  "platforms": [
+   "chatgpt",
+   "perplexity",
+   "google_ai_overview",
+   "google_ai_mode"
+  ],
+  "sources": [
+   "call notes",
+   "reply agent questions",
+   "lead radar asks",
+   "people also ask",
+   "searches the engines ran"
+  ],
+  "_note": "the measured baseline: named on 0 of 15 questions"
+ },
+ "spend": {
+  "_doc": "The owner sets these. The cap covers the daily run and articles together; RankSpot's prepaid credit runs out behind it.",
+  "monthly_cap_usd": 20,
+  "articles_a_month": 0
+ },
+ "read": {
+  "days": 7,
+  "max_answers": 400,
+  "judge_max": 40,
+  "when": "weekly, the same day each week, in the business's time zone"
+ },
+ "fixes": {
+  "_doc": "Which fixes the engine chooses from. Each goes to the role that does it as a brief. Buying questions are listed first.",
+  "answer_page": true,
+  "site_fix": true,
+  "medium_piece": true,
+  "video": true,
+  "post": true,
+  "guest_post": true,
+  "directory_listing": true,
+  "podcast": true,
+  "forum_answer": false
+ },
+ "medium": {
+  "on": false,
+  "publisher": "the owner; publishing is his yes"
+ },
+ "audit_offer": {
+  "on": false,
+  "note": "the audit of a prospect's AI visibility is a sales offer; off until the owner prices it and says which function runs it"
+ },
+ "search_console": {
+  "google": "not verified",
+  "bing": "not verified"
+ }
+}

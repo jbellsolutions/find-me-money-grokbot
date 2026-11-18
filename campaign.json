@@ -1,0 +1,107 @@
+{
+ "_doc": "Find Me Money's Revenue OS settings: which of the nine agents exist, where each starts from in this pack, and what each waits on. Names of things only. The bot reads this with REVENUE-OS.md, which is the build list. Check it with python3 tools/check_campaign.py campaign.json.",
+ "campaign": "find-me-money",
+ "business": "Find Me Money",
+ "kind": "internal",
+ "base_pack": "find-me-money v2.0.2",
+ "grok": {
+  "account": "a Find Me Money account, never AI Guy's",
+  "bot_name": "Find Me Money",
+  "timezone": "UTC",
+  "business_timezone": "America/New_York"
+ },
+ "approver": "Justin",
+ "offer": "Funding for people and businesses who need it: kept in-house or passed to one partner for a percentage",
+ "icp": "People and businesses asking for funding; wholesalers; local businesses; the funding community as partners",
+ "crm": {
+  "name": "GoHighLevel (Pinnacle Funding Group)",
+  "writer": "none",
+  "live_writers": [
+   "the funding CRM manager (a Hermes profile on the Mac)",
+   "the reply agent on the Mac (files every lead it drafts for)",
+   "the site's application form (through the Lending Hub)"
+  ],
+  "note": "The bot's sales agent drafts and logs only while context/owners.md says pinnacle-ghl: live. It becomes the one writer when the owner pauses the live writers and says 'pinnacle-ghl: bot' and 'crm-writes: on'."
+ },
+ "sending": {
+  "cold_email": "Instantly (the existing domains, or new ones: the owner's call)",
+  "social": "the Lead Storm VPS",
+  "one_to_one": "the owner's mailbox (Gmail)"
+ },
+ "engines": {
+  "host": "grokbot-computer",
+  "claude_subscription": "owner",
+  "codex_subscription": "owner",
+  "overrides": {},
+  "note": "The owner, 2026-11-18: give the Revenue OS to GrokBot and have it build it. The CLIs run on the bot's computer through engines/route.py. The Mac's Hermes profile stays the executor for browser lanes and the high-frequency sweeps (TRIGGER-MAP.md)."
+ },
+ "linkedin": {
+  "mode": "off",
+  "local_computer": "",
+  "caps": {}
+ },
+ "conversation_log": {
+  "vault": "vault/People",
+  "crm_recorder": "sales-crm",
+  "timezone": "America/New_York"
+ },
+ "agents": {
+  "dream-100": {
+   "state": "missing",
+   "source": "agents/dream-100/, settings/dream-100.json; role partners; data/lists/ (influencers, coaches, communities, partner-targets)",
+   "waits_on": "nothing to build the list from the rubric and draft; a first touch going out waits on the owner's yes per draft"
+  },
+  "dream-500": {
+   "state": "missing",
+   "source": "agents/dream-500/, settings/dream-500.json; role partners",
+   "waits_on": "nothing to build and place the list; sending waits on a sending tool and inboxes (the domain decision)"
+  },
+  "partners": {
+   "state": "paused",
+   "source": "roles/partners.md, skills/partners/; agents/partners/, settings/partners.json",
+   "waits_on": "one active partner and the split; a sending tool and inboxes for volume email"
+  },
+  "cold-email": {
+   "state": "partial",
+   "source": "roles/outreach.md (drafts), skills/outreach/; agents/cold-email/, settings/cold-email.json",
+   "waits_on": "the domain decision; the owner's charter (who, how, what a first line may say)"
+  },
+  "lead-radar": {
+   "state": "on",
+   "source": "the Funding Lead Radar (live, its own service); roles/radar.md; agents/lead-radar/, settings/lead-radar.json",
+   "waits_on": "nothing to judge its finds on Codex and hand them to the sales agent through the log"
+  },
+  "content": {
+   "state": "partial",
+   "source": "roles/content.md, skills/content/fmm-viral-content (the eight hooks); agents/content/, settings/content.json",
+   "waits_on": "a brand account per outlet and who publishes on each; the owner's content setup; any video tool is spend"
+  },
+  "speaker": {
+   "state": "missing",
+   "source": "agents/speaker/, settings/speaker.json",
+   "waits_on": "the owner's speaker profile for funding (topics, approved claims, proof) and whether funding wants shows"
+  },
+  "aeo-seo": {
+   "state": "partial",
+   "source": "the site (guide hub, answer pages, schema, sitemap, llms.txt; baseline: cited on 0 of 15 questions); agents/aeo-seo/, settings/aeo-seo.json",
+   "waits_on": "Search Console and Bing verification; the tracking tool's key and the owner's yes to its cost; site changes go to the site's own repo as a pull request"
+  },
+  "sales-crm": {
+   "state": "test",
+   "source": "roles/sales.md, skills/sales/, engine/pinnacle-reply-agent, engine/fcm; agents/sales-crm/, settings/sales-crm.json",
+   "waits_on": "Codex signed in on the bot's computer; the owner naming which live agent on the Mac is the base and pausing the other before the bot writes the CRM or answers",
+   "combined": "One agent (the owner, 2026-11-17). Two live agents on the Mac do these jobs today; the bot's stays on test (drafts and the log) until the owner switches them."
+  }
+ },
+ "lanes": [
+  "offer-specific"
+ ],
+ "coordinate_with": "",
+ "reply_rules": [
+  "no link and no 'DM me' or 'call me' in any public reply (a checker enforces it)",
+  "a first reply asks for nothing",
+  "Facebook is answered by hired posters (Justin, 2026-11-07) unless he reverses"
+ ],
+ "lanes_note": "The pack's own lanes outside the nine stay as they are: wholesale and loan-officer (roles/), and the worker's lanes on the Mac.",
+ "cutover": "A find-me-money Hermes profile on the Mac is meant to replace the older funding profiles. The Revenue OS sales agent is that cutover, not one more copy: NEEDS-JUSTIN.md, Track C."
+}

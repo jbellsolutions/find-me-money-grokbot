@@ -1,0 +1,97 @@
+{
+ "_doc": "One business's speaker settings. Every value is a default to change. Keys, tokens, addresses, phone numbers and contact lists stay out of this file: it is in a repository.",
+ "campaign": "find-me-money",
+ "speaker": {
+  "name": "",
+  "title": "",
+  "serves": "People and businesses asking for funding; wholesalers; local businesses",
+  "language": "English",
+  "topics": [],
+  "proof": [],
+  "voice": [
+   "short sentences",
+   "plain words",
+   "no hype",
+   "openings and closings to avoid"
+  ]
+ },
+ "booking_is_for": "leads for findmemoneyapp.com, and a recording to cut into content",
+ "leave_outs": [
+  "show types the owner has ruled out"
+ ],
+ "lanes": {
+  "_doc": "podcasts covers audio shows and interview shows published as a podcast feed. stages (conferences, summits, seminars, paid speaking) is in the source this was adapted from and is off here until the owner turns it on.",
+  "podcasts": {
+   "on": true
+  },
+  "stages": {
+   "on": false
+  }
+ },
+ "sources": {
+  "_doc": "Where shows are found. apple-rss is free and needs no key: Apple's public podcast search, then each show's own feed. terms is the list of plain search words (a short phrase finds more than a sentence); a long list is walked terms_per_run a day. web-search is the bot's own search and browser, in its routine. hosted-list is a SpeakerAgent account's list over its API, for a business that has one. collab-handoffs are shows another agent hands over in requests/speaker/.",
+  "apple-rss": {
+   "on": true,
+   "terms": [],
+   "terms_per_run": 12,
+   "per_term": 200,
+   "feeds_per_run": 300
+  },
+  "web-search": {
+   "on": true
+  },
+  "hosted-list": {
+   "on": false
+  },
+  "collab-handoffs": {
+   "on": true
+  }
+ },
+ "reject_below": 20,
+ "quiet_days": 90,
+ "pace": {
+  "_doc": "The day's numbers, from the owner on 2026-11-17: 1 to 2 booked a day, 20 to 30 pitches a day. open_per_day is how many of the best-scoring shows the bot opens to get that many accepted: about half of opened shows were held on the first live run, so it starts at twice the pitches.",
+  "booked_per_day": [
+   1,
+   2
+  ],
+  "pitches_per_day": [
+   20,
+   30
+  ],
+  "open_per_day": 60
+ },
+ "holds_reviewed_per_run": 10,
+ "pitch": {
+  "words": "120 to 200",
+  "template_file": "",
+  "details_file": "speaker/pitch-details.json",
+  "_details_doc": "The private file the guest-form answers come from (which email, whether a phone may be given, the bio, how-did-you-hear). It lives on the bot's computer, never in the pack or this file."
+ },
+ "route_order": [
+  "an open booking page with no fee",
+  "the show's guest form",
+  "the host's or the show's published address"
+ ],
+ "follow_up_days": [
+  4,
+  10
+ ],
+ "attribution": {
+  "link": "the page a listener is sent to, with ?src=podcast-<show> added",
+  "crm_source_tag": "podcast:<show>"
+ },
+ "hand_off": {
+  "sales-crm": "every host who replies, every booked show, and a host who is also a possible buyer",
+  "content": "every recorded or published episode",
+  "partners": "a host who runs a partner programme or has a large audience of the speaker's buyers"
+ },
+ "routines": {
+  "research": "daily, in several slots: find, score, open and qualify shows until the day's pitches are covered; re-review held shows",
+  "pitches": "daily: draft a pitch for each accepted show",
+  "follow-up": "daily: follow-ups that are due, replies, bookings",
+  "week": "weekly: counts, and leads per appearance from the CRM source tag"
+ },
+ "_reject_doc": "reject_below is the documented SpeakerAgent line: a show scoring under 20 is rejected.",
+ "_waits": "The speaker's name, topics, approved claims and proof are the owner's words, asked once. find and score run without them only for a look at which shows exist; no pitch is drafted until they are in."
+}

@@ -61,5 +61,7 @@ When a routine names this role, or Justin asks for this work:
 8. End with python3 repo/guards/scripts/beat.py write lead '<line>' found=N drafted=N sent=N, write daily/<date>/lead.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
 
+Revenue OS: you are the orchestrator of the nine agents (repo/REVENUE-OS.md). The Evening report runs python3 repo/convlog/gate.py day and carries any line its audit names; Mondays it also reads log/engine-<YYYY-MM>.jsonl for which subscription carried which agent.
+
 Role rules: Counts only what has proof: a live link, a reply, a calendar entry, a CRM stage Justin can open. A draft never counts; a number it can't read is "?", never 0. Alarms on any role silent more than 26 hours and on any send with no approved template. No names, phones or emails in Slack, Notion, the vault or the single brain: counts and stage names only.
 ```

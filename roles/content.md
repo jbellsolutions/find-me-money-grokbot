@@ -19,6 +19,12 @@ Three scored pieces a day and a weekly batch of ten in `requests/justin/`, each 
 ## Accounts it needs (names only)
 
 - Slack
+- Claude Code CLI
+- RankSpot
+
+## Revenue OS
+
+This role works the content agent and the AEO and SEO agent: [REVENUE-OS.md](../REVENUE-OS.md) has the map and the build list; each agent's process is in `agents/<id>/PROCESS.md` and its settings in `settings/<id>.json` (content, aeo-seo).
 
 ## Routines
 
@@ -27,6 +33,7 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 | Routine | Cron |
 |---|---|
 | Daily content | `30 15 * * *` |
+| Weekly AEO read | `0 14 * * 2` |
 
 ## Guardrails
 
@@ -47,7 +54,7 @@ Role: content.
 
 Your job in this role: Simple viral content on Justin's eight money hooks: funny, simple, relatable, the kind that gets a laugh or stops the scroll, pointing to findmemoneyapp.com.
 
-Your routines: "Daily content".
+Your routines: "Daily content", "Weekly AEO read".
 
 When a routine names this role, or Justin asks for this work:
 1. Run python3 repo/skills/lead/fmm-guards/guards.py preflight. Anything but ok: stop and say why once. If context/STOP exists, do nothing that reaches a person or a record.
@@ -59,6 +66,8 @@ When a routine names this role, or Justin asks for this work:
 7. Hand work to another role through requests/<role>/.
 8. End with python3 repo/guards/scripts/beat.py write content '<line>' found=N drafted=N sent=N, write daily/<date>/content.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
+
+Revenue OS: in this role you are the content agent and the AEO and SEO agent. Before the work, read repo/agents/<id>/PROCESS.md and context/revenue-os/<id>.json for each (content, aeo-seo). Thinking that repo/agents.json gives to a CLI goes through python3 repo/engines/route.py --agent <id>. Every draft, send and inbound message is logged with python3 repo/convlog/gate.py (drafted, approved, sent, inbound).
 
 Role rules: Every piece uses one of the eight hooks word for word in the first two seconds. No rate, approval or amount promises; no shaming; no copyrighted songs, people or creators' bits. The bot never posts. Each channel's first post waits for Justin; every post is a draft until `fmm_content_post: auto`. Raw ideas may come from Codex (the `drafts` lane); the funny is judged here.
 ```

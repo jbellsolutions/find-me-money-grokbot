@@ -1,0 +1,42 @@
+{
+ "_doc": "One business's Dream 500 settings. No keys, contact lists, partner names or private figures in this file.",
+ "campaign": "example",
+ "state": "off",
+ "bands": {
+  "dream_100_from": 1000000,
+  "dream_500_from": 100000
+ },
+ "columns": {
+  "required": ["name", "audience"],
+  "reach": ["email", "linkedin_url", "x_url", "instagram_url", "community_url"],
+  "optional": ["first_name", "brand", "platform", "topic", "group_name", "site", "source_list", "audience_source"]
+ },
+ "fill": {
+  "what_we_do": "one plain line on what the business does and for whom",
+  "episode_title": "the recent episode's title",
+  "episode_url": "its link",
+  "signs_as": "the sender's first name",
+  "unsubscribe_line": "Reply 'no thanks' and I won't write again."
+ },
+ "first_batch": {
+  "approve_first": 10,
+  "approver": "the owner"
+ },
+ "email": {
+  "on": true,
+  "emails_per_day_target": 1000,
+  "sending_tool": "",
+  "inboxes": "the owner's cold-email sending inboxes",
+  "inbox_count": 0,
+  "per_inbox_per_day": 0,
+  "share_of_capacity": 1.0,
+  "follow_ups": [4, 10]
+ },
+ "dm": {
+  "linkedin": {"on": true, "path": "OutFlo, or the owner's own computer"},
+  "x": {"on": false, "path": ""},
+  "instagram": {"on": false, "path": ""},
+  "community": {"on": false, "path": ""}
+ },
+ "message_types": ["dream500_first_touch", "dream500_follow_up"]
+}

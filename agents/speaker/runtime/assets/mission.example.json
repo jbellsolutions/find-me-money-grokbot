@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "mission_id": "example-mission",
+  "client_id": "demo-client",
+  "persona_id": "demo-persona",
+  "objective": "Find five current, eligible speaking opportunities with supported routes",
+  "accepted_target": 5,
+  "as_of": "2026-11-05",
+  "timezone": "America/New_York",
+  "criteria": {
+    "paid_only": true,
+    "minimum_fee": null,
+    "currency": null,
+    "event_start": null,
+    "event_end": null,
+    "geography": null
+  },
+  "limits": {
+    "provider_spend_authorized": false,
+    "max_cost_usd": 0,
+    "research_steps_per_case": 8,
+    "public_pages_per_step": 5
+  },
+  "status": "ready",
+  "accepted_count": 0,
+  "pending_actions": [],
+  "next_action": "Resolve missing persona constraints",
+  "runner": null
+}

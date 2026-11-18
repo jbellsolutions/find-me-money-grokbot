@@ -1,6 +1,6 @@
 # Find Me Money: the handoff
 
-What Justin does, then what the bot does on its own. Follows the factory PLAYBOOK and the client-build GrokBot standard. Unverified platform facts are flagged *(unverified)*. This pack replaces the v1 pack (never live): one bot, Justin's word 2026-11-12.
+What Justin does, then what the bot does on its own. Follows the factory PLAYBOOK and the client-build GrokBot standard. Unverified platform facts are flagged *(unverified)*. This pack replaces the v1 pack (never live): one bot, Justin's word 2026-11-12. Version 3 adds the Revenue OS: Part 3 is the bot building it (Justin, 2026-11-18: "give it a revenue OS, and let's just tell it to go do it").
 
 ## Part 1: Justin
 
@@ -9,7 +9,7 @@ What Justin does, then what the bot does on its own. Follows the factory PLAYBOO
 3. **The bot.** Create one bot named **Find Me Money**, pin it, and set Settings → General → Bot → Timezone to **UTC**.
 4. **The pack: one link.** Paste the line below into the new bot. If the bot can't download, attach `find-me-money.zip` from the same release instead *(zip route unverified)*:
 
-   > You are Find Me Money. Download https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip, unpack it into /workspace/find-me-money/repo/ and follow HANDOFF.md, Part 2, from step 1. Read MASTER-PROMPT.md and CHARTER.md first. Ask me one thing at a time. Nothing sends, posts, spends or writes to a CRM until I say yes in this chat.
+   > You are Find Me Money. Download https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip, unpack it into /workspace/find-me-money/repo/ and follow HANDOFF.md: Part 2 from step 1, then Part 3, which builds the Revenue OS from REVENUE-OS.md. Read MASTER-PROMPT.md and CHARTER.md first. Do every step that needs nothing from me without stopping. Keep one list of what only I can do and show it to me once, at the end. Nothing sends, posts, spends or writes to a CRM until I say yes in this chat.
 
 5. **Auto-review rules.** At Part 2 step 4, paste the Ask-first lines it shows into Auto-review → Custom Rules.
 6. **Sign-ins and keys.** When it asks, sign in through Connect apps, one at a time. Keys go only through a secure secret card or the hidden terminal prompt with **Take over**. Rotate first any key ever pasted in a chat.
@@ -44,8 +44,19 @@ What Justin does, then what the bot does on its own. Follows the factory PLAYBOO
    | Codex CLI (if Justin installed it) | worker | `codex --version`, then `hermes_bridge.py put drafts '{"kind":"test","source":"none","limit":1}'` runs once and writes `state/worker/grok/outbox/drafts/` |
 
 6. **Old agents.** Some of this work may already run live in other agents and services (each one is a system in `context/owners.md`). Two writers never write the same thing: every one of those systems stays `live` in `context/owners.md`, and the bot reads and drafts. Justin moves a system to `bot` only after he pauses its live writer. Record this in `log/setup.md`.
-7. **Routines, switched off.** Create all 12 routines in TRIGGER-MAP.md, paused, with the exact names. Each prompt starts `Role: <role>.` and names the script or skill it runs. Record each in `team-registry.md` with role, cron, time zone and next run. A next run an hour or more off means the time zone isn't set.
+7. **Routines, switched off.** Create all 15 routines in TRIGGER-MAP.md, paused, with the exact names. Each prompt starts `Role: <role>.` and names the script or skill it runs. Record each in `team-registry.md` with role, cron, time zone and next run. A next run an hour or more off means the time zone isn't set.
 8. **Report.** Read back every routine and connection into `team-registry.md`, and send Justin the list plus what isn't done and why.
+
+## Part 3: the bot builds the Revenue OS
+
+[REVENUE-OS.md](REVENUE-OS.md) is the build list: the ground (the checks, the settings copied to `context/revenue-os/`, the engines, the conversation log), then the nine agents in order, then the routines and the report. Work down it after Part 2.
+
+1. **Build without stopping.** A step that waits on Justin goes on the one list and the next step starts. Nothing in Part 3 sends, posts, spends, signs in or writes to a live system.
+2. **Build in the workspace, not in `repo/`.** Anything a status page lists as not built (a runner, a finder, a call path) is written under `/workspace/find-me-money/build/<agent>/`, with a test beside it. `repo/` changes only when a new pack version is installed.
+3. **Evidence per step.** One line per step in `log/revenue-os-build.md`: what was built, the command and its output, what waits on Justin.
+4. **Engines.** The two CLIs install only on Justin's yes, and he signs them in ([NEEDS-JUSTIN.md](NEEDS-JUSTIN.md) C1, C2). Then `python3 repo/engines/route.py --check` and one real call through each, and again the next day: if a sign-in did not last the night, say so in the report.
+5. **The sales agent stays on test.** Two live agents on the Mac file and answer today. The bot's sales agent drafts and logs until Justin switches them (C5).
+6. **Finish with one message.** The nine agents, each with built, tested (the evidence) and what it waits on; then the checklist of what only Justin can do, once.
 
 ## Usage kit (usage-mastery v1.0.0)
 
@@ -70,7 +81,7 @@ From `grokbot-usage-mastery`. Do these right after the workspace and memory step
 GrokBot is the orchestrator (Justin, 2026-11-13). Two executors do the work; each is one of Justin's yeses:
 
 1. **The Hermes worker on the Mac.** The Find Me Money Hermes profile is already on the Mac, with its own 12 jobs (the reply cycle, the 30-minute sweep, sorting, the lead sweep, the scorecard and the rest), all paused. The worker adds one more paused job, `fmm-worker-inbox`, that runs GrokBot's work orders every 15 minutes on the profile's own model. Install from a computer with this pack, Justin's yes first: `MUSE_COMPUTER=<the Mac> NEVER_TOUCH=<list> ORGO_API_KEY=<key> bash hermes-worker/install.sh` (dry run: needs only `MUSE_COMPUTER`, makes no Orgo call), then `--go`. Then turn the job on (`hermes -p find-me-money cron resume fmm-worker-inbox` on the Mac), and say "hermes-worker: bot". The install needs no Grok bot, so it can be done before Part 1.
-2. **A Codex CLI on this bot's computer** (optional): bulk drafts move to Codex's own subscription (usage-mastery trick 29). Justin installs it and signs in through the secure path (never a pasted token), then says "codex-cli: bot".
+2. **Claude Code and Codex on this bot's computer**: the Revenue OS engines. Content writes on Claude Code; the sales agent, Lead Radar, SpeakerAgent, AEO and SEO and bulk drafts run on Codex, each on its own subscription instead of Grok's allowance. The bot installs them on Justin's yes, he signs them in through the secure path (never a pasted token), then says "codex-cli: bot". Every call goes through `engines/route.py`.
 
 Until then every work order is held in `requests/hermes/` and the bot still plans, judges what the live Radar finds, and reports.
 
@@ -108,7 +119,11 @@ Every routine is `test` in `context/routines-on.md` and every system is `live` i
 | 12 | All | Owner test | `owner_guard.py check hermes-worker --routine "Dispatch"` prints `live` until Justin's yes |
 | 13 | All | STOP test | Create `context/STOP`; the next run of every role says stopped and does nothing; remove it |
 | 13b | worker | Research spot-check | Open 5 links from each research lane's results (influencers, coaches, affiliate houses): every one exists and matches its row |
-| 14 | lead | Evening report | Every role has a line; the vault note exists; `beat.py status` shows no SILENT; 0 sent, 0 posted, 0 live-system writes; Grok runs today about 13 |
+| 13c | partners | Dream desk | Candidates scored into `data/dream100.csv`; one dossier; first-touch drafts logged and in `requests/justin/`; `dream500.py place` splits a found list |
+| 13d | outreach | Speaker desk | `speaker.py find` and `score` list shows; no pitch drafted without the speaker profile |
+| 13e | content | Weekly AEO read | `aeo.py cost` prints the month's cost; the panel and terms files exist; nothing was bought |
+| 13f | All | Conversation log | Every draft of the day is in `conversations/<YYYY-MM>.jsonl`; `convlog/gate.py day` writes the day file and its audit names no line |
+| 14 | lead | Evening report | Every role has a line; the vault note exists; `beat.py status` shows no SILENT; 0 sent, 0 posted, 0 live-system writes; Grok runs today about 14 |
 
 The day passes when every row passes. Then Justin approves each message type once, and roles go `on` one at a time in the bring-up order.
 

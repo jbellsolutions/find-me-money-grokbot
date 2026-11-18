@@ -1,0 +1,207 @@
+{
+ "_doc": "One business's settings for the sales agent (replies and the CRM in one agent). Names of things only: no key, no address, no contact, no private figure.",
+ "campaign": "example",
+ "host": "the Grok bot (version 1). Where a Hermes sales agent is live on an Orgo computer it keeps its inboxes until the owner moves them",
+ "engine": {
+  "cli": "codex",
+  "model": "gpt-6-luna",
+  "subscription": "the owner's ChatGPT plan",
+  "fallback": "claude"
+ },
+ "crm": {
+  "name": "",
+  "writer": "sales-crm",
+  "pipeline": "Sales",
+  "read_only_pipelines": [],
+  "owner_user": "the owner",
+  "tag_prefix": "ros:",
+  "stages": [
+   "Interested",
+   "Call booked",
+   "Said yes",
+   "Agreement sent"
+  ],
+  "note_per": "conversation per day",
+  "never": [
+   "overwrite a value"
+  ],
+  "pipelines": [
+   "Sales",
+   "Partners"
+  ],
+  "note_link_field": "the contact field that holds the vault note's link"
+ },
+ "vault": {
+  "obsidian_vault": "",
+  "path": "vault/",
+  "people": "People/",
+  "pipeline": "Pipeline/",
+  "daily": "Daily/",
+  "contact_details_in_notes": false,
+  "note_rule": "made on the first reply, attached to the CRM contact, added to on every reply and answer, read before every draft"
+ },
+ "inboxes": [
+  {
+   "inbox": "the owner's personal email",
+   "channel": "email",
+   "from_agent": "dream-100",
+   "pipeline": "Partners",
+   "read_by": "the owner's mailbox",
+   "sent_by": "the owner's mailbox",
+   "on": true
+  },
+  {
+   "inbox": "cold email inboxes: Dream 500 campaigns",
+   "channel": "email",
+   "from_agent": "dream-500",
+   "pipeline": "Partners",
+   "read_by": "the sending tool's reply pull",
+   "sent_by": "the sending tool",
+   "on": true
+  },
+  {
+   "inbox": "cold email inboxes: partner and collaborator campaigns",
+   "channel": "email",
+   "from_agent": "partners",
+   "pipeline": "Partners",
+   "read_by": "the sending tool's reply pull",
+   "sent_by": "the sending tool",
+   "on": true
+  },
+  {
+   "inbox": "cold email inboxes: cold lead campaigns",
+   "channel": "email",
+   "from_agent": "cold-email",
+   "pipeline": "Sales",
+   "read_by": "the sending tool's reply pull",
+   "sent_by": "the sending tool",
+   "on": true
+  },
+  {
+   "inbox": "CRM conversations",
+   "channel": "email",
+   "read_by": "the CRM",
+   "sent_by": "the guarded sender",
+   "on": true,
+   "from_agent": "sales-crm",
+   "pipeline": "Sales"
+  },
+  {
+   "inbox": "LinkedIn campaign replies",
+   "channel": "linkedin",
+   "read_by": "OutFlo",
+   "sent_by": "OutFlo",
+   "on": false,
+   "from_agent": "",
+   "pipeline": ""
+  },
+  {
+   "inbox": "LinkedIn comments on the owner's posts",
+   "channel": "linkedin",
+   "read_by": "notification emails",
+   "sent_by": "the owner, from their own computer",
+   "on": false,
+   "from_agent": "",
+   "pipeline": ""
+  },
+  {
+   "inbox": "SMS",
+   "channel": "sms",
+   "read_by": "",
+   "sent_by": "",
+   "on": false,
+   "note": "off until carrier registration is approved",
+   "from_agent": "",
+   "pipeline": ""
+  }
+ ],
+ "hand_overs_from": [
+  "cold-email",
+  "lead-radar",
+  "dream-100",
+  "dream-500",
+  "partners",
+  "content",
+  "speaker"
+ ],
+ "intents": [
+  "interested",
+  "question",
+  "referral",
+  "not_now",
+  "not_interested",
+  "opt_out",
+  "wrong_person",
+  "auto_reply",
+  "bounce",
+  "complaint",
+  "identity_question",
+  "price_or_terms",
+  "other"
+ ],
+ "always_the_owners": [
+  "complaint",
+  "identity_question",
+  "price_or_terms",
+  "other"
+ ],
+ "answer": {
+  "as": "the owner, first person",
+  "voice": [
+   "plain words",
+   "short",
+   "answer what they asked first"
+  ],
+  "booking_link": "BOOKING_LINK (given at intake)",
+  "acknowledge_not_now": false
+ },
+ "follow_up": {
+  "quiet_business_days": 3,
+  "max_follow_ups": 3,
+  "not_now_default_days": 30,
+  "after_last": "tag later with a date"
+ },
+ "message_types": {
+  "email_reply": "ask",
+  "reply_book_call": "ask",
+  "crm_opener": "ask",
+  "crm_follow_up": "ask",
+  "warm_reconnect": "ask",
+  "linkedin_reply": "off",
+  "linkedin_comment": "off",
+  "x_reply": "off",
+  "instagram_reply": "off",
+  "youtube_reply": "off",
+  "skool_reply": "off",
+  "sms_reply": "off",
+  "crm_nurture": "ask"
+ },
+ "runs": {
+  "reply_check": "every 15 minutes; the script alone, the engine only when there is a reply",
+  "sweep": "twice a day",
+  "call_prep": "each morning",
+  "day_close": "end of the business's day",
+  "timezone": "",
+  "nurture_check": "once a day"
+ },
+ "_inboxes_doc": "from_agent is the outreach agent the inbox (or the campaign in the sending tool) belongs to. It decides the pipeline and the source tag. Nothing sorts a person into lead or partner.",
+ "nurture": {
+  "where": "the CRM's own email campaigns",
+  "set_up_by": "sales-crm",
+  "approval": "each campaign approved once, as a whole",
+  "enter_on": "stage and tag",
+  "leave_on": [
+   "reply",
+   "booking",
+   "opt_out"
+  ],
+  "daily_check": [
+   "running",
+   "entered and left",
+   "replies",
+   "bounces and opt-outs",
+   "stuck past the last email"
+  ]
+ },
+ "_list_doc": "Still in, waiting on the owner's keep or remove (STATUS.md, the list at the top): crm.writer, crm.never, crm.read_only_pipelines, vault.contact_details_in_notes, always_the_owners, follow_up.max_follow_ups, the SMS inbox's note, opt_out in nurture.leave_on."
+}

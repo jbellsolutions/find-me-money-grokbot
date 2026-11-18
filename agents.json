@@ -1,0 +1,386 @@
+{
+  "_doc": "The Revenue OS template: nine agents, the engine each thinks with, and what each must log. engine: grokbot (the bot's own run does the thinking), claude (Claude Code CLI, the intelligence), codex (Codex CLI, the workhorse), antigravity (Google's Antigravity CLI, for driving creative tools). tool_engine: the engine an agent uses to operate outside tools, where that differs from the one it writes with. tools: the skills the agent ships with; a campaign switches each on or off. fallback: tried in order when the engine gives no usable answer; when all fail the work goes to the bot unjudged. base: the role, skills and worker jobs it is built from in the revenue-os-max kit. A campaign config (campaign.example.json) switches agents on or off and may name a different engine for an agent. model: the model a CLI engine is asked for (the engine's own default when absent). host: bot means the agent runs with the Grok bot. aliases: an old agent id that now means another.",
+  "version": "0.3.0",
+  "engines": {
+    "grokbot": {
+      "what": "The Grok bot's own routine run",
+      "pays_with": "the Grok plan's weekly usage",
+      "runs_on": "the GrokBot computer"
+    },
+    "claude": {
+      "what": "Claude Code CLI, headless (claude -p)",
+      "pays_with": "the owner's Claude subscription",
+      "runs_on": "the GrokBot computer (or the worker box, when one exists)",
+      "sign_in": "CLAUDE_CODE_OAUTH_TOKEN from `claude setup-token`, given by hidden prompt"
+    },
+    "codex": {
+      "what": "Codex CLI, headless (codex exec)",
+      "pays_with": "the owner's ChatGPT subscription",
+      "runs_on": "the GrokBot computer (or the worker box, when one exists)",
+      "sign_in": "`codex login --device-auth` as the user the jobs run as"
+    },
+    "antigravity": {
+      "what": "Google's Antigravity CLI, headless (agy -p)",
+      "pays_with": "the owner's Google AI subscription",
+      "runs_on": "the GrokBot computer",
+      "sign_in": "the CLI's own sign-in, as the user the jobs run as"
+    }
+  },
+  "agents": {
+    "dream-100": {
+      "name": "Dream 100",
+      "tier": 1,
+      "engine": "grokbot",
+      "fallback": [],
+      "job": "The 100 partners where one yes changes the business. One researched dossier and one hand-written first touch each, by email and on socials, then patient follow-up.",
+      "channels": [
+        "email",
+        "linkedin",
+        "x",
+        "instagram",
+        "youtube"
+      ],
+      "base": {
+        "roles": [
+          "dream",
+          "partners"
+        ],
+        "skills": [
+          "dream-partner-portfolio",
+          "partner-opportunity-research",
+          "high-level-prospecting"
+        ]
+      },
+      "message_types": [
+        "dream100_first_touch",
+        "dream100_follow_up"
+      ]
+    },
+    "dream-500": {
+      "name": "Dream 500",
+      "tier": 2,
+      "engine": "grokbot",
+      "fallback": [],
+      "job": "The 500 where three or four yeses double the business. A short dossier and a personal first line each, sent in small waves by email and on socials.",
+      "channels": [
+        "email",
+        "linkedin",
+        "x",
+        "instagram"
+      ],
+      "base": {
+        "roles": [
+          "dream",
+          "partners"
+        ],
+        "skills": [
+          "dream-partner-portfolio",
+          "partner-fit-review",
+          "partner-conversation-drafts"
+        ]
+      },
+      "message_types": [
+        "dream500_first_touch",
+        "dream500_follow_up"
+      ]
+    },
+    "partners": {
+      "name": "Partners, collaborators and influencers",
+      "tier": 3,
+      "engine": "grokbot",
+      "fallback": [],
+      "job": "The wide channel: partners, collaborators and influencers who are not Dream 100 or 500 but could be big hits. A couple of promotions a month is the win. Lists at volume, scored by the rubric, one approved template per partner type.",
+      "channels": [
+        "email",
+        "linkedin",
+        "x",
+        "instagram",
+        "youtube"
+      ],
+      "base": {
+        "roles": [
+          "partners",
+          "social"
+        ],
+        "skills": [
+          "collab-blitz",
+          "partner-fit-review",
+          "partner-conversation-drafts",
+          "partner-attribution-review",
+          "affiliate-activation-support"
+        ]
+      },
+      "message_types": [
+        "partner_outreach",
+        "collab_outreach",
+        "partner_terms"
+      ]
+    },
+    "cold-email": {
+      "name": "Cold email",
+      "tier": null,
+      "engine": "grokbot",
+      "fallback": [],
+      "job": "Traditional cold targets: lists, verification, sequences in the sending tool, inbox health. The sending tool sends; code builds the lists; the bot owns copy and the daily read.",
+      "channels": [
+        "email"
+      ],
+      "base": {
+        "roles": [
+          "cold-email"
+        ],
+        "skills": [
+          "cold-email-master",
+          "cold-copy",
+          "cold-campaigns",
+          "verify-leads",
+          "scraper-forge"
+        ],
+        "worker_jobs": [
+          "list-build",
+          "list-load",
+          "replies-pull",
+          "inbox-health",
+          "campaign-stats",
+          "blocklist"
+        ]
+      },
+      "message_types": [
+        "cold_email"
+      ]
+    },
+    "lead-radar": {
+      "name": "Lead Radar",
+      "tier": null,
+      "engine": "codex",
+      "fallback": [
+        "claude"
+      ],
+      "job": "Social listening through Treg (ScrapeCreators underneath): people already asking, per channel. Reads and scores only. Every kept lead goes to the sales agent with its evidence.",
+      "channels": [
+        "facebook",
+        "reddit",
+        "x",
+        "linkedin",
+        "instagram",
+        "youtube",
+        "tiktok",
+        "skool"
+      ],
+      "base": {
+        "roles": [
+          "social"
+        ],
+        "skills": [
+          "lead-radar",
+          "treg",
+          "x-intent-search",
+          "skool-inbound"
+        ],
+        "worker_jobs": [
+          "radar-poll",
+          "skool-score"
+        ]
+      },
+      "message_types": []
+    },
+    "content": {
+      "name": "Content",
+      "tier": null,
+      "engine": "claude",
+      "fallback": [
+        "codex",
+        "antigravity"
+      ],
+      "job": "Makes videos and posts made to be shared, for the business's social accounts: reactions, talkbacks, breakdowns, UGC. Writes on Claude Code; operates the video tools on Claude Code too. Posts through a scheduler or directly, per campaign. Each campaign names its own toolset.",
+      "channels": [
+        "linkedin",
+        "youtube",
+        "newsletter",
+        "instagram",
+        "x",
+        "tiktok",
+        "facebook"
+      ],
+      "base": {
+        "roles": [
+          "content-seo",
+          "channels"
+        ],
+        "skills": [
+          "content-engine",
+          "charm-social-content",
+          "linkedin-ghostwriter",
+          "youtube-channel",
+          "youtube-brief-loop",
+          "channel-weekly-read"
+        ]
+      },
+      "message_types": [
+        "linkedin_post",
+        "youtube_publish",
+        "newsletter_issue",
+        "instagram_post"
+      ],
+      "waits_on": "the owner's content setup",
+      "tool_engine": "claude",
+      "tools": {
+        "video": [
+          "higgsfield",
+          "invideo",
+          "max-fusion",
+          "arcads",
+          "creatomate",
+          "google-flow"
+        ],
+        "posting": [
+          "creator-os",
+          "metricool",
+          "direct"
+        ]
+      }
+    },
+    "speaker": {
+      "name": "Podcast SpeakerAgent",
+      "tier": null,
+      "engine": "codex",
+      "fallback": [
+        "claude"
+      ],
+      "job": "Shows and stages: SpeakerAgent research cycles, fit scoring with an episode angle, pitches, follow-up on day 4 and day 10, and attribution for every appearance.",
+      "channels": [
+        "email",
+        "forms"
+      ],
+      "base": {
+        "roles": [
+          "speaker"
+        ],
+        "skills": [
+          "speakeragent",
+          "speakeragent-podcasts",
+          "speakeragent-pitches",
+          "show-rss-research",
+          "charm-podcast-pitch",
+          "podcast-follow-up-and-attribution"
+        ],
+        "worker_jobs": [
+          "show-research",
+          "show-score"
+        ]
+      },
+      "message_types": [
+        "podcast_pitch",
+        "podcast_follow_up"
+      ]
+    },
+    "aeo-seo": {
+      "name": "AEO and SEO",
+      "tier": null,
+      "engine": "codex",
+      "fallback": [
+        "claude"
+      ],
+      "job": "Get named by AI engines and found in search: the prompt panel, citation tracking, the audit ladder, articles and fixes handed to the role that owns each source.",
+      "channels": [
+        "site",
+        "medium"
+      ],
+      "base": {
+        "roles": [
+          "content-seo"
+        ],
+        "skills": [
+          "aeo-citations",
+          "aeo-audit-ladder",
+          "seo-campaign",
+          "medium"
+        ]
+      },
+      "message_types": [
+        "medium_post",
+        "site_article"
+      ]
+    },
+    "sales-crm": {
+      "name": "Sales agent (replies and the CRM)",
+      "tier": null,
+      "engine": "codex",
+      "fallback": [
+        "claude"
+      ],
+      "job": "Has every conversation and keeps the CRM. Each person who answers any campaign, by email, DM or comment, is known by the inbox they answered in (each inbox belongs to one outreach agent), added to that pipeline and stage with tags, and given a vault note attached to their CRM contact. The note grows with every reply and is read before every answer. The agent answers, follows up, and sets up and checks the CRM's nurture campaigns, until the person books a call or says no. The only CRM writer and the only answerer for its inboxes. Version 1 runs inside the Grok bot. Nothing goes out without the send gate.",
+      "channels": [
+        "crm",
+        "email",
+        "linkedin",
+        "x",
+        "instagram",
+        "youtube",
+        "facebook",
+        "skool",
+        "sms"
+      ],
+      "base": {
+        "roles": [
+          "sales-crm",
+          "social",
+          "channels"
+        ],
+        "skills": [
+          "chief-sales-officer",
+          "crm-conversations",
+          "gtm-crm-records",
+          "gtm-crm-openers",
+          "gtm-crm-sweep",
+          "gtm-crm-deals",
+          "quiet-thread-nudge",
+          "screenshot-to-crm",
+          "gtm-crm-replies",
+          "reply-fast-lane",
+          "charm-reply-handler",
+          "linkedin-reply-desk",
+          "x-reply-desk"
+        ],
+        "worker_jobs": [
+          "replies-sort"
+        ]
+      },
+      "message_types": [
+        "crm_opener",
+        "crm_follow_up",
+        "warm_reconnect",
+        "crm_nurture",
+        "email_reply",
+        "reply_book_call",
+        "linkedin_reply",
+        "linkedin_comment",
+        "x_reply",
+        "instagram_reply",
+        "youtube_reply",
+        "skool_reply",
+        "sms_reply"
+      ],
+      "model": "gpt-6-luna",
+      "host": "bot"
+    }
+  },
+  "lanes": {
+    "_doc": "Optional lanes a campaign may add on top of the nine. Off unless the campaign config names them.",
+    "capital": {
+      "engine": "grokbot",
+      "base": {
+        "roles": [
+          "capital"
+        ]
+      }
+    },
+    "offer-specific": {
+      "engine": "grokbot",
+      "what": "Reserved for a business whose offer needs its own lane (the next campaign in line uses this slot)."
+    }
+  },
+  "aliases": {
+    "reply": "sales-crm"
+  }
+}

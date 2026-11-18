@@ -184,6 +184,24 @@
       "keys": [
         "SIGNIN"
       ]
+    },
+    "Claude Code CLI": {
+      "path": "engines/route.py",
+      "keys": [
+        "CLAUDE_CODE_OAUTH_TOKEN"
+      ]
+    },
+    "Codex CLI": {
+      "path": "engines/route.py",
+      "keys": [
+        "SIGNIN"
+      ]
+    },
+    "RankSpot": {
+      "path": "agents/aeo-seo",
+      "keys": [
+        "RANKSPOT_API_KEY"
+      ]
     }
   }
 }
