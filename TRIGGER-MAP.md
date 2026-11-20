@@ -6,9 +6,9 @@
 |---|---|---|
 | **Hermes on the Mac** (the `find-me-money` profile, its own cheap model) | Facebook groups by theme, Marketplace and Muse (computer use on the Mac itself), Craigslist, local places, wholesaler call cards; plus the profile's own 12 jobs: the reply cycle, the 30-minute reply sweep, reply sorting, the lead sweep, the day check, the handoff watch, the scorecard, loop close | Browser, Muse and sign-ins live on that Mac; high-frequency sweeps cost Grok nothing there |
 | **Codex CLI** (on this bot's computer, its own subscription) | Bulk first drafts (no web search in `codex exec`, so research stays on Hermes) | Moves that spend off Grok's weekly allowance (usage-mastery trick 29) |
-| **GrokBot** (this bot) | 15 routines, about 14 runs a day | Judgment only: what to work, lead fit on the shortlist, the best copy, partner choice, what to tell Justin |
+| **GrokBot** (this bot) | 18 routines, about 17 runs a day | Judgment only: what to work, lead fit on the shortlist, the best copy, partner choice, what to tell Justin |
 
-Which executor runs which lane is `context/executors.md`; the bridge is `engine/hermes_bridge.py` (one Orgo call per put or pull). Every cron is UTC. **50 routines max per bot; this uses 15.** `tools/check.py` counts the Schedule rows below. Routine names are exact: the Grok title, the line in `context/routines-on.md`, and the `--routine` the guards get.
+Which executor runs which lane is `context/executors.md`; the bridge is `engine/hermes_bridge.py` (one Orgo call per put or pull). Every cron is UTC. **50 routines max per bot; this uses 18.** The bot incubates two sites ([sites/](sites/README.md)): a routine works every site in `context/sites.md`, and three routines are the referral site's own. `tools/check.py` counts the Schedule rows below. Routine names are exact: the Grok title, the line in `context/routines-on.md`, and the `--routine` the guards get.
 
 ## The loop, step by step
 
@@ -29,6 +29,9 @@ Which executor runs which lane is `context/executors.md`; the bridge is `engine/
 | 13 | Dream 100 and Dream 500 | Schedule `10 16 * * 1-5` | GrokBot | Who is worth a dossier; the first touch | Every first touch |
 | 14 | Shows | Schedule `20 16 * * 2,4` | GrokBot (Codex scores fit) | Which shows to open; the pitch | Every pitch |
 | 15 | AEO and SEO read | Schedule `0 14 * * 2` | GrokBot (Codex judges the gaps) | Which fix goes to which role | Tracking-tool spend; site changes are pull requests |
+| 16 | The referral site: intake, listings, matches, introductions | Schedule `45 14,21 * * *` | GrokBot | Real business or spam; who fits whom | Every introduction; site writes need `referral-site: bot` |
+| 17 | The referral site: prospects and outreach | Schedule `30 16 * * 1-5` | GrokBot | Does this business have customers it can reach; the one reason it would want a partner | Every message |
+| 18 | The referral site: guides | Schedule `30 14 * * 3,5` | GrokBot (Claude Code drafts) | Which question is worth a page; is every claim true | Every published guide |
 
 ## Every schedule, by role
 
@@ -58,7 +61,8 @@ Which executor runs which lane is `context/executors.md`; the bridge is `engine/
 | Kind | When | Routine | Does |
 |---|---|---|---|
 | Schedule | `30 15 * * *` | Daily content | `fmm-viral-content`: three pieces on three hooks, drafted through `agents/content/content.py draft` (Claude Code); Mondays also the weekly read and next week's hook rotation |
-| Schedule | `0 14 * * 2` | Weekly AEO read | `agents/aeo-seo/aeo.py pull`, `judge`, `read`: leads, front-page terms, the share of AI answers that named us, one fix file per owner role. Until the tracking tool's key is in: `cost` only, and the panel and terms files |
+| Schedule | `0 14 * * 2` | Weekly AEO read | `agents/aeo-seo/aeo.py pull`, `judge`, `read`: leads, front-page terms, the share of AI answers that named us, one fix file per owner role. Until the tracking tool's key is in: `cost` only, and the panel and terms files | Both sites; for the referral site also `site-check` and `rc.py stats` by source |
+| Schedule | `30 14 * * 3,5` | Referral guides | `guide-publisher`: one brief, one draft, saved to the referral site as a draft (`rc.py page-put`); a brief for the site's repo when a page is missing |
 
 ### outreach
 
@@ -66,12 +70,14 @@ Which executor runs which lane is `context/executors.md`; the bridge is `engine/
 |---|---|---|---|
 | Schedule | `0 17 * * 1-5` | Outreach drafts | Cold email (Instantly) and the Lead Storm queue from the worker's lists and Codex's drafts; Mondays also the read-only deliverability check |
 | Schedule | `20 16 * * 2,4` | Speaker desk | `agents/speaker/speaker.py find`, `score`, `draft`, `due`: shows found and scored, pitches and follow-ups as drafts; nothing is drafted until the speaker profile is in |
+| Schedule | `30 16 * * 1-5` | Referral outreach | `prospect-finder`: local businesses in the launch area into `data/prospects.csv`; `outreach-drafts`: one-to-one drafts and replies, each link tagged with its source |
 
 ### sales
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
 | Schedule | `15 14,20 * * *` | Sales desk | Read the Hermes profile's sorted replies and loop list; draft the next message for each "needs a person"; propose stages |. The Revenue OS sales agent: sorts on Codex (`route.py --agent sales-crm`), reads the person's vault note first, logs every reply and draft with `convlog/gate.py`
+| Schedule | `45 14,21 * * *` | Referral desk | `directory-desk`: sign-ups, connection requests and removals read from the site, real sign-ups listed; `matchmaker`: pairs matched and recorded, introductions drafted, each pair followed to a paid campaign |
 
 ### partners
 
@@ -94,9 +100,9 @@ Which executor runs which lane is `context/executors.md`; the bridge is `engine/
 
 ## Usage, before and after
 
-| | v1 (Nov 12) | v2 | v3 (the Revenue OS) |
-|---|---|---|---|
-| Grok routines | 29 | 12 | 15 |
-| Grok runs a day | about 130 (the 30-minute and 2-hourly sweeps) | about 13 | about 14 |
-| Where the sweeps run | Grok | Hermes on the Mac (its own 12 jobs, already installed and paused) | Hermes on the Mac |
-| Where research and bulk drafts run | Grok | Hermes (research), Codex CLI or Hermes (drafts) | Hermes (research); Claude Code and Codex on the bot's computer, through `engines/route.py` |
+| | v1 (Nov 12) | v2 | v3 (the Revenue OS) | v4 (two sites) |
+|---|---|---|---|---|
+| Grok routines | 29 | 12 | 15 | 18 |
+| Grok runs a day | about 130 (the 30-minute and 2-hourly sweeps) | about 13 | about 14 | about 17 |
+| Where the sweeps run | Grok | Hermes on the Mac (its own 12 jobs, already installed and paused) | Hermes on the Mac | Hermes on the Mac |
+| Where research and bulk drafts run | Grok | Hermes (research), Codex CLI or Hermes (drafts) | Hermes (research); Claude Code and Codex on the bot's computer, through `engines/route.py` | As v3 |

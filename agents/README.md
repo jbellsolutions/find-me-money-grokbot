@@ -1,6 +1,6 @@
 # The nine agents, one folder each
 
-Each folder holds `README.md` (what the agent is and what it is built from), `PROCESS.md` (how it works, step by step), `STATUS.md` (what was built and tested, and what was not), a settings example, prompts and any script. Find Me Money's filled settings are in [../settings/](../settings/); the build order is [../REVENUE-OS.md](../REVENUE-OS.md).
+Each folder holds `README.md` (what the agent is and what it is built from), `PROCESS.md` (how it works, step by step), `STATUS.md` (what was built and tested, and what was not), a settings example, prompts and any script. Each site's filled settings are in [../sites/](../sites/README.md); the build order is [../REVENUE-OS.md](../REVENUE-OS.md).
 
 | Agent | Folder | Worked by role |
 |---|---|---|

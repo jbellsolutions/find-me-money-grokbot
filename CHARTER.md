@@ -8,7 +8,13 @@ Find Me Money (findmemoneyapp.com) is Justin's funding business, separate from A
 
 ## Orchestrator, not doer
 
-Justin, 2026-11-13: "grokbot is just the orchestrator and automator" and "just also think of usage. always". This bot plans, sends work orders, judges, queues approvals and reports. The mining, scraping, computer use (Muse, Marketplace, groups), sweeps and bulk drafts run on executors: the Find Me Money Hermes profile on the Mac (its own cheap model), and a Codex CLI on its own subscription for text-only lanes. The bridge is `engine/hermes_bridge.py`; which executor runs which lane is `context/executors.md`; the map of every niche and place is the `lead-map` skill. 15 Grok routines, about 14 runs a day.
+Justin, 2026-11-13: "grokbot is just the orchestrator and automator" and "just also think of usage. always". This bot plans, sends work orders, judges, queues approvals and reports. The mining, scraping, computer use (Muse, Marketplace, groups), sweeps and bulk drafts run on executors: the Find Me Money Hermes profile on the Mac (its own cheap model), and a Codex CLI on its own subscription for text-only lanes. The bridge is `engine/hermes_bridge.py`; which executor runs which lane is `context/executors.md`; the map of every niche and place is the `lead-map` skill. 18 Grok routines, about 17 runs a day.
+
+## An incubator for two sites
+
+Justin, 2026-11-20: "we're going to have the Revenue OS, and we're going to have it be an incubator for a few different sites: the referral site, the Find Me Money site. We're looking to have a Revenue OS that's all about getting those sites traction." For Find Me Money: "disrupt the finance industry... and generate new leads for people who are looking to get financing the creative alternative ways." For the referral site: "building out that site to attract clients who want to do collaborations, partnerships, sponsorships, and deals with others."
+
+[sites/](sites/README.md) has one folder per site: what traction means, where each number comes from, and how each of the nine agents works it. The roles below work every site in `context/sites.md`. The referral site keeps its own records (the site itself, through `tools/rc.py`) and its own files (`data/referral/`, `context/referral/`).
 
 ## The Revenue OS
 
@@ -67,14 +73,14 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 | [lead](roles/lead.md) | Plans the day, evening report, vault note, Justin's queue | 2 |
 | [worker](roles/worker.md) | Sends work orders to Hermes on the Mac and Codex, pulls results, routes them, watchdog | 2 |
 | [radar](roles/radar.md) | The weekly niche rotation from the lead map; today's reply queue ; the Lead Radar agent | 2 |
-| [content](roles/content.md) | Simple viral content on the eight hooks; the content agent; the AEO and SEO agent | 2 |
-| [outreach](roles/outreach.md) | Cold email (Instantly) and the Lead Storm queue, from the executors' bulk drafts ; the cold email agent; the Podcast SpeakerAgent | 2 |
-| [sales](roles/sales.md) | The sales agent's judgment on what Hermes's sweeps found; the one CRM writer ; the Revenue OS sales agent | 1 |
+| [content](roles/content.md) | Simple viral content on the eight hooks; the content agent; the AEO and SEO agent ; the referral site's guides | 3 |
+| [outreach](roles/outreach.md) | Cold email (Instantly) and the Lead Storm queue, from the executors' bulk drafts ; the cold email agent; the Podcast SpeakerAgent ; the referral site's prospects and outreach | 3 |
+| [sales](roles/sales.md) | The sales agent's judgment on what Hermes's sweeps found; the one CRM writer ; the Revenue OS sales agent ; the referral site's sign-ups, listings and matches | 2 |
 | [partners](roles/partners.md) | In-house or one partner; deal passing; creators, coaches, affiliate houses ; the Dream 100, Dream 500 and partners agents | 2 |
 | [loan-officer](roles/loan-officer.md) | In-house deals; parked until a verified lender | 1 |
 | [wholesale](roles/wholesale.md) | Fund wholesalers, pass their deals (the wholesaler system) | 1 |
 
-15 routines of the 50 a bot allows.
+18 routines of the 50 a bot allows.
 
 ## Workspace
 
@@ -86,13 +92,17 @@ Through files only: `daily/<date>/<role>.md` for what each role did, `requests/<
 |---|---|---|
 | K0 | Account and bot | Justin signed in to the Find Me Money Grok account; the bot has the pack and wrote `log/setup.md` |
 | K1 | Read-only | Every app connected read-only, each with one real record read back |
-| K2 | Routines | All 15 routines created and paused, read back into `team-registry.md` |
-| K2b | The Revenue OS built | Every step of REVENUE-OS.md has a line of evidence in `log/revenue-os-build.md`; all nine agents ran on test on the bot's computer |
+| K2 | Routines | All 18 routines created and paused, read back into `team-registry.md` |
+| K2b | The Revenue OS built, for both sites | Every step of REVENUE-OS.md has a line of evidence in `log/revenue-os-build.md`; for each site, every agent that is not off ran on test on the bot's computer |
 | K3 | Test day | The first-day run in HANDOFF.md passes with zero sends and zero writes to a live system |
 | K4 | Drafts approved | Justin approved each message type once (public reply, email reply, cold email, social DM, content post, wholesaler first touch, partner message) |
 | K5 | Low-risk lanes on | lead, worker (orders held until `hermes-worker: bot`), radar, content and wholesale `on`; then the Hermes worker installed and its job on; drafts flowing to Justin daily |
 | K6 | Outreach and writes on | Justin moved `pinnacle-ghl` (after pausing the Hermes Reply Agent) and then each other system to `bot`; sales, outreach and partners `on`; the first reply posted and the first handoff accepted |
 
-## Done means
+## Done means, per site
+
+- **Find Me Money:** as below.
+- **The referral site:** one area at a time fills with real listed businesses, each matched with a partner, with every number traceable to a record on the site.
+
 
 K6 reached: a lead found by the bot gets a reply, an answer, a Pinnacle stage and a partner handoff with no one but Justin approving, and Justin sees it in the Slack evening report, the Notion scoreboard row and `vault/Daily/<date>.md`.

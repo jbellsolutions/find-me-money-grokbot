@@ -1,0 +1,91 @@
+{
+ "_doc": "The referral connection site's Revenue OS settings: the second site this bot incubates. Names of things only. Check with python3 tools/check_campaign.py sites/referral-connection/campaign.json.",
+ "campaign": "referral-connection",
+ "business": "The Referral Connection (findreferralpartners.com)",
+ "kind": "internal",
+ "base_pack": "find-me-money v4 (this pack); the site's tool and six skills come from referral-connection v1.0.0",
+ "grok": {
+  "account": "the Find Me Money account: one bot incubates both sites",
+  "bot_name": "Find Me Money",
+  "timezone": "UTC",
+  "business_timezone": "America/New_York"
+ },
+ "approver": "Justin",
+ "offer": "a free listing in a directory where businesses find each other for collaborations, partnerships, sponsorships, deals and commission referral campaigns",
+ "icp": "business owners who want a partner: someone to collaborate with, sponsor or be sponsored by, do a deal with, or swap referral campaigns with",
+ "crm": {
+  "name": "the site's own records, through its admin API (tools/rc.py): sign-ups, listings, connection requests, matches",
+  "writer": "sales-crm",
+  "note": "No other system writes these records. The bot writes them once context/owners.md says referral-site: bot. If the separate referral-connection pack is ever installed on another bot, that is a second writer: one of the two is switched off first."
+ },
+ "sending": {
+  "cold_email": "undecided (the domain decision; a sender address for member email is not set)",
+  "one_to_one": "the sender address Justin names for member email"
+ },
+ "engines": {
+  "host": "grokbot-computer",
+  "claude_subscription": "owner",
+  "codex_subscription": "owner",
+  "overrides": {}
+ },
+ "linkedin": {
+  "mode": "off",
+  "local_computer": "",
+  "caps": {}
+ },
+ "conversation_log": {
+  "vault": "vault/People",
+  "crm_recorder": "sales-crm",
+  "timezone": "America/New_York"
+ },
+ "agents": {
+  "dream-100": {
+   "state": "missing",
+   "source": "agents/dream-100/, sites/referral-connection/settings/dream-100.json; role partners",
+   "waits_on": "nothing to build the list and draft; a first touch going out waits on Justin's yes per draft"
+  },
+  "dream-500": {
+   "state": "missing",
+   "source": "agents/dream-500/, sites/referral-connection/settings/dream-500.json; role partners",
+   "waits_on": "nothing to build and place the list; sending waits on a sending tool and inboxes"
+  },
+  "partners": {
+   "state": "missing",
+   "source": "agents/partners/, sites/referral-connection/settings/partners.json; role partners",
+   "waits_on": "a sending tool and inboxes for volume email"
+  },
+  "cold-email": {
+   "state": "partial",
+   "source": "skills/outreach/prospect-finder, skills/outreach/outreach-drafts; agents/cold-email/, sites/referral-connection/settings/cold-email.json",
+   "waits_on": "the launch area; a sender address; the domain decision for volume"
+  },
+  "lead-radar": {
+   "state": "missing",
+   "source": "agents/lead-radar/, sites/referral-connection/settings/lead-radar.json; role radar",
+   "waits_on": "nothing to read and judge; reads past the free ones are spend"
+  },
+  "content": {
+   "state": "missing",
+   "source": "agents/content/, sites/referral-connection/settings/content.json; role content",
+   "waits_on": "a brand account per outlet and who publishes on each"
+  },
+  "speaker": {
+   "state": "off",
+   "source": "",
+   "waits_on": "off until Justin wants shows for this site"
+  },
+  "aeo-seo": {
+   "state": "partial",
+   "source": "skills/content/guide-publisher, skills/content/site-check, tools/rc.py (guides save as drafts on the site); agents/aeo-seo/, sites/referral-connection/settings/aeo-seo.json",
+   "waits_on": "Search Console verification; Justin's yes to the first published guide; the full SEO kit sits in the site's private repo"
+  },
+  "sales-crm": {
+   "state": "partial",
+   "source": "skills/sales/directory-desk, skills/sales/matchmaker, tools/rc.py; agents/sales-crm/, sites/referral-connection/settings/sales-crm.json",
+   "waits_on": "the site's admin key; 'referral-site: bot'; a sender address for introductions"
+  }
+ },
+ "lanes": [],
+ "coordinate_with": "",
+ "site_scope_note": "The site today is built for commission referral campaigns between local businesses. Justin, 2026-11-20: the site is for clients who want collaborations, partnerships, sponsorships and deals with others. Guides, outreach and matching cover all four from now; a change to the site's own pages or sign-up form is made in the site's repo, and the bot writes the brief for it."
+}

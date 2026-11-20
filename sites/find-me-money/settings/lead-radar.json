@@ -1,7 +1,7 @@
 {
  "_doc": "One business's Lead Radar settings. No key or token goes in this file (the owner's standing rule on secrets). Everything else here is a setting to change freely.",
  "campaign": "find-me-money",
- "offer": "funding for a person or a business: we find the right funding or pass them to one partner",
+ "offer": "funding for a person or a business, the creative and alternative ways included: the right product for the project, or one partner who has it",
  "buyer": "a person or business owner asking, in public, where or how to get funding",
  "area": "",
  "leave_outs": [
@@ -86,7 +86,14 @@
     "need funding for my business",
     "where can I get a business loan",
     "anyone know a lender",
-    "need money for"
+    "need money for",
+    "denied for a business loan",
+    "alternatives to a bank loan",
+    "how do I fund",
+    "HELOC for my business",
+    "0% business credit cards",
+    "is this MCA offer",
+    "factor rate"
    ],
    "places": []
   },

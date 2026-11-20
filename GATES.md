@@ -9,6 +9,7 @@ The factory's gates (PLAYBOOK §3), plus this bot's own. They never move.
 | First public post | Each channel's first post waits for Justin | Auto-review |
 | CRM writes | Only sales, only while `crm-writes: on` and `pinnacle-ghl: bot` | `owner_guard.py`, the job scripts, Auto-review |
 | Live systems | The bot never writes what a live system writes. Every system starts `live` in `context/owners.md`; Justin moves one at a time to `bot` after pausing its live writer | `owner_guard.py` in every job |
+| The referral site | The site's records are written only by the sales role, only while `referral-site: bot`. The bot never builds or deploys the site | `owner_guard.py`, Auto-review |
 | Stop | `context/STOP` stops everything | Every guard |
 | Suppression | Checked before any draft; anyone who says no is done for every role; no list yet means hold | `suppression.py`, `guards.py suppress` (one list, `context/suppression.csv`) |
 | Hand to Justin | Price, rates, scope, terms, a contract, anyone upset, account warnings, press, anything uncertain | Master prompt |
@@ -28,6 +29,7 @@ Justin pastes these, one rule each:
 - Ask first before sending any email, DM, comment, reply, form or message to a person outside the team.
 - Ask first before posting anything public, on any channel.
 - Ask first before any payment, purchase, plan change, credit top-up or paid API or scrape run.
+- Ask first before creating, updating or deleting a record in the referral site's admin API (sign-ups, listings, connection requests, matches, removals, guides).
 - Ask first before creating, updating or deleting a record in GoHighLevel (Pinnacle), the Lending Hub or the Funding Radar, or publishing or editing a workflow or campaign.
 - Ask first before approving a partner handoff, activating a partner, or marking a deal Funded or Paid.
 - Ask first before typing, clicking or changing anything on an Orgo computer, including Muse.
@@ -36,4 +38,4 @@ Justin pastes these, one rule each:
 
 ## Ask first until replies prove good
 
-Every message type and every CRM write starts ask-first. Justin marks a type `auto` in `context/standing-approvals.md` (with the date, his words and the template) only once its replies look right. Message types: `public_reply`, `public_followup`, `email_first_touch`, `email_reply`, `fmm_cold_email`, `fmm_social_dm`, `fmm_social_comment`, `fmm_content_post`, `fmm_wholesaler_first_touch`, `fmm_deal_pass`, `partner_handoff`, `partner_message`.
+Every message type and every CRM write starts ask-first. Justin marks a type `auto` in `context/standing-approvals.md` (with the date, his words and the template) only once its replies look right. The referral site's message types: `rc_outreach_first`, `rc_outreach_followup`, `rc_reply`, `rc_group_post`, `rc_introduction`, `rc_match_followup`, `rc_guide`. Find Me Money's message types: `public_reply`, `public_followup`, `email_first_touch`, `email_reply`, `fmm_cold_email`, `fmm_social_dm`, `fmm_social_comment`, `fmm_content_post`, `fmm_wholesaler_first_touch`, `fmm_deal_pass`, `partner_handoff`, `partner_message`.

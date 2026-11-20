@@ -6,7 +6,7 @@ Only what Justin can do, in dependency order: nothing on a line can start before
 
 **Checked 2026-11-15, read-only.** Status words: **open** means a check showed it is not done; **unverified** means nothing this pack's owner can read shows it either way (the Grok account, the bot's computer and the Mac are not readable from the factory), so it is treated as not done; **ready** means the pack's side is built and tested and it waits only on the step.
 
-**Version 3 (2026-11-18)** adds Track C at the bottom: what the Revenue OS needs from you. To start, only B1 and B2 are needed: the bot then builds everything that needs nothing from you and shows you the rest as one list.
+**Version 4 (2026-11-20)** adds Track D at the bottom: what the two sites need from you. **Version 3 (2026-11-18)** added Track C: what the Revenue OS needs from you. To start, only B1 and B2 are needed: the bot then builds everything that needs nothing from you and shows you the rest as one list.
 
 ## Track A: the Mac (needs no Grok bot)
 
@@ -73,9 +73,34 @@ The bot builds all nine agents on test without any of these. Each line is what o
 | C3 | [ ] Where the engines run: confirm or reverse | This pack puts Claude Code and Codex on the bot's computer, from your words on 2026-11-18 ("give it to GrokBot... have it go build it"). The older open question was keeping them on the Mac, where every funding agent runs today. Say "bot computer is right" or "keep it on the Mac" | Nothing | If "keep it on the Mac": the engines move there in the next pack version; the bot still orchestrates | open: built as "bot computer" |
 | C4 | [ ] The CRM field for a person's note | Name the contact field in Pinnacle that holds the link to a person's vault note, or say "make one" (a new custom field is a CRM write: your yes) | B5 | The sales agent attaching each person's note to their contact | open |
 | C5 | [ ] One sales agent: which live agent is the base | Two agents on the Mac do this job today: the CRM manager (reads and files, sends held) and the reply agent (drafts only). Say "CRM manager is the base" or "reply agent is the base"; when the bot's sales agent has passed its test day, say "yes, switch the other off", then "pinnacle-ghl: bot" and "crm-writes: on" | C2, the first-day test | The bot's sales agent answering and writing the CRM. Until then it drafts and logs only, so nothing double-writes | open |
-| C6 | [ ] Dream 100 and Dream 500: the offer to a partner's audience, and the lists | In your words: what Find Me Money gives a partner's audience at no cost, and what their audience gets from it. For the lists: give them (B9), or say "build them from the rubric" | B2 | First-touch drafts for both Dream tiers | open: `settings/dream-100.json` has both lines empty |
+| C6 | [ ] Dream 100 and Dream 500: the offer to a partner's audience, and the lists | In your words: what Find Me Money gives a partner's audience at no cost, and what their audience gets from it. For the lists: give them (B9), or say "build them from the rubric" | B2 | First-touch drafts for both Dream tiers | open: `sites/find-me-money/settings/dream-100.json` has both lines empty |
 | C7 | [ ] Content: the outlets, the accounts, who publishes | Name the outlets (set now: YouTube, newsletter, Instagram, Facebook; LinkedIn off), create or name a brand account for each, and say who publishes on each. Your content setup (workflows, where recordings live) when you have it. Any video tool is its own plan or credits: say which, if any | B2 | Content leaving the draft queue. YouTube is the strongest lever on record: AI answers cite YouTube on most funding questions and the site on none | open: no brand account is on record for any outlet |
 | C8 | [ ] AEO and SEO: the verifications and the tracking tool | Verify the site in Google Search Console and Bing (your sign-ins). For the tracking tool (RankSpot): a key by hidden prompt as `RANKSPOT_API_KEY`, and "yes" to its daily run: 15 questions on 4 platforms is about $7.20 a month at the prices read 2026-11-16, under a $20 monthly cap in the settings | B2 | The weekly read with real numbers: leads, front-page terms, the share of AI answers that name the site | open |
 | C9 | [ ] The domain decision | This is B18: "buy N domains" with a budget, or "use the existing Instantly domains". It now also carries Dream 500 and partner email at volume | B13 | Cold email, Dream 500 waves and partner email going out | open |
-| C10 | [ ] The cold email charter | In your words: who to prospect, how, and what a first line may say | B2 | Cold email lists and first lines | open: `settings/cold-email.json` has it empty and the daily number at 0 |
+| C10 | [ ] The cold email charter | In your words: who to prospect, how, and what a first line may say | B2 | Cold email lists and first lines | open: `sites/find-me-money/settings/cold-email.json` has it empty and the daily number at 0 |
 | C11 | [ ] SpeakerAgent: do you want shows for funding, and the speaker profile | "Yes" or "no shows". If yes: the speaker's name and title, the talk topics, the claims you approve word for word, and the proof that may be named | B2 | Pitches. Finding and scoring shows runs without it | open |
+
+## Track D: the two sites (version 4)
+
+The bot builds and tests every agent for both sites without any of these. Each line is what a site needs from you to go past drafts. Nothing here has been done by anyone.
+
+### Find Me Money: the Disruptor
+
+| # | What | The exact step | Needs | Unblocks | Status |
+|---|---|---|---|---|---|
+| D1 | [ ] Give the bot the messaging document | When the bot asks: attach `04-messaging-document.md` from the business's private repo (`research/messaging/`), and the covered images you want used. It is private, so it is not in the pack | B2 | Content, outreach and guides that use your words, the proof points, the counts and the images. Until then the bot drafts from the public outline only (`sites/find-me-money/MESSAGING.md`) | open |
+| D2 | [ ] Clear the claims list | Section 9 of that document, 18 items. Three need your decision before any content: claims 1 to 3 ("fraudulent industry", "the lies, the deceit": your opinion, or narrowed to what is documented), claim 9 (tell the lead-buying as the insider story), claim 8 (who reviews pillars 6 and 7, the creative routes, before they are taught). Say each in the bot's chat | D1 | Each piece that leans on a cleared claim. Pillars 6 and 8 are the "creative alternative ways", and pillar 6 waits on the review in claim 8 | open |
+
+### The referral connection site
+
+| # | What | The exact step | Needs | Unblocks | Status |
+|---|---|---|---|---|---|
+| D3 | [ ] The site's admin key | By hidden prompt when the bot asks: `RC_ADMIN_KEY` (the `ADMIN_KEY` variable on the site's Railway service). `RC_SITE` is `https://findreferralpartners.com` | B2 | Every read of the site: sign-ups, listings, connection requests, matches | open |
+| D4 | [ ] Let the bot write the site's records | After its test day: say "referral-site: bot" | D3 | Listings, matches and guide drafts saved on the site. Until then each is a proposal in your queue | open |
+| D5 | [ ] Removals | Say whether the bot may apply a removal request itself (`rc.py remove <email>` deletes that member's records) or queues each one for you. The pack's gate says the bot never deletes data; the site's privacy page promises removal | D3 | Removal requests being honoured | open |
+| D6 | [ ] The launch area | Tell the bot the first city or metro, and trades if any | B2 | Prospects, outreach and the first matches | open |
+| D7 | [ ] A sender address for member email | Name the address introductions and outreach go from, and connect it through Connect apps | B2 | Introductions and outreach leaving the draft queue. No email leaves the site today | open |
+| D8 | [ ] Approve each message type once | After the test day: yes to each draft type (`rc_outreach_first`, `rc_outreach_followup`, `rc_reply`, `rc_group_post`, `rc_introduction`, `rc_match_followup`, `rc_guide`); "auto" for a type once its replies look right | D4, D7 | Sends and published guides | open |
+| D9 | [ ] Google Search Console for the site | Verify findreferralpartners.com in Google Search Console and Bing (your sign-ins) | Nothing | The weekly read with real search numbers | open |
+| D10 | [ ] The site's pages and form for all four | The site's pages and sign-up form are written for commission referral campaigns. Your words on 2026-11-20 add collaborations, partnerships and sponsorships. The bot writes the brief; say "yes, change the site" in the site's own chat, where its code lives | Nothing | A visitor who wants a sponsor or a collaboration seeing themselves on the page | open |
+| D11 | [ ] One bot for the referral site: confirm | This pack has the Find Me Money bot run the referral site. The site also has its own pack (`referral-connection` v1.0.0), not installed. Say "this bot runs it" or "its own bot": two bots on the same records would double-write | Nothing | If "its own bot": set `referral-connection: off` in `context/sites.md` here | open: built as "this bot runs it" |

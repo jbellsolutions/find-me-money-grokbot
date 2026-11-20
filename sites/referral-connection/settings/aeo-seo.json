@@ -1,26 +1,26 @@
 {
  "_doc": "One business's AEO and SEO settings. Names of things only: no key, no token.",
- "campaign": "find-me-money",
+ "campaign": "referral-connection",
  "goal": {
   "_doc": "What this function is for. Every other number on the read is a means to this one.",
-  "measure": "inbound leads from Google and from AI engines, counted by the CRM sales agent",
-  "points_to": "the application form on findmemoneyapp.com",
+  "measure": "sign-ups by source, from rc.py stats",
+  "points_to": "https://findreferralpartners.com/join",
   "lead_sources": [
    "search",
    "ai_engine",
    "video"
   ]
  },
- "site": "findmemoneyapp.com",
+ "site": "findreferralpartners.com",
  "site_changes": {
   "_doc": "How a fix reaches the site. pull_request: the business owns the site's code and the owner merges. package: someone else runs the site; the fix is a file set with its checks, handed over. A direct write to a live site is the owner's yes.",
-  "mode": "pull_request",
-  "who_applies": "the owner, in the site's own repo"
+  "mode": "guides through the site's admin API as drafts (rc.py page-put); anything else is a brief for a pull request in the site's own repo",
+  "who_applies": "the bot saves drafts; publishing a guide is Justin's yes until rc_guide is auto; code changes are Justin's"
  },
  "business": {
-  "what_it_does": "helps people and business owners find funding",
-  "buyer": "People and businesses asking for funding; wholesalers; local businesses",
-  "name_as_said": "Find Me Money"
+  "what_it_does": "a directory where businesses find partners for collaborations, partnerships, sponsorships, deals and commission referral campaigns",
+  "buyer": "business owners who want a partner: someone to collaborate with, sponsor or be sponsored by, do a deal with, or swap referral campaigns with",
+  "name_as_said": "The Referral Connection"
  },
  "rankspot": {
   "_doc": "The engine checker. One workspace per site. The key is read from the environment by name; prices are RankSpot's listed ones on the date below and are checked again before the owner's yes.",
@@ -33,7 +33,7 @@
  },
  "google": {
   "_doc": "The search terms the business wants the front page for, buying terms first. Each: the term, its intent (buy, compare or learn), the page that answers it, and the video that answers it. Rank comes from the site's own Search Console, read through RankSpot.",
-  "terms_file": "data/aeo/terms.json",
+  "terms_file": "data/referral/aeo/terms.json",
   "front_page_is": "position 10 or better",
   "spots": [
    "the AI answer at the top",
@@ -56,13 +56,12 @@
    "embedded on the page that answers the same question, with video schema",
    "chapters and a full description",
    "the transcript on the page"
-  ],
-  "_note": "AI answers cite YouTube on most of the funding questions: one video per guide question, the existing answer pages as the scripts' source"
+  ]
  },
  "panel": {
   "_doc": "The questions a buyer asks an AI, each with where it came from. The panel's size is what the daily run costs.",
-  "file": "data/aeo/prompts.md",
-  "questions": 15,
+  "file": "data/referral/aeo/prompts.md",
+  "questions": 10,
   "platforms": [
    "chatgpt",
    "perplexity",
@@ -75,8 +74,7 @@
    "lead radar asks",
    "people also ask",
    "searches the engines ran"
-  ],
-  "_note": "the measured baseline: named on 0 of 15 questions"
+  ]
  },
  "spend": {
   "_doc": "The owner sets these. The cap covers the daily run and articles together; RankSpot's prepaid credit runs out behind it.",

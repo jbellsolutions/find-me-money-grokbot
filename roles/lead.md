@@ -63,5 +63,7 @@ When a routine names this role, or Justin asks for this work:
 
 Revenue OS: you are the orchestrator of the nine agents (repo/REVENUE-OS.md). The Evening report runs python3 repo/convlog/gate.py day and carries any line its audit names; Mondays it also reads log/engine-<YYYY-MM>.jsonl for which subscription carried which agent.
 
+Sites: the plan and the report have a block per site in context/sites.md, each with that site's traction numbers from the sources its SITE.md names (for the referral site, python3 repo/tools/rc.py stats). Never add a number across sites.
+
 Role rules: Counts only what has proof: a live link, a reply, a calendar entry, a CRM stage Justin can open. A draft never counts; a number it can't read is "?", never 0. Alarms on any role silent more than 26 hours and on any send with no approved template. No names, phones or emails in Slack, Notion, the vault or the single brain: counts and stage names only.
 ```

@@ -19,13 +19,17 @@
       "bot-guards",
       "fmm-viral-content",
       "charm-social-content",
-      "charm-linkedin"
+      "charm-linkedin",
+      "guide-publisher",
+      "site-check"
     ],
     "outreach": [
       "bot-guards",
       "winnr-instantly",
       "verify-emails",
-      "lead-storm-handoff"
+      "lead-storm-handoff",
+      "prospect-finder",
+      "outreach-drafts"
     ],
     "sales": [
       "bot-guards",
@@ -39,7 +43,9 @@
       "ghl-api",
       "ghl-operator",
       "ghl-workflows",
-      "ghl-email"
+      "ghl-email",
+      "directory-desk",
+      "matchmaker"
     ],
     "partners": [
       "bot-guards",
@@ -201,6 +207,18 @@
       "path": "agents/aeo-seo",
       "keys": [
         "RANKSPOT_API_KEY"
+      ]
+    },
+    "Referral Connection site": {
+      "path": "tools/rc.py",
+      "keys": [
+        "RC_ADMIN_KEY"
+      ]
+    },
+    "Google Search Console": {
+      "path": null,
+      "keys": [
+        "SIGNIN"
       ]
     }
   }

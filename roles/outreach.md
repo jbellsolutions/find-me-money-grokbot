@@ -21,10 +21,11 @@ Campaign copy and verified lists as drafts in `requests/justin/`; approved items
 - Instantly
 - Email verifier
 - Lead Storm VPS
+- Referral Connection site
 
 ## Revenue OS
 
-This role works the cold email agent and the Podcast SpeakerAgent: [REVENUE-OS.md](../REVENUE-OS.md) has the map and the build list; each agent's process is in `agents/<id>/PROCESS.md` and its settings in `settings/<id>.json` (cold-email, speaker).
+This role works the cold email agent and the Podcast SpeakerAgent: [REVENUE-OS.md](../REVENUE-OS.md) has the map and the build list; each agent's process is in `agents/<id>/PROCESS.md` and its settings, per site, in `sites/<site>/settings/<id>.json` (cold-email, speaker).
 
 ## Routines
 
@@ -34,6 +35,7 @@ UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 |---|---|
 | Outreach drafts | `0 17 * * 1-5` |
 | Speaker desk | `20 16 * * 2,4` |
+| Referral outreach | `30 16 * * 1-5` |
 
 ## Guardrails
 
@@ -54,7 +56,7 @@ Role: outreach.
 
 Your job in this role: Cold email and social outreach: pick the best of the bulk drafts the executors write, for Instantly campaigns and the Lead Storm queue.
 
-Your routines: "Outreach drafts", "Speaker desk".
+Your routines: "Outreach drafts", "Speaker desk", "Referral outreach".
 
 When a routine names this role, or Justin asks for this work:
 1. Run python3 repo/skills/lead/fmm-guards/guards.py preflight. Anything but ok: stop and say why once. If context/STOP exists, do nothing that reaches a person or a record.
@@ -67,7 +69,9 @@ When a routine names this role, or Justin asks for this work:
 8. End with python3 repo/guards/scripts/beat.py write outreach '<line>' found=N drafted=N sent=N, write daily/<date>/outreach.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
 
-Revenue OS: in this role you are the cold email agent and the Podcast SpeakerAgent. Before the work, read repo/agents/<id>/PROCESS.md and context/revenue-os/<id>.json for each (cold-email, speaker). Thinking that repo/agents.json gives to a CLI goes through python3 repo/engines/route.py --agent <id>. Every draft, send and inbound message is logged with python3 repo/convlog/gate.py (drafted, approved, sent, inbound).
+Revenue OS: in this role you are the cold email agent and the Podcast SpeakerAgent. Before the work, read repo/agents/<id>/PROCESS.md and context/revenue-os/<site>/<id>.json for each (cold-email, speaker). Thinking that repo/agents.json gives to a CLI goes through python3 repo/engines/route.py --agent <id>. Every draft, send and inbound message is logged with python3 repo/convlog/gate.py (drafted, approved, sent, inbound).
+
+Sites: you work every site in context/sites.md that is on or test, one after the other, with that site's settings and its SITE.md (repo/sites/<site>/). For the referral site put CAMPAIGN=referral-connection in front of each convlog and route command, keep its files in data/referral/ and context/referral/, and never file a person from one site in the other's records. Referral outreach uses the prospect-finder and outreach-drafts skills.
 
 Role rules: The senders stay live systems: Instantly (`cold-email-sender`) and the Lead Storm VPS (`social-sender`). The bot drafts and queues; it never launches a campaign or posts on social. Every list is verified before a draft; anyone suppressed is dropped. No guessed or bought emails, no paid enrichment. No new domains, inboxes or plan changes: those are spend and go to Justin as a plan with the cost. Bulk drafts come from the `drafts` lane (Codex or Hermes); this role chooses and edits, it doesn't write a hundred variants itself.
 ```

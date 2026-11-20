@@ -1,18 +1,19 @@
 # Find Me Money: GrokBot pack
 
-One Grok bot that builds and runs the Revenue OS for findmemoneyapp.com: nine agents (Dream 100, Dream 500, partners, cold email, Lead Radar, content, SpeakerAgent, AEO and SEO, the sales agent) worked by nine roles in 15 routines, about 14 runs a day. The bot orchestrates; Claude Code and Codex do the thinking on their own subscriptions; browser lanes and high-frequency sweeps stay on Hermes on the Mac.
+One Grok bot whose Revenue OS is an incubator for two sites: **Find Me Money** (findmemoneyapp.com: disrupt the finance industry and bring in new leads from people looking for financing, the creative and alternative ways included) and **The Referral Connection** (findreferralpartners.com: attract businesses that want collaborations, partnerships, sponsorships and deals, list them and match them). Nine agents (Dream 100, Dream 500, partners, cold email, Lead Radar, content, SpeakerAgent, AEO and SEO, the sales agent) worked by nine roles in 18 routines, about 17 runs a day, each agent once per site. The bot orchestrates; Claude Code and Codex do the thinking on their own subscriptions; browser lanes and high-frequency sweeps stay on Hermes on the Mac.
 
 **One-click install.** Paste this into a new Grok bot named Find Me Money:
 
-> You are Find Me Money. Download https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip, unpack it into /workspace/find-me-money/repo/ and follow HANDOFF.md: Part 2 from step 1, then Part 3, which builds the Revenue OS from REVENUE-OS.md. Read MASTER-PROMPT.md and CHARTER.md first. Do every step that needs nothing from me without stopping. Keep one list of what only I can do and show it to me once, at the end. Nothing sends, posts, spends or writes to a CRM until I say yes in this chat.
+> You are Find Me Money. Download https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip, unpack it into /workspace/find-me-money/repo/ and follow HANDOFF.md: Part 2 from step 1, then Part 3, which builds the Revenue OS from REVENUE-OS.md for both sites in sites/ (Find Me Money and the referral connection site). Read MASTER-PROMPT.md, CHARTER.md and sites/README.md first. Do every step that needs nothing from me without stopping. Keep one list of what only I can do and show it to me once, at the end. Nothing sends, posts, spends or writes to a CRM or a site until I say yes in this chat.
 
-Version 3.0.0. Version 2 was the orchestrator and the Hermes worker; version 3 adds the Revenue OS template.
+Version 4.0.0. Version 2 was the orchestrator and the Hermes worker; version 3 added the Revenue OS template; version 4 makes it an incubator for the two sites.
 
 | File | What |
 |---|---|
 | [REVENUE-OS.md](REVENUE-OS.md) | The bot's build list: which role works which of the nine agents, what to build for each, the check that shows it |
 | [TEMPLATE.md](TEMPLATE.md), [agents/](agents/README.md), [agents.json](agents.json) | The Revenue OS spec, one folder per agent (process, status, prompts, script), and the engine each thinks with |
-| [campaign.json](campaign.json), [settings/](settings/) | Find Me Money's Revenue OS settings: one file for the business, one per agent |
+| [sites/](sites/README.md) | One folder per site: `SITE.md` (the goal, what traction means, how each agent works it), `campaign.json`, `settings/` (one file per agent). [The Disruptor message outline](sites/find-me-money/MESSAGING.md) |
+| `tools/rc.py` | The referral site's admin API: sign-ups, listings, connection requests, matches, removals, guides |
 | [engines/route.py](engines/route.py) | The engine router: every Claude Code and Codex call goes through it and is recorded |
 | [convlog/](convlog/), [CONVERSATION-LOG.md](CONVERSATION-LOG.md) | The one log every agent writes every draft, send and reply to |
 | [HANDOFF.md](HANDOFF.md) | Paste or attach to GrokBot: Justin's steps, then the bot's, the bring-up order and the first-day test |
@@ -20,7 +21,7 @@ Version 3.0.0. Version 2 was the orchestrator and the Hermes worker; version 3 a
 | [MASTER-PROMPT.md](MASTER-PROMPT.md) | The bot's master prompt |
 | [CHARTER.md](CHARTER.md) | Purpose, the loop, KPIs, the owner rule, handoffs, workspace, milestones. Wins over a role charter |
 | [roles/](roles/) | lead, worker, radar, content, outreach, sales, partners, loan-officer, wholesale; each with a system prompt section to paste |
-| [TRIGGER-MAP.md](TRIGGER-MAP.md) | Every step and every routine (15 of 50), with exact names |
+| [TRIGGER-MAP.md](TRIGGER-MAP.md) | Every step and every routine (18 of 50), with exact names |
 | [GATES.md](GATES.md) | The gates and the Ask-first lines for Auto-review |
 | [guards/](guards/SKILL.md) | The guard scripts: suppression, send, spend, heartbeat, and the owner guard that keeps the bot off live systems' writes |
 | [skills.json](skills.json), [SKILLS-MAP.md](SKILLS-MAP.md), [skills/](skills/) | Which role uses which skill and account, and the skills |

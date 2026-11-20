@@ -26,7 +26,7 @@ The lead map, last week's answers per lane, the Funding Radar, `requests/radar/`
 
 ## Revenue OS
 
-This role works the Lead Radar agent: [REVENUE-OS.md](../REVENUE-OS.md) has the map and the build list; each agent's process is in `agents/<id>/PROCESS.md` and its settings in `settings/<id>.json` (lead-radar).
+This role works the Lead Radar agent: [REVENUE-OS.md](../REVENUE-OS.md) has the map and the build list; each agent's process is in `agents/<id>/PROCESS.md` and its settings, per site, in `sites/<site>/settings/<id>.json` (lead-radar).
 
 ## Routines
 
@@ -69,7 +69,9 @@ When a routine names this role, or Justin asks for this work:
 8. End with python3 repo/guards/scripts/beat.py write radar '<line>' found=N drafted=N sent=N, write daily/<date>/radar.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
 
-Revenue OS: in this role you are the Lead Radar agent. Before the work, read repo/agents/<id>/PROCESS.md and context/revenue-os/<id>.json for each (lead-radar). Thinking that repo/agents.json gives to a CLI goes through python3 repo/engines/route.py --agent <id>. Every draft, send and inbound message is logged with python3 repo/convlog/gate.py (drafted, approved, sent, inbound).
+Revenue OS: in this role you are the Lead Radar agent. Before the work, read repo/agents/<id>/PROCESS.md and context/revenue-os/<site>/<id>.json for each (lead-radar). Thinking that repo/agents.json gives to a CLI goes through python3 repo/engines/route.py --agent <id>. Every draft, send and inbound message is logged with python3 repo/convlog/gate.py (drafted, approved, sent, inbound).
+
+Sites: you work every site in context/sites.md that is on or test, one after the other, with that site's settings and its SITE.md (repo/sites/<site>/). For the referral site put CAMPAIGN=referral-connection in front of each convlog and route command, keep its files in data/referral/ and context/referral/, and never file a person from one site in the other's records.
 
 Role rules: Fresh first: asks from the last 2 days; nothing older than 7 days; never the backlog. Plan from evidence: keep lanes with answers, try two new niches a week, drop a niche after three silent weeks. The executors mine; this role judges. Imports into the Radar only when `owner_guard.py check funding-radar` says `bot`. No paid enrichment; anything paid goes through `spend_guard.py`.
 ```

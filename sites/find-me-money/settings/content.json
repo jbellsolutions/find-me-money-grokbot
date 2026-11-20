@@ -3,12 +3,14 @@
  "campaign": "find-me-money",
  "points_to": "findmemoneyapp.com",
  "voice": [
-  "funny, simple, relatable: a laugh or a stopped scroll",
-  "the eight money hooks",
+  "one person talking to a phone camera: first person, present tense",
+  "the receipt on screen in the first three seconds",
+  "plain numbers",
+  "every piece teaches one thing the viewer can use that day",
+  "funny, simple, relatable: a laugh or a stopped scroll (the eight money hooks)",
+  "no promise of approval, an amount, a rate or a timeline",
   "no link and no 'DM me' in a public reply",
-  "no promise of funding or approval",
-  "never 'same day', 'no proof of income' or 'up to $X' amounts",
-  "never name the legal entity or the older Funding Machine campaign",
+  "never names a company as a wrongdoer; sender names stay covered",
   "the site is findmemoneyapp.com only"
  ],
  "formats": [
@@ -146,5 +148,9 @@
    }
   },
   "tool_engine": "claude"
- }
+ },
+ "message": "sites/find-me-money/MESSAGING.md: the position, the eight education pillars, the content types. The full messaging document, its proof points and its claims list are private and given at intake (context/messaging/).",
+ "series": [
+  "the owner's own story, serialised: drafted only from the private messaging document, once he has cleared its claims list"
+ ]
 }

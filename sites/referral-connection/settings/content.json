@@ -1,0 +1,131 @@
+{
+ "_doc": "One business's content settings. Names of things only. Publishing needs the owner's yes.",
+ "campaign": "referral-connection",
+ "points_to": "https://findreferralpartners.com/join",
+ "voice": [
+  "plain words",
+  "one real pairing or deal per piece, with made-up names unless the businesses said yes",
+  "no promise of customers, sales or income"
+ ],
+ "formats": [
+  "reaction",
+  "talkback",
+  "breakdown",
+  "ugc"
+ ],
+ "outlets": {
+  "linkedin": {
+   "on": false,
+   "publisher": "the owner, from their own computer",
+   "pieces": [
+    "post",
+    "carousel"
+   ],
+   "waits_on": "a brand account Justin creates or names"
+  },
+  "youtube": {
+   "on": true,
+   "publisher": "the owner (uploads stay private until they publish)",
+   "pieces": [
+    "video brief",
+    "shorts cuts"
+   ],
+   "waits_on": "a brand account Justin creates or names"
+  },
+  "newsletter": {
+   "on": true,
+   "publisher": "the owner",
+   "tool": "",
+   "pieces": [
+    "section"
+   ],
+   "waits_on": "a brand account Justin creates or names"
+  },
+  "instagram": {
+   "on": true,
+   "publisher": "the owner or a named poster",
+   "pieces": [
+    "reel script",
+    "carousel"
+   ],
+   "waits_on": "a brand account Justin creates or names"
+  },
+  "facebook": {
+   "on": true,
+   "publisher": "undecided",
+   "pieces": [
+    "post",
+    "local group post (message type rc_group_post)"
+   ],
+   "waits_on": "a brand account Justin creates or names"
+  }
+ },
+ "cadence": {
+  "master_pieces_a_day": 1,
+  "instagram_a_week": 1
+ },
+ "sources": [
+  "questions members asked",
+  "new listings and areas on the site",
+  "matched pairs that reached paid (counts and categories, no names)",
+  "lead radar asks",
+  "posts worth reacting to"
+ ],
+ "owner_setup": "not handed over",
+ "tools": {
+  "_doc": "The toolset is per campaign: switch each on or off, and name whose account it runs on. Every one of these is a paid tool with its own plan or credits; a sign-up and a render are spend, and spend needs the owner's yes. weekly_limit is the most the tool may spend in a week, in the tool's own unit, such as '20 USD' or '2000 credits'; it is on the owner's keep-or-remove list in STATUS.md.",
+  "video": {
+   "higgsfield": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "invideo": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "max-fusion": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "arcads": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "creatomate": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   },
+   "google-flow": {
+    "on": false,
+    "for": "",
+    "account": "",
+    "weekly_limit": ""
+   }
+  },
+  "posting": {
+   "creator-os": {
+    "on": false,
+    "account": ""
+   },
+   "metricool": {
+    "on": false,
+    "account": ""
+   },
+   "direct": {
+    "on": false,
+    "accounts": []
+   }
+  },
+  "tool_engine": "claude"
+ }
+}
