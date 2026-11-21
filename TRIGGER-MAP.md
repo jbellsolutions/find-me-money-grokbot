@@ -6,9 +6,9 @@
 |---|---|---|
 | **Hermes on the Mac** (the `find-me-money` profile, its own cheap model) | Facebook groups by theme, Marketplace and Muse (computer use on the Mac itself), Craigslist, local places, wholesaler call cards; plus the profile's own 12 jobs: the reply cycle, the 30-minute reply sweep, reply sorting, the lead sweep, the day check, the handoff watch, the scorecard, loop close | Browser, Muse and sign-ins live on that Mac; high-frequency sweeps cost Grok nothing there |
 | **Codex CLI** (on the team's computer, its own subscription) | Bulk first drafts (no web search in `codex exec`, so research stays on Hermes) | Moves that spend off Grok's weekly allowance (usage-mastery trick 29) |
-| **The Grok team** (13 agents, one per role) | 19 routines, about 18 runs a day | Judgment only: what to work, lead fit on the shortlist, the best copy, partner choice, what to tell Justin |
+| **The Grok team** (two project agents and one agent per role) | 21 routines, 19 at install, about 20 runs a day | Judgment only: what to work, lead fit on the shortlist, the best copy, partner choice, what to tell Justin |
 
-Which executor runs which lane is `context/executors.md`; the bridge is `engine/hermes_bridge.py` (one Orgo call per put or pull). Every cron is UTC. **One agent per role** (Justin, 2026-11-20: "each role being its own agent"; [TEAM.md](TEAM.md)): 13 agents on one account, sharing one computer, 19 routines in all, at most 2 on one agent of the 50 a bot allows. The team incubates two sites ([sites/](sites/README.md)): a routine works every site in `context/sites.md`, and three routines are the referral site's own. `tools/check.py` counts the Schedule rows below. Routine names are exact: the Grok title, the line in `context/routines-on.md`, and the `--routine` the guards get.
+Which executor runs which lane is `context/executors.md`; the bridge is `engine/hermes_bridge.py` (one Orgo call per put or pull). Every cron is UTC. **One agent per role** (Justin, 2026-11-20: "each role being its own agent"; [TEAM.md](TEAM.md)): and two project agents, one per business (Justin, 2026-11-20). 14 agents on one account, sharing one computer: 12 at install, SpeakerAgent and the loan officer later. 21 routines in all, at most 2 on one agent of the 50 a bot allows. The team runs two sites ([sites/](sites/README.md)): a routine works every site in `context/sites.md`, and three routines are the referral site's own. `tools/check.py` counts the Schedule rows below. Routine names are exact: the Grok title, the line in `context/routines-on.md`, and the `--routine` the guards get.
 
 ## The loop, step by step
 
@@ -27,11 +27,12 @@ Which executor runs which lane is `context/executors.md`; the bridge is `engine/
 | 11 | In-house desk | Schedule `0 21 * * 1,3,5` | GrokBot | File complete? | Parked until a verified lender |
 | 12 | Report | Schedule `30 23 * * *` | GrokBot | Proof check on each number | None |
 | 13 | Dream 100 and Dream 500 | Schedule `10 16 * * 1-5` (Dream 100), `40 16 * * 1-5` (Dream 500) | GrokBot | Who is worth a dossier; the first touch | Every first touch |
-| 14 | Shows | Schedule `20 16 * * 2,4` | GrokBot (Codex scores fit) | Which shows to open; the pitch | Every pitch |
+| 14 | Shows (off for both sites) | Schedule `20 16 * * 2,4` | GrokBot (Codex scores fit) | Which shows to open; the pitch | Every pitch |
 | 15 | AEO and SEO read | Schedule `0 14 * * 2` | GrokBot (Codex judges the gaps) | Which fix goes to which role | Tracking-tool spend; site changes are pull requests |
 | 16 | The referral site: intake, listings, matches, introductions | Schedule `45 14,21 * * *` | GrokBot | Real business or spam; who fits whom | Every introduction; site writes need `referral-site: bot` |
 | 17 | The referral site: prospects and outreach | Schedule `30 16 * * 1-5` | GrokBot | Does this business have customers it can reach; the one reason it would want a partner | Every message |
 | 18 | The referral site: guides | Schedule `30 14 * * 3,5` | GrokBot (Claude Code drafts) | Which question is worth a page; is every claim true | Every published guide |
+| 19 | The referral business: its plan and its report | Schedule `40 12 * * *`, `40 23 * * *` | GrokBot | What the business does next, from its own numbers | None |
 
 ## Every schedule, by agent
 
@@ -39,16 +40,25 @@ One agent per role ([TEAM.md](TEAM.md), `team.json`). An agent creates and owns 
 
 ### lead
 
-Agent: **Find Me Money**.
+Agent: **Find Me Money**, the project agent for Find Me Money.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
-| Schedule | `30 12 * * *` | Morning plan | Today's plan per agent from the week's plan, yesterday's results and Justin's queue, written to each agent's `requests/<role>/`; Slack |
-| Schedule | `30 23 * * *` | Evening report | Numbers to Slack, one Notion row, `vault/Daily/<date>.md`, the scrubbed single-brain line; the conversation log's day close (`convlog/gate.py day`); Mondays add the usage audit (`usage/AUDIT.md`) |
+| Schedule | `30 12 * * *` | Morning plan | Find Me Money's plan for the day, from the next open step of `sites/find-me-money/LAUNCH.md`, yesterday's results and Justin's queue, written to each role agent's `requests/<role>/find-me-money-plan-<date>.md`; Slack |
+| Schedule | `30 23 * * *` | Evening report | Find Me Money's numbers to Slack, one Notion row, the scrubbed single-brain line; for the whole team the watchdog, `vault/Daily/<date>.md` and the conversation log's day close (`convlog/gate.py day`); Mondays add the week's decision and the usage audit (`usage/AUDIT.md`) |
+
+### referral-lead
+
+Agent: **Referral Connection**, the project agent for The Referral Connection.
+
+| Kind | When | Routine | Does |
+|---|---|---|---|
+| Schedule | `40 12 * * *` | Referral plan | The referral site's plan for the day, from `rc.py stats`, the next open step of `sites/referral-connection/LAUNCH.md` and yesterday's results, written to each role agent's `requests/<role>/referral-connection-plan-<date>.md`; Slack |
+| Schedule | `40 23 * * *` | Referral report | The site's numbers (sign-ups by source and area, listings, matches by stage, guides) to Slack, one Notion row, its section of `vault/Daily/<date>.md`; Mondays add the week's decision |
 
 ### dream-100
 
-Agent: **FMM Dream 100**.
+Agent: **Dream 100**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -56,7 +66,7 @@ Agent: **FMM Dream 100**.
 
 ### dream-500
 
-Agent: **FMM Dream 500**.
+Agent: **Dream 500**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -64,7 +74,7 @@ Agent: **FMM Dream 500**.
 
 ### partners
 
-Agent: **FMM Partners**.
+Agent: **Partners**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -72,7 +82,7 @@ Agent: **FMM Partners**.
 
 ### outreach
 
-Agent: **FMM Cold Email**.
+Agent: **Cold Email**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -81,7 +91,7 @@ Agent: **FMM Cold Email**.
 
 ### radar
 
-Agent: **FMM Lead Radar**.
+Agent: **Lead Radar**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -90,7 +100,7 @@ Agent: **FMM Lead Radar**.
 
 ### content
 
-Agent: **FMM Content**.
+Agent: **Content**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -98,7 +108,7 @@ Agent: **FMM Content**.
 
 ### speaker
 
-Agent: **FMM SpeakerAgent**.
+Agent: **SpeakerAgent**. Off for both sites (Justin, 2026-11-20); the agent and this routine are created only when he turns it on.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -106,7 +116,7 @@ Agent: **FMM SpeakerAgent**.
 
 ### aeo-seo
 
-Agent: **FMM AEO and SEO**.
+Agent: **AEO and SEO**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -115,7 +125,7 @@ Agent: **FMM AEO and SEO**.
 
 ### sales
 
-Agent: **FMM Sales**.
+Agent: **Sales**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -124,7 +134,7 @@ Agent: **FMM Sales**.
 
 ### worker
 
-Agent: **FMM Worker**.
+Agent: **Worker**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -133,7 +143,7 @@ Agent: **FMM Worker**.
 
 ### wholesale
 
-Agent: **FMM Wholesale**.
+Agent: **Wholesale**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -141,7 +151,7 @@ Agent: **FMM Wholesale**.
 
 ### loan-officer
 
-Agent: **FMM Loan Officer (created when Justin names a verified lender)**.
+Agent: **Loan Officer (created when Justin names a verified lender)**.
 
 | Kind | When | Routine | Does |
 |---|---|---|---|
@@ -149,9 +159,9 @@ Agent: **FMM Loan Officer (created when Justin names a verified lender)**.
 
 ## Usage, before and after
 
-| | v1 (Nov 12) | v2 | v3 (the Revenue OS) | v4 (two sites) | v5 (one agent per role) |
-|---|---|---|---|---|---|
-| Grok routines | 29 | 12 | 15 | 18 | 19, across 13 agents |
-| Grok runs a day | about 130 (the 30-minute and 2-hourly sweeps) | about 13 | about 14 | about 17 | about 18 |
-| Where the sweeps run | Grok | Hermes on the Mac (its own 12 jobs, already installed and paused) | Hermes on the Mac | Hermes on the Mac | Hermes on the Mac |
-| Where research and bulk drafts run | Grok | Hermes (research), Codex CLI or Hermes (drafts) | Hermes (research); Claude Code and Codex on the bot's computer, through `engines/route.py` | As v3 | As v3 |
+| | v1 (Nov 12) | v2 | v3 (the Revenue OS) | v4 (two sites) | v5 (one agent per role) | v6 (two project agents) |
+|---|---|---|---|---|---|---|
+| Grok routines | 29 | 12 | 15 | 18 | 19, across 13 agents | 21, across 14 agents (19 at install) |
+| Grok runs a day | about 130 (the 30-minute and 2-hourly sweeps) | about 13 | about 14 | about 17 | about 18 | about 20 |
+| Where the sweeps run | Grok | Hermes on the Mac (its own 12 jobs, already installed and paused) | Hermes on the Mac | Hermes on the Mac | Hermes on the Mac | Hermes on the Mac |
+| Where research and bulk drafts run | Grok | Hermes (research), Codex CLI or Hermes (drafts) | Hermes (research); Claude Code and Codex on the bot's computer, through `engines/route.py` | As v3 | As v3 | As v3 |

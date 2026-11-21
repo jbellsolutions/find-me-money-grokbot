@@ -6,7 +6,7 @@ Only what Justin can do, in dependency order: nothing on a line can start before
 
 **Checked 2026-11-15, read-only.** Status words: **open** means a check showed it is not done; **unverified** means nothing this pack's owner can read shows it either way (the Grok account, the bot's computer and the Mac are not readable from the factory), so it is treated as not done; **ready** means the pack's side is built and tested and it waits only on the step.
 
-**Version 5 (2026-11-20)** makes each role its own agent and adds Track E at the bottom: what the team needs from you. **Version 4 (2026-11-20)** added Track D: what the two sites need from you. **Version 3 (2026-11-18)** added Track C: what the Revenue OS needs from you. To start, only B1 and B2 are needed: the lead agent then creates the team, and the team builds everything that needs nothing from you and shows you the rest as one list.
+**Version 6 (2026-11-20)** is the combined install: two project agents and one agent per role, both disruptor launches, SpeakerAgent off. It adds Track F at the bottom. **Version 5 (2026-11-20)** made each role its own agent and added Track E: what the team needs from you. **Version 4 (2026-11-20)** added Track D: what the two sites need from you. **Version 3 (2026-11-18)** added Track C: what the Revenue OS needs from you. To start, only B1 and B2 are needed: the lead agent then creates the team, and the team builds everything that needs nothing from you and shows you the rest as one list.
 
 ## Track A: the Mac (needs no Grok bot)
 
@@ -78,7 +78,7 @@ The bot builds all nine agents on test without any of these. Each line is what o
 | C8 | [ ] AEO and SEO: the verifications and the tracking tool | Verify the site in Google Search Console and Bing (your sign-ins). For the tracking tool (RankSpot): a key by hidden prompt as `RANKSPOT_API_KEY`, and "yes" to its daily run: 15 questions on 4 platforms is about $7.20 a month at the prices read 2026-11-16, under a $20 monthly cap in the settings | B2 | The weekly read with real numbers: leads, front-page terms, the share of AI answers that name the site | open |
 | C9 | [ ] The domain decision | This is B18: "buy N domains" with a budget, or "use the existing Instantly domains". It now also carries Dream 500 and partner email at volume | B13 | Cold email, Dream 500 waves and partner email going out | open |
 | C10 | [ ] The cold email charter | In your words: who to prospect, how, and what a first line may say | B2 | Cold email lists and first lines | open: `sites/find-me-money/settings/cold-email.json` has it empty and the daily number at 0 |
-| C11 | [ ] SpeakerAgent: do you want shows for funding, and the speaker profile | "Yes" or "no shows". If yes: the speaker's name and title, the talk topics, the claims you approve word for word, and the proof that may be named | B2 | Pitches. Finding and scoring shows runs without it | open |
+| C11 | [ ] SpeakerAgent: now off for both sites (version 6, your words). Only if you turn it back on: do you want shows for funding, and the speaker profile | "Yes" or "no shows". If yes: the speaker's name and title, the talk topics, the claims you approve word for word, and the proof that may be named | B2 | Pitches. Finding and scoring shows runs without it | open |
 
 ## Track D: the two sites (version 4)
 
@@ -107,7 +107,7 @@ The bot builds and tests every agent for both sites without any of these. Each l
 
 ## Track E: the team, one agent per role (version 5)
 
-Your words, 2026-11-20: "it should be in grokbot with each role being its own agent", and "nine functions = 9 agents". The pack now sets up 12 agents at install (the lead, the nine functions, the worker and wholesale), and a thirteenth, the loan officer, when you name a lender. [TEAM.md](TEAM.md) has the list. Whether a bot can create another bot is not known, so E1 may or may not come up.
+Your words, 2026-11-20: "it should be in grokbot with each role being its own agent", and "nine functions = 9 agents". The pack sets up 12 agents at install (the two project agents, eight of the nine functions, the worker and wholesale). SpeakerAgent and the loan officer are created later, on your word. [TEAM.md](TEAM.md) has the list. Whether a bot can create another bot is not known, so E1 may or may not come up.
 
 | # | What | The exact step | Needs | Unblocks | Status |
 |---|---|---|---|---|---|
@@ -115,4 +115,16 @@ Your words, 2026-11-20: "it should be in grokbot with each role being its own ag
 | E2 | [ ] UTC on each agent, only if the lead cannot set it | Settings → General → Bot → Timezone **UTC** on each agent the lead names | E1 or the lead's own creation | Routines that fire at the right hour | unverified |
 | E3 | [ ] Auto-review rules on each agent, only if they are per bot | The lead says which after the first agent's test. If per bot: paste the same lines from B3 into each agent's Auto-review → Custom Rules | B3 | The same Ask-first gates on every agent | unknown |
 | E4 | [ ] The plan covers twelve bots | Check at x.ai/bot how many bots the Find Me Money plan allows. If fewer than twelve, say which agents wait | B1 | The full team | unknown |
-| E5 | [ ] One agent per role, as built: confirm the cut | Built as: the nine Revenue OS functions each an agent, plus the lead, and the worker, wholesale and loan officer as their own agents (13). Say "as built", or name roles to fold together | Nothing | Nothing waits on it | open: built as 13 |
+| E5 | [ ] One agent per role, as built: confirm the cut | Built as: the nine Revenue OS functions each an agent, plus the two project agents, and the worker, wholesale and loan officer as their own agents (14, 12 at install). Say "as built", or name roles to fold together | Nothing | Nothing waits on it | open: built as 13 |
+
+## Track F: two autonomous businesses (version 6)
+
+Your words, 2026-11-20: "one-click install that combines the Referral Connection site and Find Me Money... two separate project agents... the goal is for those two to be autonomous businesses... They're both disruptor campaigns." The team builds everything and drafts both campaigns' libraries without any of these.
+
+| # | What | The exact step | Needs | Unblocks | Status |
+|---|---|---|---|---|---|
+| F1 | [ ] Content and SpeakerAgent: confirm the reading | You said: "I wouldn't do any content. I wouldn't do SpeakerAgent for Find Me Money, but I would do content, and that's the disruptor campaign." Built as: SpeakerAgent off for both sites, content on for both. Say "as built", or say which site gets no content | Nothing | Nothing waits on it | open: built as read |
+| F2 | [ ] The Referral Connection's disruptor message | Read `sites/referral-connection/MESSAGING.md`. It is a draft written from the site's own words, with no research behind it. Say "use it", give your own position, or say "research it first" | Nothing | Anything for the referral site going public. Drafts are made from it meanwhile | open: draft |
+| F3 | [ ] The switches that make Find Me Money autonomous | The table at the end of `sites/find-me-money/LAUNCH.md`. Turn on the ones you want, one at a time, after you have seen that type's drafts: say "<type>: auto" or "<system>: bot" in the Find Me Money agent's chat | B13, the test day | Find Me Money running without you in the daily loop | open: every switch is off |
+| F4 | [ ] The switches that make The Referral Connection autonomous | The table at the end of `sites/referral-connection/LAUNCH.md`, the same way, in the Referral Connection agent's chat | D3, D4, the test day | The Referral Connection running without you in the daily loop | open: every switch is off |
+| F5 | [ ] One pack or two: confirm | This combined install replaced version 5 at the same link, so there is one Find Me Money link. The referral site's own pack (`referral-connection-grokbot`) is still published and must not be installed beside this one (D11). Say "one link", or "give the combined pack its own name" | Nothing | Nothing waits on it | open: built as one link |

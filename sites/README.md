@@ -2,7 +2,7 @@
 
 Justin, 2026-11-20: "we're going to have the Revenue OS, and we're going to have it be an incubator for a few different sites: the referral site, the Find Me Money site. We're looking to have a Revenue OS that's all about getting those sites traction."
 
-Nine functions, each its own Grok agent ([TEAM.md](../TEAM.md)), and one folder here per site. Every agent does its job once per site, with that site's settings. A site's page says what traction means for it and how each agent serves it.
+Two project agents, one per site, each running its site as its own business, and one Grok agent per role working both ([TEAM.md](../TEAM.md)). One folder here per site. Every agent does its job once per site, with that site's settings. A site's page says what traction means for it and how each agent serves it.
 
 | Site | Folder | What traction means |
 |---|---|---|
@@ -13,6 +13,8 @@ Nine functions, each its own Grok agent ([TEAM.md](../TEAM.md)), and one folder 
 
 | File | What |
 |---|---|
+| `LAUNCH.md` | The site's disruptor campaign launch plan, worked by its project agent: ground, library, go live, run it as a business, and the switches that make it autonomous |
+| `MESSAGING.md` | The disruptor message the site's content, guides and outreach are drafted from |
 | `SITE.md` | The goal in Justin's words, who the site is for, what counts as traction and where the number comes from, how each of the nine agents works it, what it waits on |
 | `campaign.json` | The site's Revenue OS settings: which agents are on, the records it keeps, the sending tools. Checked with `python3 tools/check_campaign.py sites/<site>/campaign.json` |
 | `settings/<agent>.json` | One file per agent |
@@ -25,7 +27,8 @@ In the bot's workspace the live copies are `context/revenue-os/<site>/`. Justin'
 - **Each site keeps its own records.** Find Me Money: the CRM. The referral site: the site itself, through `tools/rc.py`. A person from one site is never filed in the other's records.
 - **The conversation log is one log with a site on every line.** Run the gate with `CAMPAIGN=<site>` for a site's work, so the day file and the audit can be read per site.
 - **Private files are kept apart:** `data/` and `context/` for Find Me Money as before, `data/referral/` and `context/referral/` for the referral site (its prospect list is `data/prospects.csv`, where its skill writes it).
-- **The scoreboard has a block per site.** A number is never added across sites.
+- **Each site has its own project agent, plan and report.** A number is never added across sites.
+- **A role agent gets one plan file per site** in `requests/<role>/<site>-plan-<date>.md` and works each in turn.
 
 ## Adding a site
 

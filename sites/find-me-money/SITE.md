@@ -2,6 +2,10 @@
 
 Justin, 2026-11-20: "For Find Me Money, the goal is to disrupt the finance industry (our same Disruptor, right?), research and everything we did before, and generate new leads for people who are looking to get financing the creative alternative ways."
 
+## Its project agent
+
+**Find Me Money** (role [lead](../../roles/lead.md)) runs this site as its own business and launches its disruptor campaign from [LAUNCH.md](LAUNCH.md). Justin, 2026-11-20: "the goal is for those two to be autonomous businesses."
+
 ## Who it is for
 
 People and business owners looking for financing: the ones who were denied, the ones buried in pitches, and the ones who want a way other than the usual sales call. Also wholesalers, local businesses, and the funding community as partners.
@@ -30,7 +34,7 @@ People and business owners looking for financing: the ones who were denied, the 
 | Dream 100, Dream 500 | People who already have borrowers gathered around them: funding and credit creators, business coaches, community owners, wholesaler communities | `settings/dream-100.json`, `settings/dream-500.json` |
 | Partners | Funding companies and affiliates who take a deal for a percentage, and creators who promote | `settings/partners.json` |
 | Cold email | Owners of local businesses in the week's metro | `settings/cold-email.json` |
-| SpeakerAgent | Shows whose listeners are business owners, with the Disruptor story as the topic | `settings/speaker.json` |
+| SpeakerAgent | Off for this site (Justin, 2026-11-20: "I wouldn't do SpeakerAgent for Find Me Money") | `settings/speaker.json` |
 
 ## Not this bot's
 

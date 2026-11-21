@@ -29,17 +29,17 @@ Nine functions, nine Grok agents (Justin, 2026-11-20: "nine functions = 9 agents
 
 | Function | Engine | Grok agent (role) | Routine | Settings, in each `sites/<site>/settings/` |
 |---|---|---|---|---|
-| Dream 100 | GrokBot | FMM Dream 100 (dream-100) | Dream 100 desk | `dream-100.json` |
-| Dream 500 | GrokBot | FMM Dream 500 (dream-500) | Dream 500 desk | `dream-500.json` |
-| Partners, collaborators, influencers | GrokBot | FMM Partners (partners) | Partner desk | `partners.json` |
-| Cold email | GrokBot (first lines on Codex) | FMM Cold Email (outreach) | Outreach drafts (Find Me Money), Referral outreach (the referral site) | `cold-email.json` |
-| Lead Radar | Codex | FMM Lead Radar (radar) | Pick today's queue, Niche rotation | `lead-radar.json` |
-| Content | Claude Code | FMM Content (content) | Daily content | `content.json` |
-| Podcast SpeakerAgent | Codex | FMM SpeakerAgent (speaker) | Speaker desk (Find Me Money only) | `speaker.json` |
-| AEO and SEO | Codex | FMM AEO and SEO (aeo-seo) | Weekly AEO read (both), Referral guides (the referral site) | `aeo-seo.json` |
-| Sales agent (replies and the CRM) | Codex, model GPT-6 Luna | FMM Sales (sales) | Sales desk (Find Me Money), Referral desk (the referral site) | `sales-crm.json` |
+| Dream 100 | GrokBot | Dream 100 (dream-100) | Dream 100 desk | `dream-100.json` |
+| Dream 500 | GrokBot | Dream 500 (dream-500) | Dream 500 desk | `dream-500.json` |
+| Partners, collaborators, influencers | GrokBot | Partners (partners) | Partner desk | `partners.json` |
+| Cold email | GrokBot (first lines on Codex) | Cold Email (outreach) | Outreach drafts (Find Me Money), Referral outreach (the referral site) | `cold-email.json` |
+| Lead Radar | Codex | Lead Radar (radar) | Pick today's queue, Niche rotation | `lead-radar.json` |
+| Content | Claude Code | Content (content) | Daily content | `content.json` |
+| Podcast SpeakerAgent | Codex | SpeakerAgent (speaker): off for both sites, not created at install | Speaker desk | `speaker.json` |
+| AEO and SEO | Codex | AEO and SEO (aeo-seo) | Weekly AEO read (both), Referral guides (the referral site) | `aeo-seo.json` |
+| Sales agent (replies and the CRM) | Codex, model GPT-6 Luna | Sales (sales) | Sales desk (Find Me Money), Referral desk (the referral site) | `sales-crm.json` |
 
-The lead agent is the orchestrator: the day's plan, the day close of the conversation log, the report. The worker, wholesale and loan-officer agents are this business's own.
+Each site has its own project agent (Find Me Money, role lead; Referral Connection, role referral-lead): its plan, its report and the launch of its disruptor campaign from `sites/<site>/LAUNCH.md`. Find Me Money also closes the conversation log's day for the team. The worker, wholesale and loan-officer agents are this business's own.
 
 ## Build order
 
@@ -141,7 +141,7 @@ Starts from `roles/outreach.md`, `skills/outreach/` and `agents/cold-email/`.
 
 Starts from `roles/speaker.md` and `agents/speaker/`.
 
-- Find Me Money only; off for the referral site.
+- **Off for both sites** (Justin, 2026-11-20: "I wouldn't do SpeakerAgent for Find Me Money"). Nothing in this section is built at install and no agent is created for it. If he turns it on for a site:
 - `speaker.py find` and `score` list and score shows (free reads). No pitch is drafted until Justin gives the speaker profile (Track C11).
 - Check: `speaker.py report`.
 
@@ -149,7 +149,8 @@ Starts from `roles/speaker.md` and `agents/speaker/`.
 
 1. Each agent has created its own routines from its section of TRIGGER-MAP.md, paused. The lead reads `context/team-registry.md` and lists any agent or routine that is missing.
 2. The Evening report runs `python3 repo/convlog/gate.py day` and carries its audit lines.
-3. The lead sends Justin one message: for each site, the nine agents, each with built, tested (the evidence) and what it waits on, and the site's traction numbers as they stand; then the checklist of everything only he can do, once.
+3. **Launch.** Each project agent starts its site's `LAUNCH.md` at L0 and works down it.
+4. Each project agent sends Justin one message for its business: for each site, the nine agents, each with built, tested (the evidence) and what it waits on, and the site's traction numbers as they stand; then the checklist of everything only he can do, once.
 
 ## Done means
 

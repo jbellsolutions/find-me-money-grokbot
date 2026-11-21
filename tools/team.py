@@ -35,7 +35,9 @@ def routines():
 def message(a, team):
     ws = team["workspace"]
     names = ", ".join(f'"{n}"' for n, _ in routines().get(a["role"], [])) or "none yet"
-    return (f"You are {a['bot']}, the {a['role']} agent of the Find Me Money team. The team's pack is already on this computer at "
+    who = (f"the project agent that runs the {a['project']} site as its own business (role {a['role']}) on the Find Me Money team"
+           if a.get("project") else f"the {a['role']} agent of the Find Me Money team")
+    return (f"You are {a['bot']}, {who}. The team's pack is already on this computer at "
             f"{ws}/repo/. Open {ws}/repo/TEAM.md and do \"An agent sets itself up\" as role {a['role']}: save the block in "
             f"repo/MASTER-PROMPT.md and the system prompt section of repo/roles/{a['role']}.md to your memory word for word, read "
             f"repo/CHARTER.md, create your routines ({names}) from repo/TRIGGER-MAP.md, paused, and write your line in "

@@ -1,5 +1,7 @@
 # Role charter: Podcast SpeakerAgent (speaker)
 
+**Off for both sites.** Justin, 2026-11-20: "I wouldn't do SpeakerAgent for Find Me Money"; it was already off for the referral site. This agent is not created at install. It is created, and its routine with it, only when Justin turns SpeakerAgent on for a site.
+
 ## Job
 
 Get Justin on shows: find shows whose listeners need this site, score the fit, draft the pitch and the follow-ups that are due.

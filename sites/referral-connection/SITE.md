@@ -4,6 +4,14 @@ Justin, 2026-11-20: "that's all about building out that site to attract clients 
 
 And 2026-11-18: "They sign up to get connected to others in the area that want to do referral relationships that pay on commission. You send to my list, I send to your list." "Give it to GrokBot, and let GrokBot go promote the crap out of it."
 
+## Its project agent
+
+**Referral Connection** (role [referral-lead](../../roles/referral-lead.md)) runs this site as its own business and launches its disruptor campaign from [LAUNCH.md](LAUNCH.md). Justin, 2026-11-20: "the goal is for those two to be autonomous businesses", and "They're both disruptor campaigns."
+
+## The message
+
+[MESSAGING.md](MESSAGING.md): a draft disruptor outline (the position, six commitments, eight pillars, content types, voice, claims to clear). It is Justin's to confirm or replace.
+
 ## Who it is for
 
 Business owners who want a partner: someone to collaborate with, sponsor or be sponsored by, do a deal with, or swap commission referral campaigns with.
@@ -34,7 +42,7 @@ The site's own pages and sign-up form are written for commission referral campai
 | Dream 100, Dream 500 | People who already have business owners gathered: chambers, associations, networking groups, local newsletters and podcasts, coworking spaces, event organisers who sell sponsorships | `agents/dream-100/`, `agents/dream-500/` | `settings/dream-100.json`, `settings/dream-500.json` |
 | Partners | The wide tier of the same: anyone who would tell their members about a free listing | `agents/partners/` | `settings/partners.json` |
 | Lead Radar | Owners asking in public for a partner, a sponsor, a collaboration or a deal | `agents/lead-radar/` | `settings/lead-radar.json` |
-| Content | One piece a day pointing to the sign-up page: a pairing that makes sense, a sponsorship that worked, a new area on the directory | `agents/content/` | `settings/content.json` |
+| Content | One piece a day on one of the eight pillars, pointing to the sign-up page: a pitch broken down, a pairing that makes sense, a sponsorship that worked, a new area on the directory | `agents/content/` | `settings/content.json` |
 | SpeakerAgent | Off for this site | | `settings/speaker.json` |
 
 Message types, each approved once before it sends: `rc_outreach_first`, `rc_outreach_followup`, `rc_reply`, `rc_group_post`, `rc_introduction`, `rc_match_followup`, `rc_guide`.

@@ -4,13 +4,21 @@
     beat.py write <role> '<line>' [found=N drafted=N sent=N replies=N blocked=N ...]
     beat.py status [--hours 26]     one line per role; SILENT for any role past the limit; exit 1 if any
 
-Roles come from repo/roles/*.md (files starting with _ are skipped). Beats go to state/heartbeat.jsonl."""
+Roles come from repo/roles/*.md (files starting with _ are skipped). A role whose agent is created later
+(repo/team.json) is skipped until it has written its first beat. Beats go to state/heartbeat.jsonl."""
 import sys, json, time, pathlib
 from _ws import p
 
 def roles():
     d = pathlib.Path(__file__).resolve().parents[2] / "roles"
     return sorted(f.stem for f in d.glob("*.md") if not f.stem.startswith("_"))
+
+def later():
+    try:
+        t = json.loads((pathlib.Path(__file__).resolve().parents[2] / "team.json").read_text())
+        return {x["role"] for x in t.get("agents", []) if x.get("created") == "later"}
+    except (OSError, ValueError, KeyError):
+        return set()
 
 def main(a):
     hb = p("state", "heartbeat.jsonl")
@@ -26,9 +34,10 @@ def main(a):
             for l in hb.read_text().splitlines():
                 try: r = json.loads(l); last[r["role"]] = r
                 except (ValueError, KeyError): pass
-        bad = 0
+        bad, wait = 0, later()
         for r in roles():
             b = last.get(r)
+            if b is None and r in wait: print(f"not created {r}: its agent is created later"); continue
             age = (time.time() - b["t"]) / 3600 if b else None
             if age is None or age > hours: bad += 1; print(f"SILENT {r}: " + ("never" if b is None else f"{age:.0f}h ago"))
             else: print(f"ok {r}: {age:.1f}h ago, {b.get('line', '')}")

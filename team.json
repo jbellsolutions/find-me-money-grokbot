@@ -1,20 +1,109 @@
 {
- "_doc": "The team: one Grok agent (bot) per role, all on the one Find Me Money Grok account, sharing one computer and the workspace. role: the charter in roles/<role>.md and the TRIGGER-MAP.md section. bot: the agent's name in Grok. function: the Revenue OS agent id in agents.json it is, or null for the business's own roles. created: at_install (the lead creates it, or Justin does with the message from tools/team.py), by_justin (HANDOFF Part 1), or later (with what it waits on). tools/check.py and tools/team.py read this.",
+ "_doc": "The team: one Grok agent (bot) per role, all on the one Find Me Money Grok account, sharing one computer and the workspace. role: the charter in roles/<role>.md and the TRIGGER-MAP.md section. bot: the agent's name in Grok. project: for a project agent, the site in sites/ it runs as a business. function: the Revenue OS agent id in agents.json it is, or null for the business's own roles. created: at_install (the lead creates it, or Justin does with the message from tools/team.py), by_justin (HANDOFF Part 1), or later (with what it waits on). tools/check.py and tools/team.py read this.",
  "account": "Find Me Money's own Grok account",
  "workspace": "/workspace/find-me-money",
  "agents": [
-  {"role": "lead", "bot": "Find Me Money", "function": null, "created": "by_justin", "does": "Plans the day, keeps Justin's queue and the switch files, reports"},
-  {"role": "dream-100", "bot": "FMM Dream 100", "function": "dream-100", "created": "at_install", "does": "The hundred who already have the buyers gathered: dossiers and first touches"},
-  {"role": "dream-500", "bot": "FMM Dream 500", "function": "dream-500", "created": "at_install", "does": "The wider list: placing, first lines, waves"},
-  {"role": "partners", "bot": "FMM Partners", "function": "partners", "created": "at_install", "does": "Partners, collaborators, influencers, affiliates; in-house or one partner"},
-  {"role": "outreach", "bot": "FMM Cold Email", "function": "cold-email", "created": "at_install", "does": "Cold email and the social queue; the referral site's prospects and outreach"},
-  {"role": "radar", "bot": "FMM Lead Radar", "function": "lead-radar", "created": "at_install", "does": "The week's niches and places; today's public asks"},
-  {"role": "content", "bot": "FMM Content", "function": "content", "created": "at_install", "does": "The day's content for each site"},
-  {"role": "speaker", "bot": "FMM SpeakerAgent", "function": "speaker", "created": "at_install", "does": "Shows: find, score, pitch"},
-  {"role": "aeo-seo", "bot": "FMM AEO and SEO", "function": "aeo-seo", "created": "at_install", "does": "The weekly read, fixes, the referral site's guides and site check"},
-  {"role": "sales", "bot": "FMM Sales", "function": "sales-crm", "created": "at_install", "does": "Replies and the CRM; the referral site's sign-ups, listings, matches and introductions"},
-  {"role": "worker", "bot": "FMM Worker", "function": null, "created": "at_install", "does": "Work orders to Hermes on the Mac and Codex; pulls and routes results"},
-  {"role": "wholesale", "bot": "FMM Wholesale", "function": null, "created": "at_install", "does": "Wholesalers: funding needs and deals to pass"},
-  {"role": "loan-officer", "bot": "FMM Loan Officer", "function": null, "created": "later", "waits_on": "Justin naming a verified lender", "does": "Deals kept in-house"}
+  {
+   "role": "lead",
+   "bot": "Find Me Money",
+   "function": null,
+   "created": "by_justin",
+   "does": "Project agent for Find Me Money: runs it as a business (plan, queue, numbers, report) and launches its disruptor campaign; creates the team at install and keeps the team's watchdog",
+   "project": "find-me-money"
+  },
+  {
+   "role": "referral-lead",
+   "bot": "Referral Connection",
+   "function": null,
+   "project": "referral-connection",
+   "created": "at_install",
+   "does": "Project agent for The Referral Connection: runs it as a business (plan, queue, numbers, report) and launches its disruptor campaign"
+  },
+  {
+   "role": "dream-100",
+   "bot": "Dream 100",
+   "function": "dream-100",
+   "created": "at_install",
+   "does": "The hundred who already have the buyers gathered: dossiers and first touches"
+  },
+  {
+   "role": "dream-500",
+   "bot": "Dream 500",
+   "function": "dream-500",
+   "created": "at_install",
+   "does": "The wider list: placing, first lines, waves"
+  },
+  {
+   "role": "partners",
+   "bot": "Partners",
+   "function": "partners",
+   "created": "at_install",
+   "does": "Partners, collaborators, influencers, affiliates; in-house or one partner"
+  },
+  {
+   "role": "outreach",
+   "bot": "Cold Email",
+   "function": "cold-email",
+   "created": "at_install",
+   "does": "Cold email and the social queue; the referral site's prospects and outreach"
+  },
+  {
+   "role": "radar",
+   "bot": "Lead Radar",
+   "function": "lead-radar",
+   "created": "at_install",
+   "does": "The week's niches and places; today's public asks"
+  },
+  {
+   "role": "content",
+   "bot": "Content",
+   "function": "content",
+   "created": "at_install",
+   "does": "The day's content for each site"
+  },
+  {
+   "role": "speaker",
+   "bot": "SpeakerAgent",
+   "function": "speaker",
+   "created": "later",
+   "does": "Shows: find, score, pitch",
+   "waits_on": "Justin turning SpeakerAgent on for a site (off for both, his words 2026-11-20)"
+  },
+  {
+   "role": "aeo-seo",
+   "bot": "AEO and SEO",
+   "function": "aeo-seo",
+   "created": "at_install",
+   "does": "The weekly read, fixes, the referral site's guides and site check"
+  },
+  {
+   "role": "sales",
+   "bot": "Sales",
+   "function": "sales-crm",
+   "created": "at_install",
+   "does": "Replies and the CRM; the referral site's sign-ups, listings, matches and introductions"
+  },
+  {
+   "role": "worker",
+   "bot": "Worker",
+   "function": null,
+   "created": "at_install",
+   "does": "Work orders to Hermes on the Mac and Codex; pulls and routes results"
+  },
+  {
+   "role": "wholesale",
+   "bot": "Wholesale",
+   "function": null,
+   "created": "at_install",
+   "does": "Wholesalers: funding needs and deals to pass"
+  },
+  {
+   "role": "loan-officer",
+   "bot": "Loan Officer",
+   "function": null,
+   "created": "later",
+   "waits_on": "Justin naming a verified lender",
+   "does": "Deals kept in-house"
+  }
  ]
 }

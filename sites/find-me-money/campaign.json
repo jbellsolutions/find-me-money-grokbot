@@ -77,9 +77,9 @@
    "waits_on": "a brand account per outlet and who publishes on each; the owner's content setup; any video tool is spend"
   },
   "speaker": {
-   "state": "missing",
-   "source": "agents/speaker/, sites/find-me-money/settings/speaker.json",
-   "waits_on": "the owner's speaker profile for funding (topics, approved claims, proof) and whether funding wants shows"
+   "state": "off",
+   "source": "",
+   "waits_on": "off: Justin, 2026-11-20, \"I wouldn't do SpeakerAgent for Find Me Money\". On again only on his word, with the speaker profile"
   },
   "aeo-seo": {
    "state": "partial",
