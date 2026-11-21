@@ -15,4 +15,4 @@ Read-only. Nothing here changes the site.
 6. Home page: the title, the description, one `<h1>`, the FAQ data, and the sign-up form are present (`clean_page.py`, then `grep_lines.sh`).
 7. `/directory/zz` (an area with no listings) returns 404: the site has not started making empty area pages.
 
-Write `daily/<date>/content.md`: URLs in the sitemap, URLs failing, drafts, listings. A site fault is not this bot's to fix: the code lives in Justin's private repo, so it goes to `requests/justin/` with the URL, what was expected and what came back.
+Write `daily/<date>/aeo-seo.md`: URLs in the sitemap, URLs failing, drafts, listings. A site fault is not this bot's to fix: the code lives in Justin's private repo, so it goes to `requests/justin/` with the URL, what was expected and what came back.

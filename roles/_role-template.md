@@ -1,6 +1,6 @@
 # Role charter: {{role}}
 
-Copy this file to `roles/<role>.md` for each role. Keep roles few; one bot holds 50 routines in all.
+Copy this file to `roles/<role>.md` for each role. Each role is its own agent: add its line to `team.json` too.
 
 ## Job
 
@@ -20,7 +20,7 @@ Copy this file to `roles/<role>.md` for each role. Keep roles few; one bot holds
 
 ## Routines
 
-UTC (the bot's time zone). Created paused.
+UTC (the agent's time zone). Created paused.
 
 | Routine | Cron |
 |---|---|

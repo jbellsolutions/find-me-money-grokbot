@@ -23,7 +23,7 @@ Call cards in `requests/wholesale/`, funding needs to `requests/partners/`, rank
 
 ## Routines
 
-UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
+UTC (the agent's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|

@@ -9,7 +9,7 @@ The site makes its own directory pages: every listed business gets `/business/<s
 
 ## Choosing the question
 
-Sources, best first: questions members actually asked (`requests/content/`), what the live search results show people ask around "referral partners", "referral agreement", "referral fee", "cross promotion", "email list swap" for local businesses, and Search Console queries once it is connected. Check `python3 repo/tools/rc.py pages` so no question is answered twice. Record the query, where it was seen and the date in the brief. Search volume is not needed to pick a real question, and none is ever made up.
+Sources, best first: questions members actually asked (`requests/aeo-seo/`), what the live search results show people ask around "referral partners", "referral agreement", "referral fee", "cross promotion", "email list swap" for local businesses, and Search Console queries once it is connected. Check `python3 repo/tools/rc.py pages` so no question is answered twice. Record the query, where it was seen and the date in the brief. Search volume is not needed to pick a real question, and none is ever made up.
 
 Starting list, each one a single page:
 - How to set a referral commission between two local businesses
@@ -19,7 +19,7 @@ Starting list, each one a single page:
 - Referral campaign or networking group: how they differ
 - How to track which customers came from a referral partner
 
-## The brief (write it before the draft, in `daily/<date>/content.md`)
+## The brief (write it before the draft, in `daily/<date>/aeo-seo.md`)
 
 Who is asking and at what point; the question in their words; what the page will let them do when they finish it; the facts it needs and where each comes from; which site pages it links to (`/join`, `/directory`, the city or category pages that exist, other guides); what would make it wrong or stale.
 

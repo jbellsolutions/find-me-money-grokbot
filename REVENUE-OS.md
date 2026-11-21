@@ -6,7 +6,7 @@ Justin, 2026-11-20: "we're going to have the Revenue OS, and we're going to have
 
 The two sites, what traction means for each and how each agent serves it: [sites/](sites/README.md). Every step below is done for both sites unless it says otherwise.
 
-This page is what the bot builds, in order, after HANDOFF.md Part 2. The Revenue OS is nine agents that run everything in front of the sales call ([TEMPLATE.md](TEMPLATE.md) is the spec). This pack already holds part of each one. The bot builds the rest on its own computer, runs each on test, and keeps one list of what only Justin can do.
+This page is what the team builds, in order, after HANDOFF.md Part 2. The Revenue OS is nine agents that run everything in front of the sales call ([TEMPLATE.md](TEMPLATE.md) is the spec). This pack already holds part of each one. The team builds the rest on its own computer, each agent its own function, runs each on test, and keeps one list of what only Justin can do.
 
 ## What is in the pack, and what is not
 
@@ -17,33 +17,33 @@ This page is what the bot builds, in order, after HANDOFF.md Part 2. The Revenue
 | The conversation log | [convlog/](convlog/), [CONVERSATION-LOG.md](CONVERSATION-LOG.md) | Tested offline (`tools/selftest.py`) |
 | The two sites | [sites/](sites/README.md): for each site a `SITE.md`, a `campaign.json` and `settings/` (one file per agent) | Filled from what each site has. Empty values are Justin's to give ([NEEDS-JUSTIN.md](NEEDS-JUSTIN.md), Tracks C and D) |
 | The Disruptor message | [sites/find-me-money/MESSAGING.md](sites/find-me-money/MESSAGING.md) | The public outline. The full document is private and given at intake |
-| The referral site's tool and skills | `tools/rc.py`; `skills/sales/directory-desk`, `matchmaker`; `skills/content/guide-publisher`, `site-check`; `skills/outreach/prospect-finder`, `outreach-drafts` | From the site's own pack v1.0.0. The tool was tested against the live site by the site's chat; not run from a bot |
+| The referral site's tool and skills | `tools/rc.py`; `skills/sales/directory-desk`, `matchmaker`; `skills/aeo-seo/guide-publisher`, `site-check`; `skills/outreach/prospect-finder`, `outreach-drafts` | From the site's own pack v1.0.0. The tool was tested against the live site by the site's chat; not run from a bot |
 | The business's own roles, skills, guards, the reply engine, the worker for the Mac | `roles/`, `skills/`, `guards/`, `engine/`, `hermes-worker/` | As in pack v2: built, never installed |
 | LinkedIn | [LINKEDIN.md](LINKEDIN.md), `linkedin/` | Off for this business |
 
 Each agent's `STATUS.md` says what its chat built and what it did not. Where a status page lists something as not built (a runner, a finder, a call path to a tool), the bot builds it in its workspace.
 
-## Which role works which agent
+## Which agent is which function
 
-One bot, the same nine roles as before. A role works its agents during its own routines.
+Nine functions, nine Grok agents (Justin, 2026-11-20: "nine functions = 9 agents"; [TEAM.md](TEAM.md)). Each agent builds and runs its own function, for both sites.
 
-| Agent | Engine | Role | Routine | Settings, in each `sites/<site>/settings/` |
+| Function | Engine | Grok agent (role) | Routine | Settings, in each `sites/<site>/settings/` |
 |---|---|---|---|---|
-| Dream 100 | GrokBot | partners | Dream desk | `dream-100.json` |
-| Dream 500 | GrokBot | partners | Dream desk | `dream-500.json` |
-| Partners, collaborators, influencers | GrokBot | partners | Partner desk | `partners.json` |
-| Cold email | GrokBot (first lines on Codex) | outreach | Outreach drafts (Find Me Money), Referral outreach (the referral site) | `cold-email.json` |
-| Lead Radar | Codex | radar | Pick today's queue, Niche rotation | `lead-radar.json` |
-| Content | Claude Code | content | Daily content | `content.json` |
-| Podcast SpeakerAgent | Codex | outreach | Speaker desk (Find Me Money only) | `speaker.json` |
-| AEO and SEO | Codex | content | Weekly AEO read (both), Referral guides (the referral site) | `aeo-seo.json` |
-| Sales agent (replies and the CRM) | Codex, model GPT-6 Luna | sales | Sales desk (Find Me Money), Referral desk (the referral site) | `sales-crm.json` |
+| Dream 100 | GrokBot | FMM Dream 100 (dream-100) | Dream 100 desk | `dream-100.json` |
+| Dream 500 | GrokBot | FMM Dream 500 (dream-500) | Dream 500 desk | `dream-500.json` |
+| Partners, collaborators, influencers | GrokBot | FMM Partners (partners) | Partner desk | `partners.json` |
+| Cold email | GrokBot (first lines on Codex) | FMM Cold Email (outreach) | Outreach drafts (Find Me Money), Referral outreach (the referral site) | `cold-email.json` |
+| Lead Radar | Codex | FMM Lead Radar (radar) | Pick today's queue, Niche rotation | `lead-radar.json` |
+| Content | Claude Code | FMM Content (content) | Daily content | `content.json` |
+| Podcast SpeakerAgent | Codex | FMM SpeakerAgent (speaker) | Speaker desk (Find Me Money only) | `speaker.json` |
+| AEO and SEO | Codex | FMM AEO and SEO (aeo-seo) | Weekly AEO read (both), Referral guides (the referral site) | `aeo-seo.json` |
+| Sales agent (replies and the CRM) | Codex, model GPT-6 Luna | FMM Sales (sales) | Sales desk (Find Me Money), Referral desk (the referral site) | `sales-crm.json` |
 
-The lead role stays the orchestrator: the day's plan, the day close of the conversation log, the report. The wholesale and loan-officer roles and the worker's lanes on the Mac are this business's own and stay as they are.
+The lead agent is the orchestrator: the day's plan, the day close of the conversation log, the report. The worker, wholesale and loan-officer agents are this business's own.
 
 ## Build order
 
-Work down the list. For each step: do it, run its check, and write one line in `log/revenue-os-build.md` (what was built, the command and output that shows it, what waits on Justin). A step that waits on Justin does not stop the next one: put the item on the list and go on.
+The lead does section 0, then creates the team ([TEAM.md](TEAM.md)). Each function's agent then does its own numbered section as part of setting itself up; the lead does section 10. If the other agents cannot be created yet, the lead writes each section's steps to `requests/<role>/revenue-os-build.md` and goes on. For each step: do it, run its check, and write one line in `log/revenue-os-build.md` (what was built, the command and output that shows it, what waits on Justin). A step that waits on Justin does not stop the next one: put the item on the list and go on.
 
 ### 0. The ground
 
@@ -72,7 +72,7 @@ Starts from `roles/sales.md`, `skills/sales/`, `engine/pinnacle-reply-agent`, `e
 
 Starts from the live Funding Radar, `roles/radar.md`, `skills/radar/` and `agents/lead-radar/radar.py`.
 
-- Feed the day's finds (the Radar's fresh asks and the worker's finds) to `radar.py score --settings context/revenue-os/<site>/lead-radar.json`. Kept leads are logged and handed to the sales agent in `requests/sales-crm/`.
+- Feed the day's finds (the Radar's fresh asks and the worker's finds) to `radar.py score --settings context/revenue-os/<site>/lead-radar.json`. Kept leads are logged and handed to the sales agent in `requests/sales/`.
 - Check: `radar.py score --test` on today's asks, then `radar.py today`.
 
 - **The referral site.** The same script with `context/revenue-os/referral-connection/lead-radar.json`: owners asking in public for a partner, a sponsor, a collaboration or a deal. A kept lead gets a draft that points to the sign-up page; a community or newsletter owner goes to `requests/partners/`.
@@ -90,18 +90,18 @@ Starts from `roles/content.md`, the eight hooks in `skills/content/fmm-viral-con
 
 ### 4. AEO and SEO
 
-Starts from the site's guide hub and answer pages and `agents/aeo-seo/`.
+Starts from `roles/aeo-seo.md`, the site's guide hub and answer pages and `agents/aeo-seo/`.
 
 - Write the panel (`data/aeo/prompts.md`, 15 questions) and the buying terms (`data/aeo/terms.json`).
 - `aeo.py cost` prints what the tracking tool would cost. `pull`, `judge` and `read` wait on its key and Justin's yes (Track C8). Fixes to the site are briefs for a pull request in the site's own repo, never a write to the live site.
 - Check: `aeo.py selftest`, `aeo.py cost --settings context/revenue-os/<site>/aeo-seo.json`.
 
 - **Find Me Money.** The panel questions and buying terms come from the eight pillars: one answer page and one video brief per question.
-- **The referral site.** Guides through `skills/content/guide-publisher`: one brief, one draft, saved to the site as a draft with `rc.py page-put`; published on Justin's yes. Questions cover referral partners, collaborations, sponsorships and deals. `skills/content/site-check` each week. The first brief for the site's own repo: what the pages and the sign-up form need to say for all four.
+- **The referral site.** Guides through `skills/aeo-seo/guide-publisher`: one brief, one draft, saved to the site as a draft with `rc.py page-put`; published on Justin's yes. Questions cover referral partners, collaborations, sponsorships and deals. `skills/aeo-seo/site-check` each week. The first brief for the site's own repo: what the pages and the sign-up form need to say for all four.
 
 ### 5. Dream 100
 
-Starts from `agents/dream-100/` and Justin's lists in `data/lists/`.
+Starts from `roles/dream-100.md`, `agents/dream-100/` and Justin's lists in `data/lists/`.
 
 - Build the finder the status page lists as not built: candidates from his lists and the worker's research lanes, scored with `dream100.py score`, the best 100 in `data/dream100.csv` (mode 600, never in a report).
 - A dossier per person, then a first-touch draft. Drafts wait on what Find Me Money gives a partner's audience at no cost (Track C6).
@@ -111,7 +111,7 @@ Starts from `agents/dream-100/` and Justin's lists in `data/lists/`.
 
 ### 6. Dream 500
 
-Starts from `agents/dream-500/`.
+Starts from `roles/dream-500.md` and `agents/dream-500/`.
 
 - `dream500.py place` splits a found list into Dream 500, Dream 100 and the wide tier by audience size. First lines are drafted on the approved template.
 - Sending waits on the domain decision (Track C9).
@@ -139,7 +139,7 @@ Starts from `roles/outreach.md`, `skills/outreach/` and `agents/cold-email/`.
 
 ### 9. Podcast SpeakerAgent
 
-Starts from `agents/speaker/`.
+Starts from `roles/speaker.md` and `agents/speaker/`.
 
 - Find Me Money only; off for the referral site.
 - `speaker.py find` and `score` list and score shows (free reads). No pitch is drafted until Justin gives the speaker profile (Track C11).
@@ -147,9 +147,9 @@ Starts from `agents/speaker/`.
 
 ### 10. Routines and the report
 
-1. Create the six Revenue OS routines in TRIGGER-MAP.md (Dream desk, Speaker desk, Weekly AEO read, Referral desk, Referral outreach, Referral guides), paused, with the other 12.
+1. Each agent has created its own routines from its section of TRIGGER-MAP.md, paused. The lead reads `context/team-registry.md` and lists any agent or routine that is missing.
 2. The Evening report runs `python3 repo/convlog/gate.py day` and carries its audit lines.
-3. Send Justin one message: for each site, the nine agents, each with built, tested (the evidence) and what it waits on, and the site's traction numbers as they stand; then the checklist of everything only he can do, once.
+3. The lead sends Justin one message: for each site, the nine agents, each with built, tested (the evidence) and what it waits on, and the site's traction numbers as they stand; then the checklist of everything only he can do, once.
 
 ## Done means
 

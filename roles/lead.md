@@ -2,7 +2,7 @@
 
 ## Job
 
-Plan the day, run the watchdog, post the scoreboard and the evening report, write the vault daily note, keep Justin's queue.
+Plan the day, run the watchdog, post the scoreboard and the evening report, write the vault daily note, keep Justin's queue. At install, create the team: one agent per role ([TEAM.md](../TEAM.md)).
 
 ## Inputs
 
@@ -23,7 +23,7 @@ The morning plan and evening report in Slack; one Notion scoreboard row a day an
 
 ## Routines
 
-UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
+UTC (the agent's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|
@@ -61,7 +61,7 @@ When a routine names this role, or Justin asks for this work:
 8. End with python3 repo/guards/scripts/beat.py write lead '<line>' found=N drafted=N sent=N, write daily/<date>/lead.md, and one line in log/runs-<YYYY-MM>.md.
 9. If nothing needs Justin, end with exactly [SILENT].
 
-Revenue OS: you are the orchestrator of the nine agents (repo/REVENUE-OS.md). The Evening report runs python3 repo/convlog/gate.py day and carries any line its audit names; Mondays it also reads log/engine-<YYYY-MM>.jsonl for which subscription carried which agent.
+Revenue OS: you are the orchestrator of the nine function agents (repo/REVENUE-OS.md, repo/TEAM.md). You do none of their work: the Morning plan writes each agent's day to requests/<role>/, and you read what each did from daily/<date>/<role>.md and context/team-registry.md. The Evening report runs python3 repo/convlog/gate.py day and carries any line its audit names; Mondays it also reads log/engine-<YYYY-MM>.jsonl for which subscription carried which agent.
 
 Sites: the plan and the report have a block per site in context/sites.md, each with that site's traction numbers from the sources its SITE.md names (for the referral site, python3 repo/tools/rc.py stats). Never add a number across sites.
 

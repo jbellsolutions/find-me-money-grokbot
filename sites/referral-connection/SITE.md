@@ -29,7 +29,7 @@ The site's own pages and sign-up form are written for commission referral campai
 | Agent | What it does here | Starts from | Settings |
 |---|---|---|---|
 | Sales agent | Intake of sign-ups, connection requests and removals; a listing for each real sign-up; pairs matched; introductions drafted; each pair followed to a paid campaign | `skills/sales/directory-desk`, `skills/sales/matchmaker` | `settings/sales-crm.json` |
-| AEO and SEO | Guides that answer what an owner looking for a partner, a sponsor or a collaboration asks, saved to the site as drafts; the site check; the weekly read | `skills/content/guide-publisher`, `skills/content/site-check` | `settings/aeo-seo.json` |
+| AEO and SEO | Guides that answer what an owner looking for a partner, a sponsor or a collaboration asks, saved to the site as drafts; the site check; the weekly read | `skills/aeo-seo/guide-publisher`, `skills/aeo-seo/site-check` | `settings/aeo-seo.json` |
 | Cold email | Local businesses in the launch area, from public sources, and the messages that get them to sign up, each link tagged with its source | `skills/outreach/prospect-finder`, `skills/outreach/outreach-drafts` | `settings/cold-email.json` |
 | Dream 100, Dream 500 | People who already have business owners gathered: chambers, associations, networking groups, local newsletters and podcasts, coworking spaces, event organisers who sell sponsorships | `agents/dream-100/`, `agents/dream-500/` | `settings/dream-100.json`, `settings/dream-500.json` |
 | Partners | The wide tier of the same: anyone who would tell their members about a free listing | `agents/partners/` | `settings/partners.json` |

@@ -2,7 +2,7 @@
 
 Justin, 2026-11-20: "we're going to have the Revenue OS, and we're going to have it be an incubator for a few different sites: the referral site, the Find Me Money site. We're looking to have a Revenue OS that's all about getting those sites traction."
 
-One bot, nine agents, and one folder here per site. Every agent does its job once per site, with that site's settings. A site's page says what traction means for it and how each agent serves it.
+Nine functions, each its own Grok agent ([TEAM.md](../TEAM.md)), and one folder here per site. Every agent does its job once per site, with that site's settings. A site's page says what traction means for it and how each agent serves it.
 
 | Site | Folder | What traction means |
 |---|---|---|
@@ -19,7 +19,7 @@ One bot, nine agents, and one folder here per site. Every agent does its job onc
 
 In the bot's workspace the live copies are `context/revenue-os/<site>/`. Justin's answers go there, never into `repo/`.
 
-## How one bot works two sites
+## How the team works two sites
 
 - **The list of sites** is `context/sites.md`, one line per site: `<site>: on`, `test` or `off`. A routine works each site that is `on` or `test`, in that order, and writes a line per site.
 - **Each site keeps its own records.** Find Me Money: the CRM. The referral site: the site itself, through `tools/rc.py`. A person from one site is never filed in the other's records.

@@ -10,7 +10,8 @@ Checks:
 2. Skills: every skill in skills.json exists with a SKILL.md that has a name and description.
 3. Accounts: every account a role charter names is in skills.json -> accounts; its path exists; its keys
    are in .env.example and NEEDS-JUSTIN.md, or (SIGNIN) the account is on NEEDS-JUSTIN.md.
-4. Routines: every role section in TRIGGER-MAP.md has a charter in roles/, and schedules total 50 or fewer.
+4. Routines: every role section in TRIGGER-MAP.md has a charter in roles/, and no agent has more than 50.
+   Team (when team.json is there): every role has exactly one agent, and every Revenue OS function has one.
 5. Placeholders: {{...}} and FILL: left, reported as TODO (a failure only with --ready).
 6. Adaptation: skills that still mention Mac paths or Hermes commands (reported, not failed).
 """
@@ -122,17 +123,30 @@ def main():
     if problems:
         fails.append("accounts")
 
-    # 4 routines
+    # 4 routines, and the team (one agent per role)
     tm = open("TRIGGER-MAP.md").read() if os.path.exists("TRIGGER-MAP.md") else ""
     sections = re.findall(r"^### (\S+)", tm, re.M)
     schedules = len(re.findall(r"^\| Schedule \| `[^`]+`", tm, re.M))
     orphan = [s for s in sections if s not in roles()]
-    out.append(f"4. Routines: {schedules} schedules of {ROUTINE_CAP} allowed, across {len(sections)} role sections; {len(roles())} role charters")
+    team_bad, per_agent = [], {}
+    if os.path.exists("team.json"):
+        sys.path.insert(0, os.path.join(ROOT, "tools"))
+        import team as team_mod
+        team_bad, team_cfg, per_agent = team_mod.problems()
+        most = max((len(v) for v in per_agent.values()), default=0)
+        out.append(f"4. Routines: {schedules} schedules across {len(team_cfg['agents'])} agents, one per role; the most on one agent is {most} of {ROUTINE_CAP} allowed; {len(roles())} role charters")
+        over = most > ROUTINE_CAP
+    else:
+        out.append(f"4. Routines: {schedules} schedules of {ROUTINE_CAP} allowed, across {len(sections)} role sections; {len(roles())} role charters")
+        over = schedules > ROUTINE_CAP
     out += [f"   FAIL TRIGGER-MAP section '{s}' has no roles/{s}.md" for s in orphan]
-    if schedules > ROUTINE_CAP:
-        out.append(f"   FAIL {schedules} schedules is over the {ROUTINE_CAP} a bot allows")
-    if orphan or schedules > ROUTINE_CAP:
+    out += [f"   FAIL team: {b}" for b in team_bad]
+    if over:
+        out.append(f"   FAIL more than the {ROUTINE_CAP} routines one bot allows")
+    if orphan or over:
         fails.append("routines")
+    if team_bad:
+        fails.append("team")
 
     # 5 placeholders
     todo = {}

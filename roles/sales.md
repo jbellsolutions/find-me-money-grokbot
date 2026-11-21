@@ -31,7 +31,7 @@ This role works the sales agent (replies and the CRM in one): [REVENUE-OS.md](..
 
 ## Routines
 
-UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
+UTC (the agent's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|

@@ -1,6 +1,6 @@
 # Gates
 
-The factory's gates (PLAYBOOK §3), plus this bot's own. They never move.
+The factory's gates (PLAYBOOK §3), plus this team's own. They hold for every agent and never move.
 
 | Gate | Rule | Enforced by |
 |---|---|---|

@@ -23,7 +23,7 @@ An intake checklist, a missing-documents list, an underwriting screen, a submiss
 
 ## Routines
 
-UTC (the bot's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
+UTC (the agent's time zone). Created paused. Names are exact (TRIGGER-MAP.md).
 
 | Routine | Cron |
 |---|---|
