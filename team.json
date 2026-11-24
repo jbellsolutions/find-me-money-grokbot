@@ -1,5 +1,5 @@
 {
- "_doc": "One Grok bot, Find Me Money, that only orchestrates. Each routine hands one job (jobs/<job>.md) to the Claude Code CLI through tools/job.py. routines: name, cron (UTC), what the run does. tools/team.py, tools/install.py and tools/check.py read this.",
+ "_doc": "One Grok bot, Find Me Money, that only orchestrates. Each routine hands one job (jobs/<job>.md) to the Claude Code CLI through tools/job.py. routines: name, cron (UTC), what the run does. targets: the two daily numbers. tools/team.py, tools/install.py, tools/update.py and tools/check.py read this.",
  "name": "Find Me Money",
  "workspace": "/workspace/find-me-money",
  "link": "https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip",
@@ -15,21 +15,25 @@
  ],
  "switches": [
   "crm-writes: off",
-  "direct-lead-cold-email: off"
+  "direct-lead-cold-email: off",
+  "old-leads: keep"
  ],
  "folders": [
-  "context",
-  "daily",
-  "log/jobs",
-  "state/lead-radar",
-  "state/test",
   "approved",
   "content/drafts",
-  "vault/Daily",
-  "vault/People",
+  "content/video",
+  "context",
+  "daily",
+  "data/aeo",
+  "log/jobs",
+  "requests/content",
   "requests/justin",
-  "requests/crm",
-  "requests/partnerships"
+  "requests/partnerships",
+  "requests/sales",
+  "state/lead-radar",
+  "state/test",
+  "vault/Daily",
+  "vault/People"
  ],
  "private_folders": [
   "data",
@@ -57,7 +61,7 @@
    "bot": "Find Me Money",
    "kind": "main",
    "campaign": "find-me-money",
-   "does": "The funding bot: content first, Lead Radar, Skool and Whop, partnership outreach, the GoHighLevel CRM. It orchestrates; the Claude Code CLI does every job",
+   "does": "The funding bot: 100 leads and 100 conversations started a day. Direct leads from Lead Radar; affiliates and referral partners from the partner lists, Skool and Whop; content; AEO and SEO; a sales agent on GoHighLevel and the replies. It orchestrates; the Claude Code CLI does every job",
    "routines": [
     [
      "Plan",
@@ -70,22 +74,27 @@
      "Run python3 repo/tools/job.py run content --note \"morning: three pieces from today's plan and the calendar\""
     ],
     [
+     "Sales",
+     "15 12,15,18,21 * * *",
+     "First save any new replies from your connected inbox and the CRM's conversations to requests/sales/replies-<date>-<time>.md. Then run python3 repo/tools/job.py run sales"
+    ],
+    [
      "Lead Radar",
-     "0 13 * * *",
+     "0 13,19 * * *",
      "Run python3 repo/tools/job.py run lead-radar"
     ],
     [
-     "CRM",
-     "30 14,21 * * *",
-     "Run python3 repo/tools/job.py run crm"
+     "AEO and SEO",
+     "0 14 * * 2,5",
+     "Run python3 repo/tools/job.py run aeo-seo"
     ],
     [
      "Communities",
-     "0 15 * * *",
+     "30 15 * * *",
      "First save today's new posts from each signed-in Skool and Whop community in context/communities.md to data/communities/<date>/<name>.txt with your browser. Then run python3 repo/tools/job.py run communities"
     ],
     [
-     "Partnerships",
+     "Affiliates and referrals",
      "0 16 * * 1-5",
      "Run python3 repo/tools/job.py run partnerships"
     ],
@@ -101,5 +110,13 @@
     ]
    ]
   }
+ ],
+ "targets": {
+  "leads_a_day": 100,
+  "conversations_a_day": 100
+ },
+ "skills": [
+  "claude-code-cli",
+  "content-tools"
  ]
 }

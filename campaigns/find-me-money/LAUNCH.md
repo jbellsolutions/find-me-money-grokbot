@@ -2,39 +2,39 @@
 
 The plan job works down this page: each morning's plan comes from the next open step. A step that waits on Justin goes to his queue once, and the next step that needs nothing from him starts. Steps are milestones, not dates.
 
-## L1. The library: all drafts, nothing needed from Justin
+## L1. From the first day, nothing needed from Justin
 
 | Step | Job | Done when |
 |---|---|---|
-| A two-week calendar: six pieces a day, each on one pillar, one content type and one hook | content | `content/calendar.md`; each piece logged and in the queue |
-| The public-ask terms, the creative routes included | lead-radar | `state/lead-radar/terms.md`; fresh asks a day with a draft each |
-| The Skool and Whop communities worth joining | communities | `requests/justin/communities-to-join.md` |
-| 100 scored partner names; a dossier and a first touch for the first ten | partnerships | `data/dream100.csv`; drafts in the queue |
-| The wider partner list placed; the three-email partnership sequence | partnerships | `content/partner-sequence.md`; wave one in the queue |
-| The CRM's map; the partner pipeline and three workflows specified | crm | `context/crm-map.md`; `requests/justin/crm-build.md` |
+| 100 leads found a day: 30 direct, 70 affiliates and referral partners | lead-radar, partnerships, communities | The report's first line |
+| 100 first messages ready a day, one per lead | the same three | Drafts in the queue, each logged |
+| The search terms; the Skool and Whop communities worth joining | lead-radar, communities | `state/lead-radar/terms.md`; `requests/justin/communities-to-join.md` |
+| The three-email partnership sequence | partnerships | `content/partner-sequence.md` |
+| A two-week content calendar; six pieces a day, each script finished | content | `content/calendar.md`; drafts in the queue |
+| The 15 questions and buying terms; the first read | aeo-seo | `data/aeo/`; the baseline written down |
+| The two pipelines and three workflows specified; old leads listed | sales | `requests/justin/crm-build.md`; `requests/justin/old-leads-<date>.md` |
 
-Without the private messaging document the library is drafted from the public outline, on pillars 1 to 5 and 8, with no proof point, count or screenshot.
+Without the private messaging document the content is drafted from the public outline, on pillars 1 to 5 and 8, with no proof point, count or screenshot.
 
-## L2. Go live, one channel at a time
+## L2. Go live: each yes turns ready messages into conversations
 
-Each line is one yes from Justin, asked once, with the piece in front of him.
-
-| Step | Job | The yes |
+| Step | Job | The yes (NEEDS-JUSTIN) |
 |---|---|---|
-| The jobs run on Claude Code and Codex | all | The two sign-ins (NEEDS-JUSTIN 1, 2) |
-| The CRM read, then written | crm | The key (4); "gohighlevel: bot", "CRM: on", "crm-writes: on" (5) |
-| The signed-in communities read | communities | The groups and the browser sign-ins (6) |
-| First post on each outlet | content | The outlet's account and who publishes (13); `fmm_content_post` |
-| Public replies to fresh asks | lead-radar | `public_reply` |
-| Posts and comments in the communities | communities | `community_post` |
-| Partner first touches | partnerships, communities | `partner_message` |
-| The partnership email waves | partnerships | The sender and domains (16); `partner_cold_email` |
-| Replies answered | crm | `email_reply` |
+| The jobs run on Claude Code and Codex | all | The two sign-ins (6, 7) |
+| Public replies to direct leads | lead-radar | `public_reply` (2) |
+| First messages to affiliates and referral partners | partnerships, communities | `partner_message` (3) |
+| The partnership email waves | partnerships | The sender and domains; `partner_cold_email` (4) |
+| The signed-in communities read and posted in | communities | The groups and sign-ins; `community_post` (5) |
+| Videos rendered | content | The HeyGen key, avatar, voice and "heygen: approved N" (8) |
+| The CRM read, then written | sales | The key (10); "gohighlevel: bot", "Sales: on", "crm-writes: on" (11) |
+| Replies answered | sales | The mailbox; `email_reply` (12) |
+| Old leads cleared | sales | "old-leads: clear" (14) |
+| Content posted | content | The outlets (17); `fmm_content_post` |
 
 ## L3. Run it as a business
 
 | Each | What the plan and report jobs do |
 |---|---|
-| Day | Pieces out, asks answered, partners contacted, CRM next steps due; tomorrow's plan from the weakest number |
-| Week | Views, comments and shares by pillar and content type; partners by source. Next week doubles the best and drops the worst. One decision, with its number, in `vault/Decisions.md` |
-| Month | Active partners and the leads each sent; funded deals against the target Justin sets |
+| Day | The two numbers against 100; replies waiting; next steps due in the CRM; tomorrow's plan from the weaker number |
+| Week | Conversations to replies by channel; affiliates and referral partners by stage; views by pillar and content type; named on N of 15. Next week doubles the best and drops the worst. One decision, with its number, in `vault/Decisions.md` |
+| Month | Active affiliates and referral partners and the leads each sent; funded deals against the target Justin sets |

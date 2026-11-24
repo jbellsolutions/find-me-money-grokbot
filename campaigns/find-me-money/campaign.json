@@ -16,7 +16,7 @@
  "crm": {
   "name": "GoHighLevel",
   "writer": "none",
-  "note": "The CRM job reads, and writes its proposals to requests/justin/, until Justin says gohighlevel: bot and crm-writes: on. If another agent already files and answers there, it is switched off first: two writers never write the same record."
+  "note": "The sales job reads, and writes its proposals to requests/justin/, until Justin says gohighlevel: bot and crm-writes: on. If another agent already files and answers there, it is switched off first: two writers never write the same record."
  },
  "sending": {
   "cold_email": "partnerships only (Justin, 2026-11-24): the sending tool and domains are his call",
@@ -81,19 +81,19 @@
    "state": "off",
    "source": "",
    "role": "",
-   "waits_on": "not in this bot (Justin, 2026-11-24: a funding bot, kept focused)"
+   "waits_on": "not in this bot"
   },
   "aeo-seo": {
-   "state": "off",
-   "source": "",
-   "role": "",
-   "waits_on": "not in this bot (Justin, 2026-11-24: a funding bot, kept focused)"
+   "state": "partial",
+   "source": "agents/aeo-seo/, campaigns/find-me-money/settings/aeo-seo.json; the site (guide hub, answer pages, schema, sitemap, llms.txt; baseline: cited on 0 of 15 questions)",
+   "waits_on": "Search Console and Bing verification; the tracking tool's key and the owner's yes to its cost; site changes go to the site's own repo as a pull request",
+   "role": "find-me-money"
   },
   "sales-crm": {
    "state": "test",
    "source": "skills/pinnacle-crm; tools/ghl.py; agents/sales-crm/, campaigns/find-me-money/settings/sales-crm.json",
    "waits_on": "the CRM's key and sub-account id; Justin saying gohighlevel: bot and crm-writes: on once no other agent writes there",
-   "combined": "Replies and the CRM are one job (the owner, 2026-11-17).",
+   "combined": "Replies and the CRM are one sales job (the owner, 2026-11-17 and 2026-11-24: \"a sales agent that works the go high level and takes care of replies\").",
    "role": "find-me-money"
   }
  },
@@ -106,5 +106,5 @@
   "a first reply asks for nothing",
   "Facebook is answered by hired posters (Justin, 2026-11-07) unless he reverses"
  ],
- "goal": "Justin, 2026-11-24: a funding bot, kept focused. Content more than anything; Lead Radar; Skool and Whop for partnership and outreach; cold email for partnerships only; the GoHighLevel CRM worked hard. The message is campaigns/find-me-money/MESSAGING.md."
+ "goal": "Justin, 2026-11-24: 100 leads, 100 conversations started a day. Direct leads from Lead Radar; the rest affiliates and referrals, with a pipeline kept for them; AEO and SEO; content; a sales agent on GoHighLevel and the replies. The message is campaigns/find-me-money/MESSAGING.md."
 }

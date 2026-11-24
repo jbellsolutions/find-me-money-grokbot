@@ -10,15 +10,17 @@ The Skool and Whop groups, for partnership and outreach. Justin, 2026-11-24: "it
 
 ## Do, for each group
 
-1. **Partners.** The owner, the admins and the members who plainly have their own audience of owners. Add each to `data/partners/community.csv` (name or handle, group, role, what their audience is, the public source, why they fit). No private contact detail that was not posted in public.
-2. **Asks.** A member asking for funding goes to `requests/crm/leads-<today>.md`, like a Lead Radar find, with the group as the source.
+1. **Affiliates and referral partners.** The owner, the admins and the members who plainly have their own audience of owners, or who serve owners and could refer them (bookkeepers, accountants, coaches, agencies, equipment and real estate people). Add each to `data/partners/community.csv` (name or handle, group, role, what their audience is, the public source, why they fit). No private contact detail that was not posted in public.
+2. **Asks.** A member asking for funding goes to `requests/sales/leads-<today>.md`, like a Lead Radar find, with the group as the source.
 3. **What the group talks about.** The questions asked most, without the people, into `content/ideas.md`.
 4. **Drafts**, each an item file in `requests/justin/` logged with `CAMPAIGN=find-me-money python3 repo/convlog/gate.py drafted <file> --agent partners`:
-   - For a group that is `theirs`: one message to the owner proposing a partnership (a free funding lesson for their members, or a seat as their funding resource), specific to what their group is about. Message type `partner_message`. Check `python3 repo/guards/scripts/suppression.py check "<who>"` first.
+   - For a group that is `theirs`: one message to the owner proposing a partnership (a funding lesson for their members, or a seat as their funding resource), and one to each member worth having as an affiliate or referral partner, specific to what their group is about. Message type `partner_message`. Check `python3 repo/guards/scripts/suppression.py check "<who>"` first.
    - For any group where it would help: one post or comment that teaches one thing and sells nothing. Message type `community_post`. A group's own rules, where posted, are followed; a group that bans promotion gets a teaching post with no mention of the site.
 
 The bot never posts, comments, messages or joins. Every one of these is a draft until Justin has approved its type.
 
 ## Write
+
+Everything added here counts toward `affiliates_and_referrals` in `context/targets.md`.
 
 `daily/<today>/communities.md`: groups read (signed-in and public), groups that had no saved text, partners added, asks handed over, drafts made.

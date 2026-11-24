@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""GoHighLevel, for the CRM job: contacts, pipelines, opportunities, notes, tasks, tags and workflows. Standard library only.
+"""GoHighLevel, for the sales job: contacts, pipelines, opportunities, notes, tasks, tags and workflows. Standard library only.
 
 Reads (need only the key):
     ghl.py check                                   the sub-account's name: proves the key reads
@@ -22,9 +22,9 @@ Needs GHL_API_KEY (a Private Integration Token) and GHL_LOCATION_ID (the sub-acc
 KEY=value line in <workspace>/.secrets/*.env. There is no default sub-account: with none set, every command stops.
 
 The switches. A write goes to GoHighLevel only when all of these hold: context/owners.md says `gohighlevel: bot`,
-context/routines-on.md says `CRM: on` and `crm-writes: on`, and there is no context/STOP. workflow-add also needs
+context/routines-on.md says `Sales: on` and `crm-writes: on`, and there is no context/STOP. workflow-add also needs
 `ghl_workflow_enroll: auto` in context/standing-approvals.md, because a workflow can send. Otherwise the write is not
-made: the exact command is added to requests/justin/crm-proposals-<date>.md and the script prints PROPOSED. So the CRM
+made: the exact command is added to requests/justin/crm-proposals-<date>.md and the script prints PROPOSED. So the sales
 job can run in full from the first day, and Justin sees what it would have written.
 
 Never written, whatever the switches say: a Social Security number, a date of birth, a bank or card number, a full EIN,
@@ -93,13 +93,13 @@ def line(name, key):
 
 
 def may_write(sends=False):
-    ok, said = guard("owner_guard.py", "check", "gohighlevel", "--routine", "CRM")
+    ok, said = guard("owner_guard.py", "check", "gohighlevel", "--routine", "Sales")
     if not ok:
         return f"owner guard says {said}"
     if line("routines-on.md", "crm-writes") != "on":
         return "crm-writes is not on"
     if sends:
-        ok, said = guard("send_guard.py", "ghl_workflow_enroll", "--routine", "CRM")
+        ok, said = guard("send_guard.py", "ghl_workflow_enroll", "--routine", "Sales")
         if not ok:
             return f"send guard says {said} for ghl_workflow_enroll"
     return ""

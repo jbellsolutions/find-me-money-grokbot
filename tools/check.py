@@ -51,7 +51,7 @@ def main():
 
     missing = []
     texts = {"INSTALL.md": allf.get("INSTALL.md", ""), "MASTER-PROMPT.md": allf.get("MASTER-PROMPT.md", "")}
-    texts.update({p: t for p, t in allf.items() if p.startswith(("roles/", "jobs/", "skills/claude-code-cli/"))})
+    texts.update({p: t for p, t in allf.items() if p.startswith(("roles/", "jobs/", "skills/claude-code-cli/", "skills/content-tools/"))})
     texts["team.json"] = allf.get("team.json", "")
     for src, t in texts.items():
         for ref in set(re.findall(r"repo/([A-Za-z0-9_./-]+\.(?:py|md|json))", t)):

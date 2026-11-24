@@ -1,35 +1,40 @@
 # Find Me Money (findmemoneyapp.com)
 
-Justin, 2026-11-24: "it's just a funding Grok Bot. I want to keep it super focused... and I also wanted to really double down on content."
+Justin, 2026-11-24: "100 leads, 100 conversations started a day... we need to really focus in on building affiliates and referrals, maintaining a pipeline for them, and really hit those channels pretty hard. We have our direct leads with Lead Radar, and then the rest of it's just affiliates and referrals, and then we have our AEO SEO."
 
-The message: [MESSAGING.md](MESSAGING.md). The plan: [LAUNCH.md](LAUNCH.md).
+The message: [MESSAGING.md](MESSAGING.md). The plan: [LAUNCH.md](LAUNCH.md). The two numbers: `context/targets.md`.
 
 ## Who it is for
 
-People and business owners looking for funding: the ones who were denied, the ones buried in pitches, and the ones who want a way other than the usual sales call. And the partners who already have those owners gathered: funding and credit creators, business coaches, community owners.
+- **Direct leads:** people and business owners looking for funding, found by Lead Radar and by search.
+- **Affiliates:** people with an audience of owners who would promote Find Me Money to it: funding and credit creators, business coaches, community and group owners.
+- **Referral partners:** people who serve owners one at a time and can send the ones who need funding: bookkeepers, accountants, agencies, equipment sellers, real estate people.
 
-## What the bot does, in the order it matters
+## What the bot does
 
 | Job | Here |
 |---|---|
-| Content | Six pieces a day on the eight pillars and the eight money hooks: reactions, talkbacks, breakdowns, UGC prompts. The afternoon three answer what people asked that day |
-| Lead Radar | Public asks for funding, the creative routes included; a helpful draft answer for each |
-| Communities | The Skool and Whop groups: partners worth approaching, asks, and what the group talks about |
-| Partnerships | The Dream 100 and Dream 500 partner lists; one-to-one first touches; the partnership email sequence |
-| CRM | GoHighLevel: every person a contact with tags, a note, a stage and a dated next step; pipelines and workflows checked and specified |
+| Lead Radar | Direct leads: public asks for funding, a helpful draft answer for each |
+| Partnerships | The affiliate and referral partner lists; one-to-one first messages; the partnership email sequence |
+| Communities | The Skool and Whop groups: affiliates and referral partners there, asks, what the group talks about |
+| Sales | Every reply answered; GoHighLevel: a pipeline for direct leads and one for affiliates and referral partners, every person with a stage and a dated next step |
+| Content | Six pieces a day on the eight pillars and the eight money hooks. Words by the Claude Code CLI, talking videos by HeyGen |
+| AEO and SEO | The front page of Google and AI answers: the weekly read, one page and one video brief a week |
 
 ## The numbers, and where each comes from
 
 | Number | Source |
 |---|---|
-| Pieces drafted and posted; views, comments and shares by pillar and type | `content/drafts/`; each outlet, once it has a brand account |
-| Public asks found and answered | The conversation log |
-| Partners found, contacted, replied, active | `data/partners/`; the CRM's partner pipeline |
-| Leads: a person who gave their contact and their OK | The CRM's funding leads pipeline |
+| Leads a day, of 100: direct, and affiliates and referral partners | `requests/sales/`; `data/partners/` |
+| Conversations started a day, of 100; first messages ready and not sent | The conversation log |
+| Affiliates and referral partners by stage; leads each has sent | The CRM's partner pipeline |
+| Replies in and answered | The conversation log |
+| Pieces drafted, rendered and posted | `content/drafts/`, `log/heygen.jsonl`, each outlet |
+| Named on N of 15 questions; leads from search | `data/aeo/` |
 | Jobs carried by Claude Code, Codex and the bot | `python3 repo/tools/job.py audit` |
 
 ## Not this bot's
 
-- Cold email to a direct lead. Cold email is for partnerships only (Justin, 2026-11-24).
-- The Referral Connection site, SpeakerAgent, AEO and SEO.
+- Cold email to a direct lead. Cold email is for affiliates and referral partners only.
+- The Referral Connection site and SpeakerAgent.
 - A reply-to-every-pitch text campaign runs on Justin's own computer. The bot does not send it.

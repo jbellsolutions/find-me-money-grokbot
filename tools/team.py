@@ -51,7 +51,7 @@ def setup(team, a):
             if add else
             "1. SAVE THIS TO YOUR MEMORY, word for word. It replaces anything an older install of this pack saved there."), "",
            "-----", memory(a["role"]), "-----", "",
-           f"2. SAVE THE SKILL: the file {ws}/repo/skills/claude-code-cli/SKILL.md, as a skill named {team.get('skill_name', 'claude-code-cli')}.", "",
+           "2. SAVE THESE SKILLS, each under its own name: " + "; ".join(f"{ws}/repo/skills/{k}/SKILL.md as {k}" for k in team.get("skills", ["claude-code-cli"])) + ".", "",
            "3. CREATE THESE ROUTINES (time zone UTC). Each runs; the switch file keeps it on test, so it only drafts:", ""]
     for name, cron, does in a["routines"]:
         out += [f"   - Name: {name}", f"     Schedule: {cron}",

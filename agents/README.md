@@ -8,4 +8,5 @@ Each folder holds `PROCESS.md` (how the function works, step by step), `STATUS.m
 | [lead-radar/](lead-radar/README.md) | lead-radar, communities |
 | [dream-100/](dream-100/README.md), [dream-500/](dream-500/README.md), [partners/](partners/README.md) | partnerships |
 | [cold-email/](cold-email/README.md) | partnerships (partner emails only; no direct lead) |
-| [sales-crm/](sales-crm/README.md) | crm |
+| [sales-crm/](sales-crm/README.md) | sales |
+| [aeo-seo/](aeo-seo/README.md) | aeo-seo |

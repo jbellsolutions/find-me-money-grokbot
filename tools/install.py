@@ -45,6 +45,20 @@ def main():
     routines = [n for n, _, _ in a["routines"]]
     w("context/routines-on.md", "# Routines: on, test or off\n\ntest means the routine runs and only drafts. Justin changes a line by saying it in the bot's chat.\n\n"
       + "".join(f"{n}: test\n" for n in routines) + "".join(s + "\n" for s in team.get("switches", [])))
+    rf = os.path.join(ws, "context", "routines-on.md")
+    have = open(rf, encoding="utf-8").read()
+    miss = [f"{n}: test" for n in routines if not __import__("re").search(rf"(?m)^{__import__('re').escape(n)}\s*:", have)] + \
+           [s for s in team.get("switches", []) if not __import__("re").search(rf"(?m)^{__import__('re').escape(s.split(':')[0])}\s*:", have)]
+    if miss:
+        open(rf, "a", encoding="utf-8").write(("" if have.endswith("\n") else "\n") + "\n".join(miss) + "\n")
+        made.append("context/routines-on.md (added: " + ", ".join(m.split(":")[0] for m in miss) + ")")
+    tg = team.get("targets")
+    if tg:
+        w("context/targets.md", "# The two daily numbers\n\nJustin, 2026-11-24: \"100 leads, 100 conversations started a day.\" He changes a number by saying it in the bot's chat.\n\n"
+          f"leads_a_day: {tg['leads_a_day']}\nconversations_a_day: {tg['conversations_a_day']}\n\n"
+          "A lead is a new person found today, with the public source and the reason, filed for the sales job. Direct leads come from Lead Radar; the rest are affiliates and referral partners.\n"
+          "A conversation started is a first message that reached a new person today. A draft is not one: it is counted as ready.\n\n"
+          "# A starting split, not Justin's: change it freely\ndirect_leads: 30\naffiliates_and_referrals: 70\n")
     w("context/campaigns.md", "# Campaigns: on, test or off\n\n" + "".join(f"{c}: test\n" for c in team["campaigns"]))
     w("context/owners.md", "# Who writes each system: live (someone else; the bot reads and proposes) or bot (the bot writes)\n\n"
       + "".join(f"{o}: live\n" for o in team["owners"]))
@@ -88,7 +102,7 @@ def main():
 WHAT YOU DO NOW, in order, without asking Justin anything:
 
 1. Run: python3 {ws}/repo/tools/team.py setup
-   and do the four things it prints (memory, the skill, the {len(routines)} routines, the ready command).
+   and do the four things it prints (memory, the skills, the {len(routines)} routines, the ready command).
 2. Install the two CLIs if the lines above say no (Justin asked for both):
      npm install -g @anthropic-ai/claude-code
      npm install -g @openai/codex
