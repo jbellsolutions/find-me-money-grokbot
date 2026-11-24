@@ -15,7 +15,7 @@
   "_doc": "The daily read says PAUSE for a campaign at or over this. Not the owner's number: see STATUS.md."
  },
  "charter": {
-  "who": "",
+  "who": "Partners only (Justin, 2026-11-24: \"cold email through partnerships, for partnerships, but not for direct leads, at least not for right now\"): people who already have business owners gathered around them",
   "how": "",
   "personalization": "",
   "_doc": "The owner's charter: who to prospect, how, and what a first line may say. Pasted in the owner's words."
@@ -76,5 +76,6 @@
    ]
   }
  },
- "_waits": "daily_sends is 0 until the domain decision and the owner's charter; plan shows what any number needs. Research-intent lists are email only, never text or call, and only after the owner approves the sender, the copy and the postal address (context/01-lead-sources.md)."
+ "_waits": "daily_sends is 0 until the domain decision and the owner's charter; plan shows what any number needs. Research-intent lists are email only, never text or call, and only after the owner approves the sender, the copy and the postal address (context/01-lead-sources.md).",
+ "direct_leads": "off"
 }

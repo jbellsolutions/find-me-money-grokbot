@@ -27,7 +27,7 @@ from _ws import p, stopped, touch_refusal
 # reporting is the bot's own and never waits on this guard.
 # Extra systems can be added at intake (OWNER_SYSTEMS, comma-separated); any system not in context/owners.md is `live`.
 import os
-DEFAULTS = ["pinnacle-ghl", "referral-site", "cold-email-sender", "social-sender",
+DEFAULTS = ["gohighlevel", "cold-email-sender", "social-sender",
             *[x.strip().lower() for x in os.environ.get("OWNER_SYSTEMS", "").split(",") if x.strip()]]
 
 

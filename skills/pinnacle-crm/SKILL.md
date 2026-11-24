@@ -17,6 +17,8 @@ Never write a funding contact into another business's sub-account (the names in 
 
 ## Using GHL here
 
+**On the Find Me Money bot everything goes through `python3 repo/tools/ghl.py`** (run it with `-h`). It reads freely and writes only when Justin's switches allow; otherwise it saves the exact write as a proposal. Where the rest of this page names another `ghl` tool, use `ghl.py`.
+
 Run everything through the pinnacle-officer `ghl` tool: `ghl(["contacts", "search", "--query", "Acme"])`.
 It pins the profile. It allows reads and CRM writes (contacts, tags, notes, opportunities, stage moves). It
 refuses sends, deletes and workflow enrollment, which reach a person: draft those for a human. The

@@ -1,36 +1,35 @@
-# Campaign: Find Me Money (findmemoneyapp.com)
+# Find Me Money (findmemoneyapp.com)
 
-Justin, 2026-11-20: "the goal is to disrupt the finance industry... and generate new leads for people who are looking to get financing the creative alternative ways."
+Justin, 2026-11-24: "it's just a funding Grok Bot. I want to keep it super focused... and I also wanted to really double down on content."
 
-Main agent: **Find Me Money**. The message: [MESSAGING.md](MESSAGING.md). The launch plan: [LAUNCH.md](LAUNCH.md).
+The message: [MESSAGING.md](MESSAGING.md). The plan: [LAUNCH.md](LAUNCH.md).
 
 ## Who it is for
 
-People and business owners looking for financing: the ones who were denied, the ones buried in pitches, and the ones who want a way other than the usual sales call.
+People and business owners looking for funding: the ones who were denied, the ones buried in pitches, and the ones who want a way other than the usual sales call. And the partners who already have those owners gathered: funding and credit creators, business coaches, community owners.
+
+## What the bot does, in the order it matters
+
+| Job | Here |
+|---|---|
+| Content | Six pieces a day on the eight pillars and the eight money hooks: reactions, talkbacks, breakdowns, UGC prompts. The afternoon three answer what people asked that day |
+| Lead Radar | Public asks for funding, the creative routes included; a helpful draft answer for each |
+| Communities | The Skool and Whop groups: partners worth approaching, asks, and what the group talks about |
+| Partnerships | The Dream 100 and Dream 500 partner lists; one-to-one first touches; the partnership email sequence |
+| CRM | GoHighLevel: every person a contact with tags, a note, a stage and a dated next step; pipelines and workflows checked and specified |
 
 ## The numbers, and where each comes from
 
 | Number | Source |
 |---|---|
-| New leads: a person who gave their contact and their OK | The CRM's first pipeline; the conversation log |
-| Public asks answered | The conversation log |
-| Views, comments and shares per piece, by pillar and content type | Each outlet, once it has a brand account |
-| Share of AI answers and front-page terms that name the site | The weekly AEO read (baseline: named on 0 of 15 questions) |
-| Shows pitched and booked | The SpeakerAgent's log |
+| Pieces drafted and posted; views, comments and shares by pillar and type | `content/drafts/`; each outlet, once it has a brand account |
+| Public asks found and answered | The conversation log |
+| Partners found, contacted, replied, active | `data/partners/`; the CRM's partner pipeline |
+| Leads: a person who gave their contact and their OK | The CRM's funding leads pipeline |
+| Jobs carried by Claude Code, Codex and the bot | `python3 repo/tools/job.py audit` |
 
-## What each agent does for it
+## Not this bot's
 
-| Agent | Here |
-|---|---|
-| Content | Three pieces a day on the eight pillars and the eight money hooks: reactions, talkbacks, breakdowns, UGC prompts |
-| AEO and SEO | One answer page and one video brief per pillar question; the weekly read |
-| Lead Radar | Public asks for funding, the creative routes included, on social, Skool and Whop |
-| Dream 100, Dream 500 | Funding and credit creators, business coaches, community owners |
-| Cold Email | Owners of local businesses, one metro at a time |
-| SpeakerAgent | Shows whose listeners are business owners, with the Disruptor story as the topic. A switch (NEEDS-JUSTIN 10) |
-| Reply | Every reply, with the person's note read first |
-| Sales and CRM | One stage, one card and a dated next step per lead, in the CRM |
-
-## Not the team's
-
-A reply-to-every-pitch text campaign runs on Justin's own computer. The team does not send it. A person who answers it and wants funding reaches the Reply agent like any other lead.
+- Cold email to a direct lead. Cold email is for partnerships only (Justin, 2026-11-24).
+- The Referral Connection site, SpeakerAgent, AEO and SEO.
+- A reply-to-every-pitch text campaign runs on Justin's own computer. The bot does not send it.

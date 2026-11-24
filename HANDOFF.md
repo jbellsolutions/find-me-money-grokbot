@@ -1,9 +1,3 @@
-# This pack installs from INSTALL.md
+# Handoff
 
-An older line told the bot to "follow HANDOFF.md". The install is now one command:
-
-```
-python3 tools/install.py
-```
-
-Run it from wherever this pack was unpacked, then do what it prints. [INSTALL.md](INSTALL.md) has the rest.
+The install is one line. It is in [INSTALL.md](INSTALL.md).

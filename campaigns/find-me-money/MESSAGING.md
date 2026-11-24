@@ -1,10 +1,18 @@
 # Find Me Money: the Disruptor message (the public outline)
 
-This page is the outline the agents work from. The full messaging document is private: Justin's own words, the counts from his own inbox and phone, the proof points with their images, and the list of claims that must be cleared before anything is published. He gives it to the Find Me Money agent (NEEDS-JUSTIN 13), which saves it as `context/messaging/messaging-document.md` (mode 600) with the images beside it.
+This page is the outline the jobs work from. The full messaging document is private: Justin's own words, the counts from his own inbox and phone, the proof points with their images, and the list of claims that must be cleared before anything is published. He gives it to the bot (NEEDS-JUSTIN 11), which saves it as `context/messaging/messaging-document.md` (mode 600) with the images beside it.
 
-**Until that document is in the workspace, the agents draft from this outline only. No piece that uses a proof point, a count, a screenshot or a line about the industry's conduct is drafted until the document is in and Justin has cleared that claim on its list.**
+**Until that document is in the workspace, the content job drafts from this outline only. No piece that uses a proof point, a count, a screenshot or a line about the industry's conduct is drafted until the document is in and Justin has cleared that claim on its list.**
 
 ## The position
+
+Justin, 2026-11-24: "they don't have to pay us anything, and... we're going to get them the best rate, the best deal, because we're not a lender. We're anti-lender, anti-broker."
+
+Three things follow, and every piece carries at least one:
+
+- **Free to the owner.** Said together with how Find Me Money is paid, every time (commitment 1 below). Until Justin has given that sentence (NEEDS-JUSTIN 10), pieces are written without the word "free".
+- **Not a lender, not a broker.** Find Me Money has no product to push and no application to chase. It is on the owner's side of the table.
+- **The best rate and the best deal.** Said as what Find Me Money works for and how (showing the owner the buy rate, the fees and the questions to ask), never as a promised number. It is on the claims list for Justin to clear (NEEDS-JUSTIN 12).
 
 Find Me Money is the business-funding company that tells you how the game works. Most of the industry wants your application. This one wants you to understand what happens to it: who gets paid, what the offer in front of you really costs, and what you can say to get a better one. Education comes first; the application is the last step.
 

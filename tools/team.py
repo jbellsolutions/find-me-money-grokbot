@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""The team (team.json): two main agents, one per campaign, and one agent per Revenue OS function.
+"""The bot (team.json): one Grok bot that orchestrates, and the routines that hand each job to the Claude Code CLI.
 
-    python3 tools/team.py list             every agent, its role and its routines
-    python3 tools/team.py line <role>      the one line that turns a new bot into that agent
-    python3 tools/team.py lines            that line for every agent
-    python3 tools/team.py setup <role>     what that agent does to set itself up: its memory block, then its routines
-    python3 tools/team.py ready <role>     write that agent's row in context/team-registry.md and its first heartbeat
-    python3 tools/team.py check            exit 1 unless the team file, the role charters and the engine map agree
+    python3 tools/team.py list             the bot and its routines
+    python3 tools/team.py line [role]      the one line that sets a bot up
+    python3 tools/team.py setup [role]     what the bot does to set itself up: memory, the CLI skill, routines
+    python3 tools/team.py ready [role]     write the bot's row in context/team-registry.md and its first heartbeat
+    python3 tools/team.py check            exit 1 unless team.json, roles/ and jobs/ agree
 """
 import json, os, re, subprocess, sys, time
 
@@ -33,27 +32,31 @@ def block(path):
 
 
 def memory(role):
-    """The agent's whole memory: the team's master prompt, then its own role section. Nothing else."""
+    """The bot's whole memory section: the master prompt, then its role block. Nothing else."""
     return block(os.path.join(ROOT, "MASTER-PROMPT.md")) + "\n\n" + block(os.path.join(ROOT, "roles", role + ".md"))
 
 
 def line(team, a):
-    ws = where(team)
-    return (f"You are {a['bot']}, one agent on the {team['name']} team. If {ws}/repo/INSTALL.md is not on your computer, download "
-            f"{team['link']}, unpack it into {ws}/repo/ and run python3 {ws}/repo/tools/install.py. Then run "
-            f"python3 {ws}/repo/tools/team.py setup {a['role']} and do the three things it prints. Ask me nothing until you are done. "
+    ws = team["workspace"]
+    return (f"{'Add' if team.get('memory') == 'add' else 'Install'} {team['name']}. Download {team['link']}, unpack it into {ws}/repo/, run python3 {ws}/repo/tools/install.py "
+            f"and do what it prints, in order. Ask me nothing until it is all done, then send me one message that ends with the checklist. "
             f"Nothing sends, posts, spends or writes to a CRM or a site until I say yes.")
 
 
 def setup(team, a):
     ws = where(team)
-    out = [f"# {a['bot']}: set yourself up ({a['role']})", "",
-           "1. SAVE THIS TO YOUR MEMORY, word for word, and nothing else from the pack:", "", "-----", memory(a["role"]), "-----", "",
-           "2. CREATE THESE ROUTINES (time zone UTC). Each runs; the switch file keeps it on test, so it only drafts:", ""]
+    add = team.get("memory") == "add"
+    out = [f"# {a['bot']}: set yourself up", "",
+           ("1. ADD THIS SECTION TO YOUR MEMORY, word for word. Keep everything already in your memory: this is one more job, not a new identity."
+            if add else
+            "1. SAVE THIS TO YOUR MEMORY, word for word. It replaces anything an older install of this pack saved there."), "",
+           "-----", memory(a["role"]), "-----", "",
+           f"2. SAVE THE SKILL: the file {ws}/repo/skills/claude-code-cli/SKILL.md, as a skill named {team.get('skill_name', 'claude-code-cli')}.", "",
+           "3. CREATE THESE ROUTINES (time zone UTC). Each runs; the switch file keeps it on test, so it only drafts:", ""]
     for name, cron, does in a["routines"]:
         out += [f"   - Name: {name}", f"     Schedule: {cron}",
-                f"     Prompt: Role: {a['role']}. Routine: {name}. {does}. Follow your memory's run steps."]
-    out += ["", f"3. RUN: python3 {ws}/repo/tools/team.py ready {a['role']}", "   Then answer \"ready\" in one line, with anything you could not do."]
+                f"     Prompt: Routine: {name}. {does}. Follow the run steps in your memory{' (the ' + team['name'] + ' section)' if add else ''}."]
+    out += ["", f"4. RUN: python3 {ws}/repo/tools/team.py ready {a['role']}"]
     return "\n".join(out)
 
 
@@ -63,43 +66,47 @@ def problems():
     have = [a["role"] for a in team["agents"]]
     bad += [f"roles/{r}.md has no agent in team.json" for r in roles if r not in have]
     bad += [f"agent '{r}' has no roles/{r}.md" for r in have if r not in roles]
-    bad += [f"role '{r}' is listed {have.count(r)} times" for r in sorted(set(have)) if have.count(r) > 1]
-    bots = [a["bot"] for a in team["agents"]]
-    bad += [f"two agents are named '{b}'" for b in sorted(set(bots)) if bots.count(b) > 1]
-    mains = [a.get("campaign") for a in team["agents"] if a["kind"] == "main"]
-    bad += [f"campaign '{c}' has {mains.count(c)} main agents; it must have one" for c in team["campaigns"] if mains.count(c) != 1]
-    bad += [f"campaign '{c}' has no folder in campaigns/" for c in team["campaigns"] if not os.path.isdir(os.path.join(ROOT, "campaigns", c))]
-    reg = json.load(open(os.path.join(ROOT, "agents.json")))
-    known = set(reg["agents"]) | set(reg.get("aliases", {}))
-    bad += [f"agent '{a['role']}' names engine '{a.get('engine')}', which agents.json does not have" for a in team["agents"] if a["kind"] == "function" and a.get("engine") not in known]
     names = [r[0] for a in team["agents"] for r in a["routines"]]
     bad += [f"two routines are named '{n}'" for n in sorted(set(names)) if names.count(n) > 1]
     bad += [f"agent '{a['role']}' has more than the {CAP} routines one bot allows" for a in team["agents"] if len(a["routines"]) > CAP]
+    jobs = sorted(f[:-3] for f in os.listdir(os.path.join(ROOT, "jobs")) if f.endswith(".md"))
+    used = set()
     for a in team["agents"]:
-        if a["role"] in roles and f"Role: {a['role']}." not in block(os.path.join(ROOT, "roles", a["role"] + ".md")):
-            bad.append(f"roles/{a['role']}.md has no memory block that starts 'Role: {a['role']}.'")
+        if a["role"] in roles:
+            b = block(os.path.join(ROOT, "roles", a["role"] + ".md"))
+            if f"Role: {a['role']}." not in b:
+                bad.append(f"roles/{a['role']}.md has no memory block that starts 'Role: {a['role']}.'")
+            bad += [f"routine '{n}' is not named in roles/{a['role']}.md" for n, _, _ in a["routines"] if f'"{n}"' not in b]
+        for n, _, does in a["routines"]:
+            m = re.search(r"job\.py run ([a-z0-9-]+)", does)
+            if not m:
+                bad.append(f"routine '{n}' does not hand a job to tools/job.py")
+            elif m.group(1) not in jobs:
+                bad.append(f"routine '{n}' runs job '{m.group(1)}', which has no file in jobs/")
+            else:
+                used.add(m.group(1))
+    bad += [f"jobs/{j}.md is run by no routine" for j in jobs if j not in used]
+    if "job.py" not in block(os.path.join(ROOT, "MASTER-PROMPT.md")):
+        bad.append("MASTER-PROMPT.md does not carry the rule that every task goes through tools/job.py")
     return bad, team
 
 
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "list"
     bad, team = problems()
-    arg = sys.argv[2] if len(sys.argv) > 2 else ""
-    a = agent(team, arg) if arg else None
+    a = agent(team, sys.argv[2]) if len(sys.argv) > 2 else team["agents"][0]
     if cmd == "check":
         n = sum(len(x["routines"]) for x in team["agents"])
-        print("\n".join(bad) if bad else f"ok: {len(team['agents'])} agents ({sum(1 for x in team['agents'] if x['kind'] == 'main')} main, one per campaign), {n} routines")
+        print("\n".join(bad) if bad else f"ok: {len(team['agents'])} bot, {n} routines, every routine hands a job to the CLI")
         return 1 if bad else 0
     if cmd == "list":
         for x in team["agents"]:
-            print(f"{x['bot']} | {x['kind']} | role {x['role']} | " + "; ".join(f"{n} ({c})" for n, c, _ in x["routines"]))
+            print(f"{x['bot']} | role {x['role']}")
+            for n, c, d in x["routines"]:
+                print(f"  {n} ({c}): {d}")
         return 0
-    if cmd == "lines":
-        for x in team["agents"]:
-            print(f"## {x['bot']}\n\n{line(team, x)}\n")
-        return 0
-    if cmd in ("line", "setup", "ready") and not a:
-        print(f"no agent for role '{arg}'. Roles: " + ", ".join(x["role"] for x in team["agents"])); return 1
+    if not a:
+        print("no such role. Roles: " + ", ".join(x["role"] for x in team["agents"])); return 1
     if cmd == "line":
         print(line(team, a)); return 0
     if cmd == "setup":
@@ -108,14 +115,13 @@ def main():
         ws = where(team)
         reg = os.path.join(ws, "context", "team-registry.md")
         os.makedirs(os.path.dirname(reg), exist_ok=True)
-        rows = open(reg, encoding="utf-8").read().splitlines() if os.path.exists(reg) else ["# Team registry", "", "| Agent | Role | Routines | Set up (UTC) |", "|---|---|---|---|"]
+        rows = open(reg, encoding="utf-8").read().splitlines() if os.path.exists(reg) else ["# Registry", "", "| Bot | Role | Routines | Set up (UTC) |", "|---|---|---|---|"]
         rows = [r for r in rows if not r.startswith(f"| {a['bot']} |")]
         rows.append(f"| {a['bot']} | {a['role']} | " + "; ".join(f"{n} `{c}`" for n, c, _ in a["routines"]) + f" | {time.strftime('%Y-%m-%d %H:%M', time.gmtime())} |")
         open(reg, "w", encoding="utf-8").write("\n".join(rows) + "\n")
-        env = dict(os.environ, BOT_HOME=ws)
-        subprocess.run([sys.executable, os.path.join(ROOT, "guards", "scripts", "beat.py"), "write", a["role"], "set up", "found=0", "drafted=0", "sent=0"], env=env, capture_output=True)
-        done = sum(1 for r in rows if r.startswith("| ") and not r.startswith("| Agent") and not r.startswith("|---"))
-        print(f"ok: {a['bot']} is in the registry ({done} of {len(team['agents'])} agents set up)")
+        subprocess.run([sys.executable, os.path.join(ROOT, "guards", "scripts", "beat.py"), "write", a["role"], "set up", "found=0", "drafted=0", "sent=0"],
+                       env=dict(os.environ, BOT_HOME=ws), capture_output=True)
+        print(f"ok: {a['bot']} is in the registry with {len(a['routines'])} routines")
         return 0
     print(__doc__); return 1
 

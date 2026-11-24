@@ -1,7 +1,7 @@
 {
  "_doc": "One business's settings for the sales agent (replies and the CRM in one agent). Names of things only: no key, no address, no contact, no private figure.",
  "campaign": "find-me-money",
- "host": "the Grok team, on test. Any other agent that files or answers in this CRM keeps doing so until the owner switches it off and says pinnacle-ghl: bot",
+ "host": "the Grok team, on test. Any other agent that files or answers in this CRM keeps doing so until the owner switches it off and says gohighlevel: bot",
  "engine": {
   "cli": "codex",
   "model": "gpt-6-luna",
@@ -9,7 +9,7 @@
   "fallback": "claude"
  },
  "crm": {
-  "name": "GoHighLevel (Pinnacle Funding Group)",
+  "name": "GoHighLevel",
   "writer": "sales-crm",
   "pipeline": "P1 · Funding Leads",
   "read_only_pipelines": [
@@ -29,7 +29,7 @@
    "P4 · Partner Handoffs"
   ],
   "note_link_field": "named at intake: the contact field that holds the vault note's link",
-  "writes_when": "context/owners.md says pinnacle-ghl: bot and context/routines-on.md says crm-writes: on; until then every write is a proposal in requests/justin/"
+  "writes_when": "context/owners.md says gohighlevel: bot and context/routines-on.md says crm-writes: on; until then every write is a proposal in requests/justin/"
  },
  "vault": {
   "obsidian_vault": "the workspace vault (/workspace/revenue-os/vault)",

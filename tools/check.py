@@ -4,10 +4,10 @@
     python3 tools/check.py [--ready]
 
 1. Secrets: no key-shaped value anywhere in the pack.
-2. Team: team.json, roles/ and agents.json agree (tools/team.py check): one main agent per campaign, one agent per function.
-3. Files: every file a role's memory block or INSTALL.md points to in repo/ is in the pack.
+2. Bot: team.json, roles/ and jobs/ agree (tools/team.py check): every routine hands a job to the CLI through tools/job.py.
+3. Files: every file the memory, INSTALL.md, a job or the CLI skill points to in repo/ is in the pack.
 4. Keys: every key name in .env.example is on NEEDS-JUSTIN.md.
-5. Size: the first agent's whole reading (INSTALL.md and its setup page) stays under 2,000 words.
+5. Size: the bot's whole install reading (INSTALL.md and its setup page) stays under 2,000 words.
 6. Placeholders: {{...}} or FILL: left (a failure only with --ready).
 """
 import os, re, sys
@@ -45,13 +45,13 @@ def main():
 
     bad, team = T.problems()
     n = sum(len(a["routines"]) for a in team["agents"])
-    out.append(f"2. Team: {len(team['agents'])} agents, {n} routines; {len(bad)} problems")
+    out.append(f"2. Bot: {n} routines; {len(bad)} problems")
     out += [f"   FAIL {b}" for b in bad]
     if bad: fails.append("team")
 
     missing = []
     texts = {"INSTALL.md": allf.get("INSTALL.md", ""), "MASTER-PROMPT.md": allf.get("MASTER-PROMPT.md", "")}
-    texts.update({p: t for p, t in allf.items() if p.startswith("roles/")})
+    texts.update({p: t for p, t in allf.items() if p.startswith(("roles/", "jobs/", "skills/claude-code-cli/"))})
     texts["team.json"] = allf.get("team.json", "")
     for src, t in texts.items():
         for ref in set(re.findall(r"repo/([A-Za-z0-9_./-]+\.(?:py|md|json))", t)):
@@ -70,9 +70,9 @@ def main():
     out += [f"   FAIL {k}" for k in off]
     if off: fails.append("keys")
 
-    first = next(a for a in team["agents"] if a["kind"] == "main")
+    first = team["agents"][0]
     words = len(allf.get("INSTALL.md", "").split()) + len(T.setup(team, first).split())
-    out.append(f"5. Size: the first agent reads {words} words to install (limit {WORDS})")
+    out.append(f"5. Size: the bot reads {words} words to install (limit {WORDS})")
     if words > WORDS:
         out.append("   FAIL the install reading is too long"); fails.append("size")
 

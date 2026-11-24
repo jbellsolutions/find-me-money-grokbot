@@ -1,44 +1,105 @@
 {
- "_doc": "The team. Two main agents, one per disruptor campaign, and one agent per Revenue OS function. Each is its own Grok bot. role: the charter in roles/<role>.md. bot: its name in Grok. kind: main (runs one campaign) or function (does one job for both). engine: the agents.json id its thinking is routed by. routines: name, cron (UTC), and what the run does. tools/team.py, tools/install.py and tools/check.py read this.",
- "name": "Disruptor Revenue OS",
- "workspace": "/workspace/revenue-os",
- "link": "https://github.com/jbellsolutions/disruptor-revenue-os-grokbot/releases/latest/download/disruptor-revenue-os.zip",
- "campaigns": ["find-me-money", "referral-connection"],
+ "_doc": "One Grok bot, Find Me Money, that only orchestrates. Each routine hands one job (jobs/<job>.md) to the Claude Code CLI through tools/job.py. routines: name, cron (UTC), what the run does. tools/team.py, tools/install.py and tools/check.py read this.",
+ "name": "Find Me Money",
+ "workspace": "/workspace/find-me-money",
+ "link": "https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip",
+ "campaigns": [
+  "find-me-money"
+ ],
+ "secrets": "find-me-money.env",
+ "memory": "replace",
+ "owners": [
+  "gohighlevel",
+  "cold-email-sender",
+  "social-sender"
+ ],
+ "switches": [
+  "crm-writes: off",
+  "direct-lead-cold-email: off"
+ ],
+ "folders": [
+  "context",
+  "daily",
+  "log/jobs",
+  "state/lead-radar",
+  "state/test",
+  "approved",
+  "content/drafts",
+  "vault/Daily",
+  "vault/People",
+  "requests/justin",
+  "requests/crm",
+  "requests/partnerships"
+ ],
+ "private_folders": [
+  "data",
+  "data/partners",
+  "data/communities",
+  "data/crm",
+  "context/messaging",
+  ".secrets"
+ ],
+ "checks": [
+  [
+   "self-test",
+   "tools/selftest.py"
+  ],
+  [
+   "campaign",
+   "tools/check_campaign.py",
+   "campaigns/find-me-money/campaign.json"
+  ]
+ ],
+ "first_job": "plan",
  "agents": [
-  {"role": "find-me-money", "bot": "Find Me Money", "kind": "main", "campaign": "find-me-money",
-   "does": "Main agent for the Find Me Money disruptor campaign: the one Justin talks to about it",
-   "routines": [["Find Me Money plan", "30 12 * * *", "Read yesterday's results and the campaign's numbers, pick the next open step of campaigns/find-me-money/LAUNCH.md, write each function agent's work for today"],
-                ["Find Me Money report", "30 23 * * *", "The campaign's numbers and what waits on Justin, to Slack, Notion and the vault; Mondays the week's one decision"]]},
-  {"role": "referral-connection", "bot": "Referral Connection", "kind": "main", "campaign": "referral-connection",
-   "does": "Main agent for the Referral Connection disruptor campaign: the one Justin talks to about it",
-   "routines": [["Referral Connection plan", "40 12 * * *", "Read python3 repo/tools/rc.py stats and yesterday's results, pick the next open step of campaigns/referral-connection/LAUNCH.md, write each function agent's work for today"],
-                ["Referral Connection report", "40 23 * * *", "The campaign's numbers and what waits on Justin, to Slack, Notion and the vault; Mondays the week's one decision"]]},
-  {"role": "lead-radar", "bot": "Lead Radar", "kind": "function", "engine": "lead-radar",
-   "does": "Finds people asking in public for what each campaign offers, on social, Skool and Whop",
-   "routines": [["Lead Radar", "0 13 * * *", "For each campaign: read the day's public asks, Skool and Whop included, score them with agents/lead-radar/radar.py, draft a reply for the kept ones, hand them to the reply agent"]]},
-  {"role": "content", "bot": "Content", "kind": "function", "engine": "content",
-   "does": "The disruptor content for each campaign",
-   "routines": [["Content", "30 15 * * *", "For each campaign: draft the day's pieces from its MESSAGING.md with agents/content/content.py and queue them"]]},
-  {"role": "aeo-seo", "bot": "AEO and SEO", "kind": "function", "engine": "aeo-seo",
-   "does": "Gets each campaign's site found in search and in AI answers; the referral site's guides",
-   "routines": [["AEO and SEO", "0 14 * * 2,5", "For each campaign: Tuesday the weekly read (agents/aeo-seo/aeo.py), Friday one answer page or guide draft; for the referral site also the site check"]]},
-  {"role": "dream-100", "bot": "Dream 100", "kind": "function", "engine": "dream-100",
-   "does": "The hundred people who already have each campaign's buyers gathered",
-   "routines": [["Dream 100", "10 16 * * 1-5", "For each campaign: score candidates with agents/dream-100/dream100.py, write a dossier and a first-touch draft for the next few, draft the follow-ups that are due"]]},
-  {"role": "dream-500", "bot": "Dream 500", "kind": "function", "engine": "dream-500",
-   "does": "The wider list of audience holders, in waves",
-   "routines": [["Dream 500", "40 16 * * 1-5", "For each campaign: place found names with agents/dream-500/dream500.py, write first lines for the next wave, draft the follow-ups that are due"]]},
-  {"role": "cold-email", "bot": "Cold Email", "kind": "function", "engine": "cold-email",
-   "does": "Cold email to each campaign's prospects",
-   "routines": [["Cold Email", "0 17 * * 1-5", "For each campaign: build or check the list, write first lines with agents/cold-email/cold.py, queue the drafts; for the referral site the prospect-finder and outreach-drafts skills"]]},
-  {"role": "speaker", "bot": "SpeakerAgent", "kind": "function", "engine": "speaker",
-   "does": "Podcast outreach: gets the speaker on shows",
-   "routines": [["SpeakerAgent", "20 16 * * 2,4", "For each campaign where speaker is not off: find and score shows with agents/speaker/speaker.py, draft pitches and the follow-ups that are due"]]},
-  {"role": "reply", "bot": "Reply", "kind": "function", "engine": "reply",
-   "does": "Answers every reply, on every channel, for both campaigns",
-   "routines": [["Reply", "15 14,18,22 * * *", "For each campaign: read new replies, sort each, read the person's note, draft the answer, log it, hand anyone ready to the sales and CRM agent"]]},
-  {"role": "sales-crm", "bot": "Sales and CRM", "kind": "function", "engine": "sales-crm",
-   "does": "Keeps each campaign's records and moves each person to the next step",
-   "routines": [["Sales and CRM", "45 14,21 * * *", "Find Me Money: the CRM's stages, cards and dated next steps. Referral Connection: sign-ups, listings, matches and introductions through repo/tools/rc.py"]]}
+  {
+   "role": "find-me-money",
+   "bot": "Find Me Money",
+   "kind": "main",
+   "campaign": "find-me-money",
+   "does": "The funding bot: content first, Lead Radar, Skool and Whop, partnership outreach, the GoHighLevel CRM. It orchestrates; the Claude Code CLI does every job",
+   "routines": [
+    [
+     "Plan",
+     "30 11 * * *",
+     "Run python3 repo/tools/job.py run plan"
+    ],
+    [
+     "Content morning",
+     "0 12 * * *",
+     "Run python3 repo/tools/job.py run content --note \"morning: three pieces from today's plan and the calendar\""
+    ],
+    [
+     "Lead Radar",
+     "0 13 * * *",
+     "Run python3 repo/tools/job.py run lead-radar"
+    ],
+    [
+     "CRM",
+     "30 14,21 * * *",
+     "Run python3 repo/tools/job.py run crm"
+    ],
+    [
+     "Communities",
+     "0 15 * * *",
+     "First save today's new posts from each signed-in Skool and Whop community in context/communities.md to data/communities/<date>/<name>.txt with your browser. Then run python3 repo/tools/job.py run communities"
+    ],
+    [
+     "Partnerships",
+     "0 16 * * 1-5",
+     "Run python3 repo/tools/job.py run partnerships"
+    ],
+    [
+     "Content afternoon",
+     "0 18 * * *",
+     "Run python3 repo/tools/job.py run content --note \"afternoon: three pieces answering what Lead Radar and the communities found today\""
+    ],
+    [
+     "Report",
+     "30 23 * * *",
+     "Run python3 repo/tools/job.py run report. Then post daily/<date>/report.md, as it is, to Slack and to the Notion hub"
+    ]
+   ]
+  }
  ]
 }
