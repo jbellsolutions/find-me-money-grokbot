@@ -1,0 +1,110 @@
+{
+ "_doc": "The Find Me Money campaign's Revenue OS settings: which functions are on, where each starts from in this pack, and what each waits on. Names of things only. Check with python3 tools/check_campaign.py campaigns/find-me-money/campaign.json.",
+ "campaign": "find-me-money",
+ "business": "Find Me Money",
+ "kind": "internal",
+ "base_pack": "disruptor-revenue-os",
+ "grok": {
+  "account": "one Grok account for both campaigns",
+  "main_agent": "Find Me Money",
+  "timezone": "UTC",
+  "business_timezone": "America/New_York"
+ },
+ "approver": "Justin",
+ "offer": "Education first on how business funding really works, then the funding itself: the right product for the project, kept in-house or passed to one partner for a percentage",
+ "icp": "People and business owners looking for financing, the creative and alternative ways included; wholesalers; local businesses; the funding community as partners",
+ "crm": {
+  "name": "GoHighLevel (Pinnacle Funding Group)",
+  "writer": "none",
+  "note": "The sales and CRM agent drafts and proposes stages until Justin says pinnacle-ghl: bot. If another agent already files and answers there, it is switched off first: two writers never write the same record."
+ },
+ "sending": {
+  "cold_email": "Instantly (the existing domains, or new ones: the owner's call)",
+  "social": "the Lead Storm VPS",
+  "one_to_one": "the owner's mailbox (Gmail)"
+ },
+ "engines": {
+  "host": "grokbot-computer",
+  "claude_subscription": "owner",
+  "codex_subscription": "owner",
+  "overrides": {},
+  "note": "Justin, 2026-11-24: \"we sign into Claude Code CLI and Codex CLI, so we keep our costs down\". Every CLI call goes through engines/route.py."
+ },
+ "linkedin": {
+  "mode": "off",
+  "local_computer": "",
+  "caps": {}
+ },
+ "conversation_log": {
+  "vault": "vault/People",
+  "crm_recorder": "sales-crm",
+  "timezone": "America/New_York"
+ },
+ "agents": {
+  "dream-100": {
+   "state": "missing",
+   "source": "agents/dream-100/, campaigns/find-me-money/settings/dream-100.json; data/lists/ (influencers, coaches, communities, partner-targets)",
+   "waits_on": "nothing to build the list from the rubric and draft; a first touch going out waits on the owner's yes per draft",
+   "role": "dream-100"
+  },
+  "dream-500": {
+   "state": "missing",
+   "source": "agents/dream-500/, campaigns/find-me-money/settings/dream-500.json",
+   "waits_on": "nothing to build and place the list; sending waits on a sending tool and inboxes (the domain decision)",
+   "role": "dream-500"
+  },
+  "partners": {
+   "state": "off",
+   "source": "agents/partners/",
+   "waits_on": "not one of the agents in this install (Justin's list, 2026-11-24). Dream 500 keeps the partner tier. On his word it becomes its own agent",
+   "role": ""
+  },
+  "cold-email": {
+   "state": "partial",
+   "source": "skills/; agents/cold-email/, campaigns/find-me-money/settings/cold-email.json",
+   "waits_on": "the domain decision; the owner's charter (who, how, what a first line may say)",
+   "role": "cold-email"
+  },
+  "lead-radar": {
+   "state": "on",
+   "source": "agents/lead-radar/, campaigns/find-me-money/settings/lead-radar.json",
+   "waits_on": "nothing to judge its finds on Codex and hand them to the sales agent through the log",
+   "role": "lead-radar"
+  },
+  "content": {
+   "state": "partial",
+   "source": "skills/fmm-viral-content (the eight hooks); agents/content/, campaigns/find-me-money/settings/content.json",
+   "waits_on": "a brand account per outlet and who publishes on each; the owner's content setup; any video tool is spend",
+   "role": "content"
+  },
+  "speaker": {
+   "state": "missing",
+   "source": "agents/speaker/, campaigns/find-me-money/settings/speaker.json",
+   "role": "speaker",
+   "waits_on": "the speaker profile (name, title, topics, proof). A switch: Justin said \"I wouldn't do SpeakerAgent for Find Me Money\" on 2026-11-20 and listed SpeakerAgent in the Revenue OS on 2026-11-24; set state off to switch it off for this campaign"
+  },
+  "aeo-seo": {
+   "state": "partial",
+   "source": "the site (guide hub, answer pages, schema, sitemap, llms.txt; baseline: cited on 0 of 15 questions); agents/aeo-seo/, campaigns/find-me-money/settings/aeo-seo.json",
+   "waits_on": "Search Console and Bing verification; the tracking tool's key and the owner's yes to its cost; site changes go to the site's own repo as a pull request",
+   "role": "aeo-seo"
+  },
+  "sales-crm": {
+   "state": "test",
+   "source": "skills/pinnacle-crm; agents/sales-crm/, campaigns/find-me-money/settings/sales-crm.json",
+   "waits_on": "Codex signed in; the CRM's read-only key; Justin saying pinnacle-ghl: bot once no other agent writes there",
+   "combined": "One process (the owner, 2026-11-17), run here as two agents from his list of 2026-11-24: Reply answers, Sales and CRM keeps the records. Both stay on test (drafts and the log) until he says pinnacle-ghl: bot.",
+   "role": "reply and sales-crm"
+  }
+ },
+ "lanes": [
+  "offer-specific"
+ ],
+ "coordinate_with": "",
+ "reply_rules": [
+  "no link and no 'DM me' or 'call me' in any public reply (a checker enforces it)",
+  "a first reply asks for nothing",
+  "Facebook is answered by hired posters (Justin, 2026-11-07) unless he reverses"
+ ],
+ "goal": "Justin, 2026-11-20: disrupt the finance industry and generate new leads from people looking to get financing the creative alternative ways. The message is campaigns/find-me-money/MESSAGING.md."
+}

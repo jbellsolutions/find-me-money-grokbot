@@ -1,36 +1,40 @@
-# Find Me Money: GrokBot pack
+# Disruptor Revenue OS: GrokBot pack
 
-One install for two autonomous businesses: two project agents (**Find Me Money** and **Referral Connection**) and one Grok agent per role, with a charter for each and the instructions for launching each site's disruptor campaign. The two sites: **Find Me Money** (findmemoneyapp.com: disrupt the finance industry and bring in new leads from people looking for financing, the creative and alternative ways included) and **The Referral Connection** (findreferralpartners.com: attract businesses that want collaborations, partnerships, sponsorships and deals, list them and match them). The role agents: the nine Revenue OS functions (Dream 100, Dream 500, partners, cold email, Lead Radar, content, AEO and SEO, the sales agent, and SpeakerAgent, which is off for both sites and not created at install), plus Find Me Money's own worker, wholesale and loan officer. 12 agents and 19 routines at install. Justin, 2026-11-20: "We'd still have one agent for each role, and then we'd have two separate project agents... the goal is for those two to be autonomous businesses." The team orchestrates; Claude Code and Codex do the thinking on their own subscriptions; browser lanes and high-frequency sweeps stay on Hermes on the Mac.
+One Revenue OS, two disruptor campaigns. Justin, 2026-11-24: "You got a main agent for each one of the two campaigns for the two projects, and then you have our Revenue OS. That should be pretty set up and straightforward, so I can just talk to each one of the two main bots about each of those two different projects."
 
-**One-click install.** Paste this into a new Grok bot named Find Me Money. It becomes the Find Me Money project agent and creates the rest of the team, the Referral Connection project agent included ([TEAM.md](TEAM.md)):
+**One-click install.** Paste this into one new Grok bot:
 
-> You are Find Me Money, the project agent that runs the Find Me Money business, and the first agent of a team. Download https://github.com/jbellsolutions/find-me-money-grokbot/releases/latest/download/find-me-money.zip, unpack it into /workspace/find-me-money/repo/ and follow HANDOFF.md: Part 2 from step 1, which has you create the team from TEAM.md (a second project agent, Referral Connection, and one agent per role, each its own bot on this account), then Part 3, where each agent builds its own part of the Revenue OS for both sites and each project agent launches its site's disruptor campaign from sites/<site>/LAUNCH.md. The goal is two autonomous businesses. Read MASTER-PROMPT.md, CHARTER.md, TEAM.md and sites/README.md first. Do every step that needs nothing from me without stopping. Keep one list of what only I can do and show it to me once, at the end. Nothing sends, posts, spends or writes to a CRM or a site until I say yes.
+> Install the Disruptor Revenue OS. Download https://github.com/jbellsolutions/disruptor-revenue-os-grokbot/releases/latest/download/disruptor-revenue-os.zip, unpack it into /workspace/revenue-os/repo/, run python3 /workspace/revenue-os/repo/tools/install.py and do what it prints, in order. Ask me nothing until it is all done, then send me one message that ends with the checklist. Nothing sends, posts, spends or writes to a CRM or a site until I say yes.
 
-Version 6.0.0. Version 2 was the orchestrator and the Hermes worker; version 3 added the Revenue OS template; version 4 made it an incubator for the two sites; version 5 made each role its own agent; version 6 adds a project agent per business, both disruptor launch plans, and switches SpeakerAgent off.
+Version 1.0.0.
 
-| File | What |
+## What it installs
+
+| Agent | What it is |
 |---|---|
-| [TEAM.md](TEAM.md), [team.json](team.json), `tools/team.py` | The team: one agent per role, how the lead creates it, how an agent sets itself up, each agent's setup message |
-| [REVENUE-OS.md](REVENUE-OS.md) | The build list: which agent is which of the nine functions, what each builds, the check that shows it |
-| [TEMPLATE.md](TEMPLATE.md), [agents/](agents/README.md), [agents.json](agents.json) | The Revenue OS spec, one folder per agent (process, status, prompts, script), and the engine each thinks with |
-| [sites/find-me-money/LAUNCH.md](sites/find-me-money/LAUNCH.md), [sites/referral-connection/LAUNCH.md](sites/referral-connection/LAUNCH.md) | Each business's disruptor campaign launch plan, and the switches that make it autonomous |
-| [sites/](sites/README.md) | One folder per site: `SITE.md` (the goal, what traction means, how each agent works it), `campaign.json`, `settings/` (one file per agent). [The Disruptor message outline](sites/find-me-money/MESSAGING.md) |
-| `tools/rc.py` | The referral site's admin API: sign-ups, listings, connection requests, matches, removals, guides |
-| [engines/route.py](engines/route.py) | The engine router: every Claude Code and Codex call goes through it and is recorded |
-| [convlog/](convlog/), [CONVERSATION-LOG.md](CONVERSATION-LOG.md) | The one log every agent writes every draft, send and reply to |
-| [HANDOFF.md](HANDOFF.md) | Justin's steps, then the lead's and the team's, the bring-up order and the first-day test |
-| [NEEDS-JUSTIN.md](NEEDS-JUSTIN.md) | Sign-ins, keys by name, yeses |
-| [MASTER-PROMPT.md](MASTER-PROMPT.md) | The master prompt every agent saves, above its own role section |
-| [CHARTER.md](CHARTER.md) | Purpose, the loop, KPIs, the owner rule, handoffs, workspace, milestones. Wins over a role charter |
-| [roles/](roles/) | One charter per agent: lead (the Find Me Money project agent), referral-lead (the Referral Connection project agent), dream-100, dream-500, partners, outreach, radar, content, speaker, aeo-seo, sales, worker, wholesale, loan-officer; each with the system prompt section its agent saves |
-| [TRIGGER-MAP.md](TRIGGER-MAP.md) | Every step and every routine by agent (21 in all, 19 at install), with exact names |
-| [GATES.md](GATES.md) | The gates and the Ask-first lines for Auto-review |
-| [guards/](guards/SKILL.md) | The guard scripts: suppression, send, spend, heartbeat, and the owner guard that keeps the bot off live systems' writes |
-| [skills.json](skills.json), [SKILLS-MAP.md](SKILLS-MAP.md), [skills/](skills/) | Which role uses which skill and account, and the skills |
-| [engine/](engine/) | `hermes_bridge.py` (work orders and results), and the Reply Agent, `fcm`, the scorecard and the job scripts, which now run on the Hermes side |
-| [hermes-worker/](hermes-worker/) | The worker for the Mac: `dispatch.py`, the lanes and their fixed prompts, and the paused installer |
-| [data/lists/](data/lists/README.md) | Where Justin's private lists go at intake: file names and columns only, never a list |
-| [context/](context/) | Lead sources, the Lending Hub, partners and commissions |
-| [.env.example](.env.example) | Key names only |
-| `tools/check.py` | Completeness and secret check: `python3 tools/check.py --ready` |
-| `tools/selftest.py`, `tools/check_campaign.py` | Offline checks of the router, the log and the agents' scripts; the campaign file's check and gap list |
+| **Find Me Money** | Main agent for the Find Me Money disruptor campaign (findmemoneyapp.com). Justin talks to it about that campaign |
+| **Referral Connection** | Main agent for the Referral Connection disruptor campaign (findreferralpartners.com). Justin talks to it about that campaign |
+| **Lead Radar** | People asking in public for what each campaign offers: social, Skool and Whop |
+| **Content** | Each campaign's disruptor content |
+| **AEO and SEO** | Each site found in search and in AI answers; the referral site's guides |
+| **Dream 100**, **Dream 500** | The people who already have each campaign's buyers gathered |
+| **Cold Email** | Cold email to each campaign's prospects |
+| **SpeakerAgent** | Podcast outreach |
+| **Reply** | Answers every reply |
+| **Sales and CRM** | Each campaign's records, and each person's next step |
+
+Eleven agents, thirteen routines. The nine Revenue OS agents work both campaigns and keep them apart. Their thinking runs through Claude Code and Codex on Justin's own subscriptions (`engines/route.py`), not on Grok usage. Reports go to Slack, Notion and the vault that feeds the single brain.
+
+## What is in the pack
+
+| | |
+|---|---|
+| [INSTALL.md](INSTALL.md) | The one line, and the four steps the first agent takes |
+| [NEEDS-JUSTIN.md](NEEDS-JUSTIN.md) | The one checklist of what only Justin can do |
+| [team.json](team.json), `tools/team.py`, `tools/install.py` | The team, each agent's one line and setup, the installer |
+| [MASTER-PROMPT.md](MASTER-PROMPT.md), [roles/](roles/) | Every agent's memory: the team block, then its own |
+| [campaigns/](campaigns/) | Per campaign: `CAMPAIGN.md`, `MESSAGING.md` (the disruptor message), `LAUNCH.md` (the launch plan and the switches that make it autonomous), settings |
+| [agents/](agents/README.md), [agents.json](agents.json), [engines/](engines/route.py), [convlog/](convlog/) | The Revenue OS: each function's process and script, the engine router, the one conversation log |
+| [guards/](guards/SKILL.md) | The checks an agent runs before it drafts, sends, writes or spends |
+| [skills/](skills/), `tools/rc.py` | The referral site's desk, guides and outreach; the eight money hooks; the CRM map |
+| `tools/check.py`, `tools/selftest.py` | The pack's own checks |

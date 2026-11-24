@@ -18,5 +18,3 @@ These are code, not advice. Run them; don't reason around them. Paths are relati
 
 Never print the suppression list, read `.secrets/`, or edit a guard or a switch file to get past it.
 | Write to a live system | `python3 repo/guards/scripts/owner_guard.py check <system> --routine "<NAME>"` | `bot`, `live` or `stopped`. Anything but `bot` means read and draft only; the live system keeps the writes |
-
-The engine's own guard, `repo/skills/lead/fmm-guards/guards.py` (preflight, gates and daily caps, the approval queue), reads the same `context/STOP`, `context/suppression.csv` and `context/standing-approvals.md`, so the two never disagree.

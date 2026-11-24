@@ -5,8 +5,8 @@
     owner_guard.py target <NAME>                        ok or refused: may the bot touch this computer, agent or account at all
     owner_guard.py list                                 every system and who writes it
 
-Find Me Money may already run live systems that write on their own: the CRM, the Radar and its
-lanes, the Lending Hub, Muse, the social sender, the cold-email sender and older agents. Two writers on one system double-post and double-file. So every
+A campaign may already have live systems that write on their own: a CRM, a site's records, a cold-email
+sender, a social sender. Two writers on one system double-post and double-file. So every
 write to one of them asks this guard first.
 
 The table is context/owners.md, one line per system: `<system>: live` or `<system>: bot`.
@@ -27,8 +27,7 @@ from _ws import p, stopped, touch_refusal
 # reporting is the bot's own and never waits on this guard.
 # Extra systems can be added at intake (OWNER_SYSTEMS, comma-separated); any system not in context/owners.md is `live`.
 import os
-DEFAULTS = ["pinnacle-ghl", "funding-radar", "radar-cl", "fbgroups-lane", "lending-hub", "muse-app",
-            "social-sender", "legacy-agent", "cold-email-sender", "hermes-worker", "codex-cli", "referral-site",
+DEFAULTS = ["pinnacle-ghl", "referral-site", "cold-email-sender", "social-sender",
             *[x.strip().lower() for x in os.environ.get("OWNER_SYSTEMS", "").split(",") if x.strip()]]
 
 

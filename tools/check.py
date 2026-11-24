@@ -1,32 +1,26 @@
 #!/usr/bin/env python3
-"""Completeness and safety check for a GrokBot pack built from the factory template.
+"""Completeness and safety check for this pack. Exit 1 on any failure.
 
-    python3 tools/check.py            print the report; exit 1 on any failure
-    python3 tools/check.py --ready    also fail on any placeholder left ({{...}} or FILL:)
-    python3 tools/check.py --write    also rewrite SKILLS-MAP.md from skills.json
+    python3 tools/check.py [--ready]
 
-Checks:
 1. Secrets: no key-shaped value anywhere in the pack.
-2. Skills: every skill in skills.json exists with a SKILL.md that has a name and description.
-3. Accounts: every account a role charter names is in skills.json -> accounts; its path exists; its keys
-   are in .env.example and NEEDS-JUSTIN.md, or (SIGNIN) the account is on NEEDS-JUSTIN.md.
-4. Routines: every role section in TRIGGER-MAP.md has a charter in roles/, and no agent has more than 50.
-   Team (when team.json is there): every role has exactly one agent, and every Revenue OS function has one.
-5. Placeholders: {{...}} and FILL: left, reported as TODO (a failure only with --ready).
-6. Adaptation: skills that still mention Mac paths or Hermes commands (reported, not failed).
+2. Team: team.json, roles/ and agents.json agree (tools/team.py check): one main agent per campaign, one agent per function.
+3. Files: every file a role's memory block or INSTALL.md points to in repo/ is in the pack.
+4. Keys: every key name in .env.example is on NEEDS-JUSTIN.md.
+5. Size: the first agent's whole reading (INSTALL.md and its setup page) stays under 2,000 words.
+6. Placeholders: {{...}} or FILL: left (a failure only with --ready).
 """
-import json, os, re, sys
+import os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
-ROUTINE_CAP = 50
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+import team as T
 
 SECRET = re.compile(r"(agt_[A-Za-z0-9_-]{20,}|sk-(?:ant-|or-|proj-)?[A-Za-z0-9_-]{20,}|xox[abprs]-[A-Za-z0-9-]{10,}|ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|AKIA[0-9A-Z]{16}|pit-[0-9a-f-]{30,}|eyJ[A-Za-z0-9_-]{30,}\.[A-Za-z0-9_-]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY-----\s*[A-Za-z0-9+/=]{40})")
 ASSIGN = re.compile(r"""(?i)\b[A-Z0-9_]*(?:API_KEY|TOKEN|SECRET|PASSWORD)\s*[=:]\s*["']?([A-Za-z0-9_\-]{24,})""")
 PLACEHOLDER = re.compile(r"\{\{[a-z_]+\}\}|FILL:")
-ADAPT = {"Hermes command": re.compile(r"\bhermes (?:-p|chat|kanban|cron)|kanban_create|\bHERMES_"),
-         "Mac path": re.compile(r"~/\.claude|/Users/home"),
-         "old box path": re.compile(r"/root/")}
+WORDS = 2000
 
 
 def files():
@@ -40,142 +34,52 @@ def files():
                 pass
 
 
-def frontmatter(p):
-    t = open(p, encoding="utf-8", errors="ignore").read()
-    m = re.match(r"---\n(.*?)\n---", t, re.S)
-    if not m:
-        return None, None
-    name = re.search(r"^name:\s*(.+)$", m.group(1), re.M)
-    desc = re.search(r"^description:\s*(.+)$", m.group(1), re.M)
-    return (name.group(1).strip() if name else None), (desc.group(1).strip().strip('"') if desc else None)
-
-
-def roles():
-    return sorted(f[:-3] for f in os.listdir("roles") if f.endswith(".md") and not f.startswith("_"))
-
-
 def main():
-    ready, write = "--ready" in sys.argv, "--write" in sys.argv
-    fails, out = [], []
+    ready, fails, out = "--ready" in sys.argv, [], []
     allf = dict(files())
-    cfg = json.load(open("skills.json"))
 
-    # 1 secrets
-    hits = []
-    for p, t in allf.items():
-        if p.endswith(".env.example"):
-            continue
-        for m in SECRET.finditer(t):
-            hits.append((p, m.group(0)[:6] + "…"))
-        for m in ASSIGN.finditer(t):
-            v = m.group(1)
-            if not re.fullmatch(r"[A-Z_]+|x+|X+|\.+|your[A-Za-z_-]*|<[^>]+>", v) and not v.isupper():
-                hits.append((p, m.group(0)[:18] + "…"))
+    hits = [p for p, t in allf.items() if not p.startswith("tools/check.py") and (SECRET.search(t) or ASSIGN.search(t))]
     out.append(f"1. Secrets: {len(hits)} key-shaped values in {len(allf)} files")
-    out += [f"   FAIL {p}: {h}" for p, h in hits]
-    if hits:
-        fails.append("secrets")
+    out += [f"   FAIL {p}" for p in hits]
+    if hits: fails.append("secrets")
 
-    # 2 skills
-    missing, bad, rows = [], [], []
-    for role, need in cfg.get("skills", {}).items():
-        for s in need:
-            d = "guards" if s == "bot-guards" else f"skills/{role}/{s}"
-            sk = os.path.join(d, "SKILL.md")
-            if not os.path.exists(sk):
-                missing.append(f"{role}/{s}")
+    bad, team = T.problems()
+    n = sum(len(a["routines"]) for a in team["agents"])
+    out.append(f"2. Team: {len(team['agents'])} agents, {n} routines; {len(bad)} problems")
+    out += [f"   FAIL {b}" for b in bad]
+    if bad: fails.append("team")
+
+    missing = []
+    texts = {"INSTALL.md": allf.get("INSTALL.md", ""), "MASTER-PROMPT.md": allf.get("MASTER-PROMPT.md", "")}
+    texts.update({p: t for p, t in allf.items() if p.startswith("roles/")})
+    texts["team.json"] = allf.get("team.json", "")
+    for src, t in texts.items():
+        for ref in set(re.findall(r"repo/([A-Za-z0-9_./-]+\.(?:py|md|json))", t)):
+            if "<" in ref:
                 continue
-            n, desc = frontmatter(sk)
-            if not (n and desc):
-                bad.append(sk)
-            rows.append((role, s, d, desc or ""))
-    total = sum(len(v) for v in cfg.get("skills", {}).values())
-    out.append(f"2. Skills: {len(rows)} of {total} listed skills present; {len(missing)} missing; {len(bad)} without name+description")
-    out += [f"   FAIL missing {m}" for m in missing] + [f"   FAIL no frontmatter {b}" for b in bad]
-    if missing or bad:
-        fails.append("skills")
+            if not os.path.exists(ref):
+                missing.append(f"{src} points to repo/{ref}")
+    out.append(f"3. Files: {len(missing)} missing")
+    out += [f"   FAIL {m}" for m in sorted(missing)]
+    if missing: fails.append("files")
 
-    # 3 accounts
-    env = open(".env.example").read() if os.path.exists(".env.example") else ""
-    nj = open("NEEDS-JUSTIN.md").read() if os.path.exists("NEEDS-JUSTIN.md") else ""
-    accounts = cfg.get("accounts", {})
-    n_acc, problems = 0, []
-    for r in roles():
-        t = open(f"roles/{r}.md").read()
-        sec = re.search(r"## Accounts it needs.*?\n(.*?)\n## ", t, re.S)
-        for line in re.findall(r"^- (.+)$", sec.group(1) if sec else "", re.M):
-            n_acc += 1
-            key = next((k for k in accounts if line.startswith(k) or k in line), None)
-            if not key:
-                problems.append(f"roles/{r}.md: '{line}' is not in skills.json accounts")
-                continue
-            a = accounts[key]
-            if a.get("path") and not os.path.exists(a["path"]):
-                problems.append(f"roles/{r}.md: '{key}' -> {a['path']} not in the pack")
-            for k in a.get("keys", []):
-                if k == "SIGNIN":
-                    if key not in nj:
-                        problems.append(f"'{key}' sign-in is not on NEEDS-JUSTIN.md")
-                elif not re.search(rf"^{k}=", env, re.M) or k not in nj:
-                    problems.append(f"key {k} ({key}) is not in both .env.example and NEEDS-JUSTIN.md")
-    out.append(f"3. Accounts: {n_acc} named in role charters; {len(problems)} problems")
-    out += [f"   FAIL {p}" for p in problems]
-    if problems:
-        fails.append("accounts")
+    env, nj = allf.get(".env.example", ""), allf.get("NEEDS-JUSTIN.md", "")
+    keys = re.findall(r"^([A-Z][A-Z0-9_]+)=\s*$", env, re.M)  # the empty ones are the secrets Justin gives
+    off = [k for k in keys if k not in nj]
+    out.append(f"4. Keys: {len(keys)} names in .env.example; {len(off)} not on NEEDS-JUSTIN.md")
+    out += [f"   FAIL {k}" for k in off]
+    if off: fails.append("keys")
 
-    # 4 routines, and the team (one agent per role)
-    tm = open("TRIGGER-MAP.md").read() if os.path.exists("TRIGGER-MAP.md") else ""
-    sections = re.findall(r"^### (\S+)", tm, re.M)
-    schedules = len(re.findall(r"^\| Schedule \| `[^`]+`", tm, re.M))
-    orphan = [s for s in sections if s not in roles()]
-    team_bad, per_agent = [], {}
-    if os.path.exists("team.json"):
-        sys.path.insert(0, os.path.join(ROOT, "tools"))
-        import team as team_mod
-        team_bad, team_cfg, per_agent = team_mod.problems()
-        most = max((len(v) for v in per_agent.values()), default=0)
-        out.append(f"4. Routines: {schedules} schedules across {len(team_cfg['agents'])} agents, one per role; the most on one agent is {most} of {ROUTINE_CAP} allowed; {len(roles())} role charters")
-        over = most > ROUTINE_CAP
-    else:
-        out.append(f"4. Routines: {schedules} schedules of {ROUTINE_CAP} allowed, across {len(sections)} role sections; {len(roles())} role charters")
-        over = schedules > ROUTINE_CAP
-    out += [f"   FAIL TRIGGER-MAP section '{s}' has no roles/{s}.md" for s in orphan]
-    out += [f"   FAIL team: {b}" for b in team_bad]
-    if over:
-        out.append(f"   FAIL more than the {ROUTINE_CAP} routines one bot allows")
-    if orphan or over:
-        fails.append("routines")
-    if team_bad:
-        fails.append("team")
+    first = next(a for a in team["agents"] if a["kind"] == "main")
+    words = len(allf.get("INSTALL.md", "").split()) + len(T.setup(team, first).split())
+    out.append(f"5. Size: the first agent reads {words} words to install (limit {WORDS})")
+    if words > WORDS:
+        out.append("   FAIL the install reading is too long"); fails.append("size")
 
-    # 5 placeholders
-    todo = {}
-    for p, t in allf.items():
-        if p.startswith(("tools/", "roles/_")) or p == "skills/README.md" or (p.startswith("agents/") and "/prompts/" in p):  # prompt templates: merge fields a script fills
-            continue
-        c = len(PLACEHOLDER.findall(t))
-        if c:
-            todo[p] = c
-    out.append(f"5. Placeholders: {sum(todo.values())} left in {len(todo)} files" + (" (TODO)" if todo and not ready else ""))
+    todo = {p: len(PLACEHOLDER.findall(t)) for p, t in allf.items() if not p.startswith("tools/") and not (p.startswith("agents/") and "/prompts/" in p) and PLACEHOLDER.search(t)}
+    out.append(f"6. Placeholders: {sum(todo.values())} left in {len(todo)} files")
     out += [f"   {'FAIL' if ready else 'TODO'} {p}: {c}" for p, c in sorted(todo.items())]
-    if ready and todo:
-        fails.append("placeholders")
-
-    # 6 adaptation (report only)
-    flagged = []
-    for role, s, d, _ in rows:
-        text = "".join(t for p, t in allf.items() if p.startswith(d + "/"))
-        flags = [k for k, rx in ADAPT.items() if rx.search(text)]
-        if flags:
-            flagged.append(f"{role}/{s}: {', '.join(flags)}")
-    out.append(f"6. Adaptation: {len(rows)} skills; {len(flagged)} still mention Mac or Hermes things")
-    out += [f"   NOTE {f}" for f in flagged]
-
-    if write:
-        with open("SKILLS-MAP.md", "w") as f:
-            f.write("# Which role uses which skill, and why\n\nGenerated by `python3 tools/check.py --write` from skills.json. \"Why\" is the skill's own description: it is when the bot loads it.\n\n| Role | Skill | Where | Why |\n|---|---|---|---|\n")
-            for role, s, d, desc in rows:
-                f.write(f"| {role} | `{s}` | `{d}/` | {desc[:220].replace('|', '/')}{'…' if len(desc) > 220 else ''} |\n")
+    if ready and todo: fails.append("placeholders")
 
     print("\n".join(out))
     print("RESULT:", "PASS" if not fails else "FAIL (" + ", ".join(fails) + ")")

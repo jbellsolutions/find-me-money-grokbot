@@ -1,0 +1,157 @@
+{
+ "_doc": "One business's settings for the sales agent (replies and the CRM in one agent). Names of things only: no key, no address, no contact, no private figure.",
+ "campaign": "referral-connection",
+ "host": "the Grok bot",
+ "engine": {
+  "cli": "codex",
+  "model": "gpt-6-luna",
+  "subscription": "the owner's ChatGPT plan",
+  "fallback": "claude"
+ },
+ "crm": {
+  "name": "the site's own records (tools/rc.py)",
+  "writer": "sales-crm",
+  "pipeline": "sign-ups",
+  "read_only_pipelines": [],
+  "owner_user": "the owner",
+  "tag_prefix": "ros:",
+  "stages": [
+   "new",
+   "listed",
+   "matched",
+   "paused",
+   "spam"
+  ],
+  "note_per": "conversation per day",
+  "never": [
+   "overwrite a value"
+  ],
+  "pipelines": [
+   "sign-ups",
+   "matches"
+  ],
+  "note_link_field": "the sign-up's notes (rc.py signup-set --notes)",
+  "match_stages": [
+   "proposed",
+   "introduced",
+   "agreed",
+   "sent",
+   "paid",
+   "dropped"
+  ],
+  "writes_when": "context/owners.md says referral-site: bot; until then every write is a proposal in requests/justin/"
+ },
+ "vault": {
+  "obsidian_vault": "the workspace vault (/workspace/revenue-os/vault)",
+  "path": "vault/",
+  "people": "People/referral/",
+  "pipeline": "Pipeline/",
+  "daily": "Daily/",
+  "contact_details_in_notes": false,
+  "note_rule": "made on the first reply, attached to the CRM contact, added to on every reply and answer, read before every draft"
+ },
+ "inboxes": [
+  {
+   "inbox": "the site's sign-ups",
+   "channel": "crm",
+   "from_agent": "aeo-seo",
+   "pipeline": "sign-ups",
+   "read_by": "rc.py signups --status new",
+   "sent_by": "the sender address Justin names",
+   "on": true,
+   "note": "the source tag on each sign-up says which agent's link brought it"
+  },
+  {
+   "inbox": "the site's connection requests",
+   "channel": "crm",
+   "from_agent": "sales-crm",
+   "pipeline": "matches",
+   "read_by": "rc.py connections",
+   "sent_by": "the sender address Justin names",
+   "on": true
+  },
+  {
+   "inbox": "the site's removal requests",
+   "channel": "crm",
+   "from_agent": "sales-crm",
+   "pipeline": "sign-ups",
+   "read_by": "rc.py removals",
+   "sent_by": "",
+   "on": true,
+   "note": "applied or queued: Justin's call (NEEDS-JUSTIN 21)"
+  },
+  {
+   "inbox": "replies to outreach",
+   "channel": "email",
+   "from_agent": "cold-email",
+   "pipeline": "sign-ups",
+   "read_by": "the sender's mailbox",
+   "sent_by": "the sender address Justin names",
+   "on": false,
+   "note": "off until a sender address exists"
+  }
+ ],
+ "hand_overs_from": [
+  "cold-email",
+  "lead-radar",
+  "dream-100",
+  "dream-500",
+  "partners",
+  "content"
+ ],
+ "intents": [
+  "interested",
+  "question",
+  "referral",
+  "not_now",
+  "not_interested",
+  "opt_out",
+  "wrong_person",
+  "auto_reply",
+  "bounce",
+  "complaint",
+  "identity_question",
+  "price_or_terms",
+  "other"
+ ],
+ "always_the_owners": [
+  "complaint",
+  "identity_question",
+  "price_or_terms",
+  "other"
+ ],
+ "answer": {
+  "as": "The Referral Connection, first person, plain",
+  "voice": [
+   "plain words",
+   "short",
+   "answer what they asked first"
+  ],
+  "booking_link": "https://findreferralpartners.com/join",
+  "acknowledge_not_now": false
+ },
+ "follow_up": {
+  "quiet_business_days": 3,
+  "max_follow_ups": 3,
+  "not_now_default_days": 30,
+  "after_last": "tag later with a date"
+ },
+ "message_types": {
+  "rc_introduction": "ask",
+  "rc_match_followup": "ask",
+  "rc_reply": "ask"
+ },
+ "runs": {
+  "reply_check": "the Referral desk routine (twice a day)",
+  "sweep": "the Referral desk routine",
+  "day_close": "the Evening report",
+  "nurture_check": "none: the site sends no email",
+  "timezone": "America/New_York"
+ },
+ "_inboxes_doc": "from_agent is the outreach agent the inbox (or the campaign in the sending tool) belongs to. It decides the pipeline and the source tag. Nothing sorts a person into lead or partner.",
+ "nurture": {
+  "where": "none yet: no email leaves the site",
+  "set_up_by": "sales-crm"
+ },
+ "_list_doc": "Still in, waiting on the owner's keep or remove (STATUS.md, the list at the top): crm.writer, crm.never, crm.read_only_pipelines, vault.contact_details_in_notes, always_the_owners, follow_up.max_follow_ups, the SMS inbox's note, opt_out in nurture.leave_on."
+}

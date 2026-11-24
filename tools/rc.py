@@ -2,7 +2,7 @@
 """Operator CLI for the site's admin API. Standard library only.
 
 Needs RC_SITE (e.g. https://findreferralpartners.com) and RC_ADMIN_KEY, from the environment or from
-.secrets/fmm.env or .secrets/site.env in the bot's workspace (KEY=value lines).
+.secrets/revenue-os.env or .secrets/site.env in the bot's workspace (KEY=value lines).
 
   rc.py stats
   rc.py signups [--status new] [--area austin] [--since 2026-11-18T00:00:00Z] [--csv FILE]
@@ -19,7 +19,7 @@ import argparse, json, os, sys, urllib.error, urllib.parse, urllib.request
 
 def call(method, path, body=None, raw=False):
     here = os.path.dirname(os.path.abspath(__file__))
-    for f in (os.path.join(os.getcwd(), ".secrets", "site.env"), os.path.join(os.getcwd(), ".secrets", "fmm.env"), os.path.join(here, "..", "..", ".secrets", "fmm.env"), os.path.join(here, "..", "..", ".secrets", "site.env"), os.path.join(here, "..", ".env.local")):
+    for f in (os.path.join(os.getcwd(), ".secrets", "site.env"), os.path.join(os.getcwd(), ".secrets", "revenue-os.env"), os.path.join(here, "..", "..", ".secrets", "revenue-os.env"), os.path.join(here, "..", "..", ".secrets", "site.env"), os.path.join(here, "..", ".env.local")):
         if os.path.exists(f):  # KEY=value lines; the environment wins
             for line in open(f):
                 k, _, v = line.strip().partition("=")
